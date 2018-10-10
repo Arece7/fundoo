@@ -1,0 +1,55 @@
+.container > * {
+    width: 100%;
+  }
+  #field2
+  {
+    margin-left: 10px;
+    width: 48%
+  }
+  #field1
+  {
+    float:left;
+    width: 48%
+  }
+  #button
+{
+  float:right;
+}
+a
+{
+  text-decoration: none;
+}
+.user
+{
+    width:100%
+}
+#pass1{
+width: 48%;
+}
+#pass2
+{ margin-left:10px;
+    width:48%;
+   
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+ .example-card {
+ background-color: gainsboro
+  }
+    
+  #link
+  {
+      float:left;
+  }
+  .select
+  {
+    background-color: darkolivegreen;
+  }
+  .deselect
+  {
+    
+  }

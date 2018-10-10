@@ -1,0 +1,33 @@
+<div class="container" fxLayout>
+  <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
+  <div fxLayout="column" fxLayoutGap = "20%">
+    <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84">
+      <mat-card class="card">
+        <div style="padding: 30px 0px;">
+
+          <img src="../../../assets/images/google.svg"alt="google" class="center">
+          <mat-card-title >Sign In</mat-card-title>
+          <mat-card-subtitle>to continue to fundooNotes</mat-card-subtitle>
+          <mat-form-field id="field1">
+            <input matInput placeholder="Email">
+          </mat-form-field><br>
+          <mat-form-field id="field1">
+            <input matInput placeholder="Password"[type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <a href="#" id="link">Forgot password ?</a> <br><br><br>
+          <button mat-flat-button id="button">Log In</button>
+          <a routerLink="/signup">Create an account</a>
+          <br><br><br>
+        </div>
+      </mat-card>
+    </div>
+    <div class="item item-1" fxFlex="33%"fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  </div>
+  
+</div>
+<div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+</div>
+<router-outlet></router-outlet>

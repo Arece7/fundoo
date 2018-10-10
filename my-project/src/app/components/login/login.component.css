@@ -1,0 +1,22 @@
+
+  .container > * {
+    width: 100%;
+  }
+  #field1
+  {
+    width: 100%
+  }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+#button
+{
+  float:right;
+}
+a
+{
+  text-decoration: none;
+}
