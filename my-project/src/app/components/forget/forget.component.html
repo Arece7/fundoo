@@ -1,0 +1,29 @@
+<div class="container" fxLayout>
+  <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
+  <div fxLayout="column" fxLayoutGap = "20%">
+    <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" >
+      <mat-card class="card">
+        <div style="padding: 30px 0px;">
+
+          <img src="../../../assets/images/google.svg"alt="google" class="center">
+          <mat-card-title >Forget Password</mat-card-title>
+          <mat-card-subtitle>to continue to your account</mat-card-subtitle>
+          <mat-form-field id="field1">
+            <input matInput placeholder="Email" [(ngModel)]="model.uname" >
+            
+          </mat-form-field>
+         
+         
+          <button mat-flat-button id="button" (click)="reset()">Submit</button>
+          
+        </div>
+      </mat-card>
+    </div>
+    <div class="item item-1" fxFlex="33%"fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  </div>
+</div>
+<div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+</div>
+<router-outlet></router-outlet>

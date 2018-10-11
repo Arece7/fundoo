@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {passValidator} from './custom'
+import {MatSnackBar} from '@angular/material';
+// import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  hide = true;
-
+  hide = false;
+   service="";
   rForm: FormGroup;
   post: any;
   fname: string = '';
@@ -20,13 +22,13 @@ export class SignupComponent implements OnInit {
 
   public cards=[];
 
-  constructor(private _getService:UserService,private _postService:UserService,fb: FormBuilder) 
+  constructor(private _getService:UserService,private _postService:UserService,fb: FormBuilder ,public snackbar:MatSnackBar) 
   {
     this.rForm = fb.group({
       'fname': [null, Validators.required],
       'lname': [null, Validators.required],
-      'email': [null, [Validators.required, Validators.email]],
-      'password': [null,Validators.required],
+      'email': [null, [Validators.required, Validators.pattern(/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/)]],
+      'password': [null,[Validators.required,Validators.minLength(6)]],
       'cnfpassword': [null, passValidator]
 
     });
@@ -49,11 +51,16 @@ export class SignupComponent implements OnInit {
     });
 
     }
-    public service;
+   
     toggle(card){
       card.select = !card.select;
-      console.log(card.name);
-       this.service=card.name;
+      this.service=card.name;
+      if(card.select==false)
+      {
+        this.service="";
+      }
+      console.log(this.service);
+       
       for(var i = 0; i < this.cards.length; i++){
         if(card.name==this.cards[i].name){
           continue;
@@ -65,23 +72,37 @@ export class SignupComponent implements OnInit {
   model:any={};
   Signup()
   {
+    if(this.service.length===0)
+    {
+      this.snackbar.open("services", "select a service first", {
+        duration: 2000,
+      });
+    }
+    else
     this._postService.postData("user/userSignUp",
     {
       "firstName": this.model.fname,
       "lastName": this.model.lname,
-      "phoneNumber": 8617666305,
        "service": this.service,
-      "createdDate": "2018-10-09T06:35:12.617Z",
-      "modifiedDate": "2018-10-09T06:35:12.617Z",
-      "username": this.model.uname,
       "email": this.model.uname,
       "emailVerified": true,
       "password": this.model.pass
     }).subscribe(response=>
     {
       console.log("signup done");
+      this.snackbar.open("signup", "success", {
+        duration: 2000,
+      });
       console.log(response);
-    })
+    },error=>
+    {
+      this.snackbar.open("signup", "failed,Try again", {
+        duration: 2000,
+      });
+      console.log(error);
+      
+    }
+  )
 }
   
 

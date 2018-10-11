@@ -19,4 +19,8 @@ url="http://34.213.106.173/api";
   {
     return this.http.post(this.url+"/"+adress,bodydata);
   }
+  checkData(adress,bodydata)
+  {
+    return this.http.post(this.url+"/"+adress,bodydata);
+  }
 }

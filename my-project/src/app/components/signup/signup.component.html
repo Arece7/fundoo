@@ -19,12 +19,12 @@
             <mat-error class="alert" *ngIf="!rForm.controls['lname'].valid && rForm.controls['lname'].touched">please provide last name</mat-error>
           </mat-form-field>
           <mat-form-field class="user">
-            <input matInput placeholder="Username"[(ngModel)]="model.uname " formControlName="email"required>
+            <input matInput placeholder="Email"[(ngModel)]="model.uname " formControlName="email"required>
             <mat-error class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">provide a valid email</mat-error>
           </mat-form-field>
           <mat-form-field id="pass1">
             <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'text' : 'password'" [(ngModel)]="model.pass"required>
-           
+            <mat-error class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">Enter a password(min-length:6) </mat-error>
           </mat-form-field>
           <mat-form-field id="pass2">
             <input matInput placeholder="Confirm password" formControlName="cnfpassword"  [type]="hide ? 'text' : 'password'">

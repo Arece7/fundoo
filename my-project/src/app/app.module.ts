@@ -17,16 +17,20 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ForgetComponent } from './components/forget/forget.component';
+import { RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ForgetComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,BrowserAnimationsModule,FlexLayoutModule,MatFormFieldModule,
-    MatInputModule,MatButtonModule,MatCardModule,MatIconModule,MatButtonToggleModule, HttpClientModule,FormsModule,MatSnackBarModule,ReactiveFormsModule 
+    MatInputModule,MatButtonModule,MatCardModule,MatIconModule,MatButtonToggleModule, HttpClientModule,FormsModule,MatSnackBarModule,ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
