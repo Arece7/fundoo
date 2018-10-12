@@ -3,11 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent }      from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ForgetComponent } from './components/forget/forget.component';
+import { ResetComponent } from './components/reset/reset.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent,  },
   { path: 'signup', component:SignupComponent,  },
-  { path: 'forget', component: ForgetComponent,  }
+  { path: 'forget', component: ForgetComponent,  },
+  { path: 'resetpassword/:token', component:ResetComponent },
+  { path: 'dashboard', component: DashboardComponent  }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { UserService } from '../../services/user.service';
 import {MatSnackBar} from '@angular/material';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private _Service:UserService,fb: FormBuilder,public snackbar:MatSnackBar) {
+  constructor(private _Service:UserService,fb: FormBuilder,public snackbar:MatSnackBar,private router: Router) {
     this.lForm = fb.group({
      
       
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    this._Service.getData("user").subscribe((data)=>{console.log(data)})
+    // this._Service.getData("user").subscribe((data)=>{console.log(data)})
   }
   model:any={};
   login()
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
       this.snackbar.open("login", "success", {
         duration: 2000,
       });
+      this.router.navigate(['/', 'dashboard']);
       console.log(response);
     },error=>
     {

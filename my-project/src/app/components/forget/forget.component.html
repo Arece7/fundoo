@@ -3,7 +3,7 @@
   <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
   <div fxLayout="column" fxLayoutGap = "20%">
     <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" >
+    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" [formGroup]='rForm' >
       <mat-card class="card">
         <div style="padding: 30px 0px;">
 
@@ -11,12 +11,12 @@
           <mat-card-title >Forget Password</mat-card-title>
           <mat-card-subtitle>to continue to your account</mat-card-subtitle>
           <mat-form-field id="field1">
-            <input matInput placeholder="Email" [(ngModel)]="model.uname" >
-            
+            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="model.uname" >
+            <mat-error class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">provide a valid email</mat-error>  
           </mat-form-field>
+          <a routerLink="/login" id="link">Back to Login</a>
          
-         
-          <button mat-flat-button id="button" (click)="reset()">Submit</button>
+          <button mat-flat-button id="button"[disabled]="!rForm.valid" (click)="reset()">Submit</button>
           
         </div>
       </mat-card>

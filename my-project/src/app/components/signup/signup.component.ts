@@ -3,7 +3,8 @@ import { UserService } from '../../services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {passValidator} from './custom'
 import {MatSnackBar} from '@angular/material';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -22,13 +23,13 @@ export class SignupComponent implements OnInit {
 
   public cards=[];
 
-  constructor(private _getService:UserService,private _postService:UserService,fb: FormBuilder ,public snackbar:MatSnackBar) 
+  constructor(private _getService:UserService,private _postService:UserService,fb: FormBuilder ,public snackbar:MatSnackBar,private router: Router) 
   {
     this.rForm = fb.group({
       'fname': [null, Validators.required],
       'lname': [null, Validators.required],
       'email': [null, [Validators.required, Validators.pattern(/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/)]],
-      'password': [null,[Validators.required,Validators.minLength(6)]],
+      'password': [null,[Validators.required,Validators.minLength(6),Validators.maxLength(10)]],
       'cnfpassword': [null, passValidator]
 
     });
@@ -93,6 +94,7 @@ export class SignupComponent implements OnInit {
       this.snackbar.open("signup", "success", {
         duration: 2000,
       });
+      this.router.navigate(['/', 'login']);
       console.log(response);
     },error=>
     {

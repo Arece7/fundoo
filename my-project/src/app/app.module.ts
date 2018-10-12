@@ -19,13 +19,17 @@ import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgetComponent } from './components/forget/forget.component';
 import { RouterModule} from '@angular/router';
+import { ResetComponent } from './components/reset/reset.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ForgetComponent
+    ForgetComponent,
+    ResetComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,BrowserAnimationsModule,FlexLayoutModule,MatFormFieldModule,
