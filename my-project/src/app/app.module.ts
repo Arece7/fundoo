@@ -21,7 +21,10 @@ import { ForgetComponent } from './components/forget/forget.component';
 import { RouterModule} from '@angular/router';
 import { ResetComponent } from './components/reset/reset.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule, MatListModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +32,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     SignupComponent,
     ForgetComponent,
     ResetComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,AppRoutingModule,BrowserAnimationsModule,FlexLayoutModule,MatFormFieldModule,
     MatInputModule,MatButtonModule,MatCardModule,MatIconModule,MatButtonToggleModule, HttpClientModule,FormsModule,MatSnackBarModule,ReactiveFormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

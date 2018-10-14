@@ -1,0 +1,82 @@
+<div fxFlex>
+<div fxLayout="column wrap">
+<div>
+<mat-toolbar color="primary" class="toolbar"  >
+    <mat-toolbar-row>
+            <button mat-icon-button class="menu">
+        <i (click)="drawer.toggle()" class="material-icons ">
+            menu
+            </i>
+        </button>
+      <span class="head">Fundoo Notes</span>
+      <div class="sBar">
+      <i class="material-icons">
+         search
+          </i>
+          <input type="input" placeholder="search" class= "search">
+       </div>
+      <button mat-icon-button class="refresh">
+      <i class="material-icons ">
+          refresh
+          </i></button>
+          <button mat-icon-button class="view">
+          <i class="material-icons">
+              view_agenda
+              </i> </button>
+              <button mat-icon-button class="apps">
+              <i class="material-icons " >
+                  apps
+                  </i> </button>
+                  <button mat-icon-button class="notify">
+                  <i class="material-icons " >
+                      notifications
+                      </i></button>
+                      <button mat-icon-button class=" person">
+                  <i class="material-icons" >
+                      person
+                      </i></button>
+
+    </mat-toolbar-row></mat-toolbar></div>
+
+    <div>
+        <mat-sidenav-container class="example-container" fxFill hasBackdrop="false" >
+            <mat-sidenav #drawer class="example-sidenav" mode="side">
+         <mat-list>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/note.svg" >Notes</button><br>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/reminders.svg" >Reminder</button>
+              </mat-list>
+              <mat-divider></mat-divider>
+              <mat-list>
+              <p class="para">Labels<button mat-button>EDIT</button></p>
+            
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/label.svg" >Create new label</button>
+              </mat-list>
+              <mat-divider></mat-divider>
+              <mat-list>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/archive.svg" >Archive</button><br>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/tash.svg" >Trash</button>
+              </mat-list>
+              <mat-divider></mat-divider>
+              <mat-list>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/settings.svg" >Settings</button><br>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/feedback.svg" >Send feedback</button><br>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/help.svg" >Help</button><br>
+              <button mat-stroked-button ><img class="img" src="../../../assets/images/appdownloads.svg" >App downloads</button><br>
+            </mat-list>
+              <div class="terms">
+                  <a href="https://www.google.com/policies/privacy/" class="Link" >Privacy</a>&nbsp;·&nbsp;
+                  <a href="http://www.google.com/policies/terms/"  class="Link" >Terms</a><br>
+                  <a href="http://ssl.gstatic.com/keep/open-source_licenses.txt"  class="Link" >Open-source licenses</a>
+                </div>
+              
+                       
+            </mat-sidenav>
+            <div class="example-sidenav-content" >
+                
+                   
+        
+            </div>
+          </mat-sidenav-container>
+        </div>
+    </div>
+</div>
