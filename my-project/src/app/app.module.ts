@@ -15,7 +15,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgetComponent } from './components/forget/forget.component';
 import { RouterModule} from '@angular/router';
@@ -25,6 +25,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule, MatListModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
+import { NotesComponent } from './components/notes/notes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,11 +36,14 @@ import { MatSidenavModule, MatListModule } from '@angular/material';
     ResetComponent,
     DashboardComponent,
     NavbarComponent,
+    NotesComponent,
   ],
   imports: [
-    BrowserModule,AppRoutingModule,BrowserAnimationsModule,FlexLayoutModule,MatFormFieldModule,
-    MatInputModule,MatButtonModule,MatCardModule,MatIconModule,MatButtonToggleModule, HttpClientModule,FormsModule,MatSnackBarModule,ReactiveFormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule
+    BrowserModule, AppRoutingModule, BrowserAnimationsModule, FlexLayoutModule, MatFormFieldModule,
+     MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatButtonToggleModule,
+      HttpClientModule, FormsModule, MatSnackBarModule, ReactiveFormsModule,
+      ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,
+   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

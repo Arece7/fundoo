@@ -6,6 +6,11 @@ color: black;
 }
 .head
 {
+    margin-right: 5px;
+    color: black;
+}
+.head1
+{
     margin-right: 20px;
     color: black;
 }
@@ -60,8 +65,8 @@ input:focus {
 
 .toolbar{
     background-color: #fb0;
-    display:flex;
-    position: fixed;
+    /* display:flex; */
+    position: relative;
     z-index: 2;
 }
 .sBar{
@@ -154,4 +159,23 @@ padding-left: 100px;
 
   margin-left: 20px;
 
+}
+.example-card {
+  max-width: 300px;
+  max-height: 150px;
+  position: absolute;
+  right: 0;
+}
+
+.example-header-image {
+  background-image: url('../../../assets/images/a-img.png');
+  background-size: cover;
+}
+.button2{
+  margin-left: 85px;
+  color:azure;
+  border: 1px solid  black;
+  color:black;
+  float:left;
+  opacity: 0.5;
 }
