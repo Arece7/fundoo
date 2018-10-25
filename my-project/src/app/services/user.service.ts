@@ -27,7 +27,7 @@ url="http://34.213.106.173/api";
   {
     console.log(acessToken);
     console.log(bodydata);
-    
+
     var httpAuthOptions1 = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -35,9 +35,67 @@ url="http://34.213.106.173/api";
       })
 
     };
-    
-  
+
+
     return this.http.post(this.url+"/"+adress,this.getFormUrlEncoded(bodydata),httpAuthOptions1)
+  }
+  addingNote(adress,bodydata,acessToken)
+  {
+    console.log(acessToken);
+    console.log(bodydata);
+
+    var httpAuthOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': acessToken
+      })
+
+    };
+
+
+    return this.http.post(this.url+"/"+adress,this.getFormUrlEncoded(bodydata),httpAuthOptions1)
+  }
+  getnotes(adress,token)
+{
+  var httpheaders = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': token
+    })
+  };
+
+  return this.http.get(this.url+'/'+adress,httpheaders);
+
+}
+deletingNote(adress,bodydata,acessToken)
+  {
+
+
+    var httpAuthOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': acessToken
+      })
+
+    };
+
+
+    return this.http.post(this.url+"/"+adress,bodydata,httpAuthOptions1)
+  }
+  colorChange(adress,bodydata,acessToken)
+  {
+
+
+    var httpAuthOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': acessToken
+      })
+
+    };
+
+
+    return this.http.post(this.url+"/"+adress,bodydata,httpAuthOptions1)
   }
   getFormUrlEncoded(toConvert) {
     const formBody = [];

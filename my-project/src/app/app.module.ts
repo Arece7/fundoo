@@ -27,6 +27,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule, MatListModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import { NotesComponent } from './components/notes/notes.component';
+import { ClickOutsideModule } from 'ng4-click-outside';
+import { AddNotesComponent } from './components/add-notes/add-notes.component';
+
+import { NotesCollectionComponent } from './components/notes-collection/notes-collection.component';
+import { MoreComponent } from './components/more/more.component';
+import { ChangeColorComponent } from './components/change-color/change-color.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,13 +44,20 @@ import { NotesComponent } from './components/notes/notes.component';
     DashboardComponent,
     NavbarComponent,
     NotesComponent,
+    AddNotesComponent,
+
+    NotesCollectionComponent,
+
+    MoreComponent,
+
+    ChangeColorComponent,
   ],
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, FlexLayoutModule, MatFormFieldModule,
      MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatButtonToggleModule,
       HttpClientModule, FormsModule, MatSnackBarModule, ReactiveFormsModule,
       ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,
-   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule
+   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule,ClickOutsideModule,MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

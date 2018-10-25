@@ -1,3 +1,5 @@
-<p>
-  notes works!
-</p>
+ <app-add-notes (onNewEntryAdded)="addNewEntry($event)"></app-add-notes>
+  <app-notes-collection [NoteArray]=notes (onNewEntryDeleted)= "addNewEntry($event)" (onNewColorChange)="addNewEntry($event)"></app-notes-collection>
+
+
+

@@ -1,0 +1,50 @@
+.matcard
+{
+    width: 600px;
+    margin-top: 7%;
+    margin-left: 55%
+
+}
+.span{
+    top: 10px;
+    right: 0px;
+    position: absolute;
+}
+
+.div2{
+
+    outline: none;
+    width: 130px;
+    position: relative;
+    word-wrap:break-word;
+}
+div:empty:before {
+    content:attr(data-text);
+    color:gray
+  }
+
+.take_note{
+    padding-top: 12px;
+    padding-left: 14px;
+    padding-bottom: 0px
+}
+.card_note{
+  margin:1%;
+  height: min-content;
+  /* width: 15px; */
+}
+/* .note-card
+{
+
+  display:flex;
+  flex-wrap:wrap;
+
+} */
+.card_note:hover .action
+{
+ opacity:1;
+}
+.action
+{
+  opacity:0;
+}

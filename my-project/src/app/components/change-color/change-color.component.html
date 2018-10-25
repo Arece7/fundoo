@@ -1,0 +1,47 @@
+<button mat-icon-button [matMenuTriggerFor]="menuColor">
+  <i class="material-icons" matTooltip="Change-color" style="opacity: 0.5;" >color_lens</i>
+  </button>
+  <mat-menu #menuColor="matMenu" yPosition="above" [overlapTrigger]="false" class="colorCard">
+    <div class="colorDiv">
+      <button mat-menu-item (click)="setcolor('#FAFAFA')" class="colorPalette" style="background-color:#FAFAFA">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#FF8A80')" class="colorPalette" style="background-color: #FF8A80">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#FFD180')" class="colorPalette" style="background-color:#FFD180">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#FFFF8D')" class="colorPalette" style="background-color:#FFFF8D">
+        <mat-icon></mat-icon>
+      </button>
+    </div>
+    <div class="colorDiv">
+      <button mat-menu-item (click)="setcolor('#CCFF90')" class="colorPalette" style="background-color:#CCFF90">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#A7FFEB')" class="colorPalette" style="background-color:#A7FFEB">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#80D8FF')" class="colorPalette" style="background-color:#80D8FF">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#82B1FF')" class="colorPalette" style="background-color:#82B1FF">
+        <mat-icon></mat-icon>
+      </button>
+    </div>
+    <div class="colorDiv">
+      <button mat-menu-item (click)="setcolor('#B388FF')" class="colorPalette" style="background-color:#B388FF">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#F8BBD0')" class="colorPalette" style="background-color:#F8BBD0">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#D7CCC8')" class="colorPalette" style="background-color:#D7CCC8">
+        <mat-icon></mat-icon>
+      </button>
+      <button mat-menu-item (click)="setcolor('#CFD8DC')" class="colorPalette" style="background-color:#CFD8DC">
+        <mat-icon></mat-icon>
+      </button>
+    </div>
+  </mat-menu>

@@ -1,0 +1,14 @@
+<button mat-icon-button  matTooltip="More" [matMenuTriggerFor]="menu">
+  <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
+  </button>
+  <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
+    <button mat-menu-item (click)=deleteNotes()>
+      Delete
+    </button>
+    <button mat-menu-item >
+      Add label
+    </button>
+    <button mat-menu-item>
+   Show checkboxes
+    </button>
+  </mat-menu>

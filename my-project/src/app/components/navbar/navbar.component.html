@@ -10,11 +10,12 @@
         </button>
       <span class="head" fxHide.xs="true" fxHide.sm="true">Fundoo</span>
       <span class="head1" >Notes</span>
-      <div class="sBar">
+      <div >
+     <button mat-icon-button class="searchicon" fxHide.xs="true" fxHide.sm="true">
       <i class="material-icons">
          search
-          </i>
-          <input type="input" placeholder="search" class= "search">
+          </i></button>
+          <input type="input" placeholder="search" class= "search" fxHide.xs="true" fxHide.sm="true">
        </div>
       <button mat-icon-button class="refresh">
       <i class="material-icons ">
@@ -32,7 +33,7 @@
                   <i class="material-icons " >
                       notifications
                       </i></button>
-                      <button  mat-icon-button class=" person" (click)="logout=!logout" >
+                      <button  mat-icon-button class=" person" (click)="logout=!logout" (clickOutside)="logout=false" >
                   <i class="material-icons" >
                       person
                       </i>
@@ -44,7 +45,7 @@
         <mat-sidenav-container  class="example-container" fxFill hasBackdrop="false" >
             <mat-sidenav  #drawer class="example-sidenav" mode="side">
          <mat-list>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/note.svg" >Notes</button><br>
+              <button mat-stroked-button (click)="notes()"><img class="img" src="../../../assets/images/note.svg" >Notes</button><br>
               <button mat-stroked-button ><img class="img" src="../../../assets/images/reminders.svg" >Reminder</button>
               </mat-list>
               <mat-divider></mat-divider>
@@ -73,24 +74,28 @@
 
 
             </mat-sidenav>
-            <div class="example-sidenav-content" >
+
+            <div class="example-sidenav-content"  >
 
 <mat-card class="example-card" *ngIf="logout">
     <mat-list flexLayout="row">
     <mat-card-header>
 
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Arghya Ray</mat-card-title>
-      <mat-card-subtitle>arece7@gmail.com</mat-card-subtitle>
+      <div mat-card-avatar class="">
+        <button mat-mini-fab disabled>{{word}}</button>
+      </div>
+      <mat-card-title>{{Fname}}&nbsp;{{Lname}}</mat-card-title>
+      <mat-card-subtitle>{{Email}}</mat-card-subtitle>
 
     </mat-card-header></mat-list>
 <mat-divider></mat-divider>
 <mat-list>
     <mat-card-actions>
-    <button mat-button class="button2" style="margin-left: 116px;">Log out</button>
+    <button mat-button class="button2" style="margin-left: 116px;" (click)="Logout()" >Log out</button>
     </mat-card-actions>
 </mat-list>
 </mat-card>
+<router-outlet></router-outlet>
             </div>
           </mat-sidenav-container>
         </div>
