@@ -1,0 +1,47 @@
+<div [ngStyle]="{'background-color':data.color}" >
+<mat-card-header>
+      <div data-text="Title" id="title" contenteditable="true" class="div2" [innerHTML]="data.title">
+      </div>
+      <span style="float:right;"><button mat-icon-button><img src="../../../assets/images/pin.svg"></button></span>
+  </mat-card-header>
+
+  <mat-card-content class="take_note">
+      <div data-text="Take a note.." id="description" contenteditable="true" class="div2" [innerHTML]="data.description">
+      </div>
+  </mat-card-content>
+
+  <mat-card-actions flexLayout="row">
+    <button mat-icon-button>
+      <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
+    </button>
+
+    <button mat-icon-button>
+    <i class="material-icons" style="opacity: 0.5;"> person_add </i>
+    </button>
+
+  <app-change-color [note]=data></app-change-color>
+
+    <button mat-icon-button>
+    <i class="material-icons" style="opacity: 0.5;">photo</i>
+    </button>
+
+    <button mat-icon-button>
+      <i class="material-icons" style="opacity: 0.5;">archive</i>
+    </button>
+
+  <button mat-icon-button>
+  <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
+  </button>
+
+  <button mat-icon-button>
+  <i class="material-icons" style="opacity: 0.5;">rotate_left </i>
+  </button>
+
+  <button mat-icon-button>
+  <i class="material-icons" style="opacity: 0.5;">rotate_right</i>
+  </button>
+
+  <button mat-button style="float:right" (click)="onNoClick()"> Close</button>
+  </mat-card-actions>
+
+</div>

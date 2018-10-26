@@ -1,5 +1,12 @@
+/** Purpose         : For changing color of Notes
+ *  @description
+ *  @file           : change-color.component.ts
+ *  @author         : Arghya Ray
+*/
+
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-change-color',
   templateUrl: './change-color.component.html',
@@ -9,11 +16,11 @@ export class ChangeColorComponent implements OnInit {
 
   @Input() note
   @Output() eventEmit=new EventEmitter();
-  constructor(private service: UserService) { }
+  constructor(private service: UserService,public snackbar:MatSnackBar) { }
 
   ngOnInit() {
   }
-
+                         // for changing the color
   setcolor(str) {
     var idlist = []
     idlist.push(this.note.id);
@@ -24,17 +31,22 @@ export class ChangeColorComponent implements OnInit {
 
     }
 
+                        //api call for changing color
 
     this.service.colorChange('/notes/changesColorNotes', body,token).subscribe(
 
       data => {
         console.log(data);
         this.eventEmit.emit({});
-
+        this.snackbar.open("Note", "Color Changed", {
+          duration: 2000,
+        });
       },
       error => {
         console.log('error happened');
-
+        this.snackbar.open("Note", "Color not changed,Try again", {
+          duration: 2000,
+        });
       }
     )
 

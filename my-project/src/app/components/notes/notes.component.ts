@@ -1,3 +1,9 @@
+/** Purpose         : For Notes
+ *  @description
+ *  @file           : notes.component.ts
+ *  @author         : Arghya Ray
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 @Component({
@@ -14,17 +20,17 @@ export class NotesComponent implements OnInit {
     this.getNotes();
   }
   addNewEntry(event){
-
     console.log(event);
     if(event){
-
-     this.notes = [];
       this.getNotes();
     }
   }
-  getNotes()
+  getNotes()              //for getting the data of the notes
   {
     var token=window.localStorage.getItem('token')
+
+                             //api call for getting note list
+
 
     this.service.getnotes('/notes/getNotesList',token).subscribe(
 
@@ -32,9 +38,9 @@ export class NotesComponent implements OnInit {
         this.notes=[];
        for(var i=data["data"].data.length-1;i>=0;i--)
        {
-         if(data["data"].data[i].isDeleted==false)
-         {
-          this.notes.push(data["data"].data[i])
+         if(data["data"].data[i].isDeleted==false && data["data"].data[i].isArchived==false )
+         {                                                   //checking the flags
+          this.notes.push(data["data"].data[i])            //pusing in note array
          }
 
        }
@@ -45,6 +51,10 @@ export class NotesComponent implements OnInit {
        console.log(error);
 
       }
+
     )
+  }
+  change(event){
+      this.getNotes();            // event for catching the changes
   }
 }

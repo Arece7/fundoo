@@ -1,22 +1,22 @@
-<div class="note-card" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start" fxLayout.lt-sm="column" >
-  <mat-card class="card_note"*ngFor="let note of NoteArray"  fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
+<div class="note-card" fxLayout="row wrap" style="margin-top:7%" fxLayoutGap="10px" fxLayoutAlign="center" fxLayout.lt-sm="column" >
+  <mat-card class="card_note"  *ngFor="let note of NoteArray"  fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
   fxFlex.lt-sm="100%" [ngStyle]="{'background-color':note.color}"  >
 
     <mat-card-header>
 
-          <div class="div2"[innerHTML]="note.title"></div>
+          <div  (click)="openDialog(note)" class="div2"[innerHTML]="note.title"></div>
           <span style="float:right ;" class="action"><button mat-icon-button><img src="../../../assets/images/pin.svg"></button></span>
       </mat-card-header>
 
       <mat-card-content class="take_note">
-          <div   class="div2" [innerHTML]="note.description">
+          <div (click)="openDialog(note)"  class="div2" [innerHTML]="note.description">
 
           </div>
       </mat-card-content>
 
       <mat-card-actions class="action" >
         <button mat-icon-button>
-          <img src="../../../assets/images/reminders.svg" class="svg_img" height="20px" width="20px" style="margin-top: -5px;"/>
+          <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
         </button>
         <button mat-icon-button>
         <i class="material-icons" style="opacity: 0.5;"> person_add </i>
@@ -25,9 +25,7 @@
         <button mat-icon-button>
         <i class="material-icons" style="opacity: 0.5;">photo</i>
         </button>
-        <button mat-icon-button>
-        <img src="../../../assets/images/archive.svg" class="svg_img" height="20px" width="20px" style="margin-top: -5px;"/>
-        </button>
+        <app-archive [note]="note" (eventEmit)=eventOccured($event)> </app-archive>
        <app-more [note]="note" (eventEmit)=eventOccured($event)></app-more>
       </mat-card-actions>
 

@@ -1,4 +1,4 @@
-<div fxLayoutAlign="space-evenly center">
+<div fxLayoutAlign="space-evenly center" style="margin-top:2%">
     <mat-card class="matcard" *ngIf="note1">
         <div data-text="Take a note..."  contenteditable="true" class="div2" (click)="note1=!note1">
         </div>
@@ -34,7 +34,7 @@
 
             <mat-card-actions flexLayout="row">
               <button mat-icon-button>
-                <img src="../../../assets/images/reminders.svg" class="svg_img" height="20px" width="20px" style="margin-top: -5px;"/>
+                <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
               </button>
 
               <button mat-icon-button>
@@ -50,7 +50,7 @@
               </button>
 
               <button mat-icon-button>
-              <img src="../../../assets/images/archive.svg" class="svg_img" height="20px" width="20px" style="margin-top: -5px;"/>
+                <i class="material-icons" style="opacity: 0.5;"> archive </i>
               </button>
 
             <button mat-icon-button>

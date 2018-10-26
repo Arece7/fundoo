@@ -92,9 +92,11 @@ input:focus {
       /* .example-sidenav-content {
 
     overflow:auto;
-    position: fixed;
+
+    height: 100%;
+
     padding-right: 2%;
-    padding-left:5%;
+    padding-left:10%;
 
   } */
 

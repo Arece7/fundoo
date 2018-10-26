@@ -34,6 +34,12 @@ import { NotesCollectionComponent } from './components/notes-collection/notes-co
 import { MoreComponent } from './components/more/more.component';
 import { ChangeColorComponent } from './components/change-color/change-color.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { MainArchiveComponent } from './components/main-archive/main-archive.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UpdateComponent } from './components/update/update.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,15 +57,25 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MoreComponent,
 
     ChangeColorComponent,
+
+    ArchiveComponent,
+
+    TrashComponent,
+
+    MainArchiveComponent,
+
+    UpdateComponent,
+
   ],
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, FlexLayoutModule, MatFormFieldModule,
      MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatButtonToggleModule,
       HttpClientModule, FormsModule, MatSnackBarModule, ReactiveFormsModule,
       ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,
-   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule,ClickOutsideModule,MatTooltipModule
+   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule,ClickOutsideModule,MatTooltipModule,MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[UpdateComponent, NotesCollectionComponent]
 })
 export class AppModule { }
