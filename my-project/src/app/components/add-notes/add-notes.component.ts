@@ -15,7 +15,8 @@ import {MatSnackBar} from '@angular/material';
 })
 export class AddNotesComponent implements OnInit {
   public note1:boolean=true;
-
+  public archive=false;
+  public cardColor='#FFFFFF';
   @Output() onNewEntryAdded = new EventEmitter(); //creating an instance
 
   constructor(private service:UserService,public snackbar:MatSnackBar) { }
@@ -28,10 +29,13 @@ export class AddNotesComponent implements OnInit {
     var description=document.getElementById("description").innerHTML;
 
           var body={
-
             'title':title,
-            'description':description
+            'description':description,
+            'isArchived':this.archive,
+            "color": this.cardColor,
+            "labelIdList":JSON.stringify(this.labelId)
           }
+          console.log(body)
 
 var token=localStorage.getItem('token')
 
@@ -40,6 +44,7 @@ var token=localStorage.getItem('token')
     this.service.addingNote('/notes/addNotes',body,token).subscribe(
 
           data=>{
+            this.cardColor="#FFFFFF";
               console.log('post sucessfull');
               this.snackbar.open("Note", "Added", {
                 duration: 2000,
@@ -50,6 +55,7 @@ var token=localStorage.getItem('token')
                   })
           },
           error=>{
+            this.cardColor="#FFFFFF";
             this.snackbar.open("Note", "not added", {
               duration: 2000,
             });
@@ -58,5 +64,34 @@ var token=localStorage.getItem('token')
           }
     )
 
+  }
+  eventOccured(event){
+    if(event){
+
+      console.log("in")
+      if(event){
+        this.archive=true;
+        this.postValue();
+      }
+
+    }
+  }
+  eventOccuredcolor(event){
+    console.log(event);
+    this.cardColor=event;
+  }
+  public labelId=[]
+  public labelName=[]
+  eventlabel(event)
+  {
+  this.labelId.push(event.id);
+  if(this.labelName.indexOf(event)<0)
+  this.labelName.push(event);
+
+  else{
+    this.labelName.splice(this.labelName.indexOf(event,1));
+    this.labelId.splice(this.labelId.indexOf(event,1));
+
+  }
   }
 }

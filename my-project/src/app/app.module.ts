@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -39,6 +40,12 @@ import { TrashComponent } from './components/trash/trash.component';
 import { MainArchiveComponent } from './components/main-archive/main-archive.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UpdateComponent } from './components/update/update.component';
+import { CreatelabelComponent } from './components/createlabel/createlabel.component';
+import { AddlabelComponent } from './components/addlabel/addlabel.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
+import { SearchPipe } from './search.pipe';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -66,16 +73,24 @@ import { UpdateComponent } from './components/update/update.component';
 
     UpdateComponent,
 
+    CreatelabelComponent,
+
+    AddlabelComponent,
+
+    SearchPipe,
+
+    SearchBarComponent
+
   ],
   imports: [
     BrowserModule, AppRoutingModule, BrowserAnimationsModule, FlexLayoutModule, MatFormFieldModule,
      MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatButtonToggleModule,
       HttpClientModule, FormsModule, MatSnackBarModule, ReactiveFormsModule,
       ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), RouterModule,
-   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule,ClickOutsideModule,MatTooltipModule,MatDialogModule
+   MatToolbarModule, LayoutModule, MatSidenavModule, MatListModule, MatMenuModule,ClickOutsideModule,MatTooltipModule,MatDialogModule,MatCheckboxModule,MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[UpdateComponent, NotesCollectionComponent]
+  entryComponents:[UpdateComponent, NotesCollectionComponent,CreatelabelComponent,AddlabelComponent]
 })
 export class AppModule { }

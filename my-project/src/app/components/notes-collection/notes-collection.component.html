@@ -1,5 +1,5 @@
 <div class="note-card" fxLayout="row wrap" style="margin-top:7%" fxLayoutGap="10px" fxLayoutAlign="center" fxLayout.lt-sm="column" >
-  <mat-card class="card_note"  *ngFor="let note of NoteArray"  fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
+  <mat-card class="card_note"  *ngFor="let note of NoteArray | search:searchInput"  fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
   fxFlex.lt-sm="100%" [ngStyle]="{'background-color':note.color}"  >
 
     <mat-card-header>
@@ -10,11 +10,14 @@
 
       <mat-card-content class="take_note">
           <div (click)="openDialog(note)"  class="div2" [innerHTML]="note.description">
-
           </div>
+
       </mat-card-content>
 
       <mat-card-actions class="action" >
+          <mat-chip-list>
+              <div *ngFor="let label of note.noteLabels"><mat-chip *ngIf="!label.isDeleted">{{label.label}}</mat-chip></div>
+            </mat-chip-list>
         <button mat-icon-button>
           <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
         </button>

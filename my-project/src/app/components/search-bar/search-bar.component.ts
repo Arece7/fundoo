@@ -1,31 +1,22 @@
-/** Purpose         : For Notes
- *  @description
- *  @file           : notes.component.ts
- *  @author         : Arghya Ray
-*/
-
 import { Component, OnInit } from '@angular/core';
+import { DataService } from "../../services/data.service";
 import { UserService } from '../../services/user.service';
+
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.css']
 })
-export class NotesComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
 
-  constructor(private service:UserService) { }
- public notes=[];
-
+  constructor(private data: DataService,private service:UserService) { }
+  searchInput:string;
   ngOnInit() {
+    this.data.currentMessage.subscribe(message => {this.searchInput = message
+    console.log(this.searchInput,"searchbar")})
     this.getNotes();
   }
-  addNewEntry(event){
-    console.log(event);
-    if(event){
-      this.getNotes();
-    }
-  }
-
+  public notes=[];
   getNotes()              //for getting the data of the notes
   {
     var token=window.localStorage.getItem('token')
@@ -53,9 +44,5 @@ export class NotesComponent implements OnInit {
 
       }
 
-    )
-  }
-  change(event){
-      this.getNotes();            // event for catching the changes
-  }
+    )}
 }

@@ -20,7 +20,7 @@
         </span>
         </mat-card>
 
-        <mat-card class="matcard" *ngIf="!note1">
+        <mat-card [ngStyle]="{'background-color':cardColor}" class="matcard" *ngIf="!note1">
             <mat-card-header>
                 <div data-text="Title" id="title" contenteditable="true" class="div2">
                 </div>
@@ -33,6 +33,9 @@
             </mat-card-content>
 
             <mat-card-actions flexLayout="row">
+                <mat-chip-list>
+                    <div *ngFor="let label of labelName"><mat-chip *ngIf="!label.isDeleted">{{label.label}}</mat-chip></div>
+                  </mat-chip-list>
               <button mat-icon-button>
                 <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
               </button>
@@ -41,21 +44,15 @@
               <i class="material-icons" style="opacity: 0.5;"> person_add </i>
               </button>
 
-              <button mat-icon-button>
-              <i class="material-icons" style="opacity: 0.5;" >color_lens</i>
-              </button>
+              <app-change-color  (eventEmit)=eventOccuredcolor($event) ></app-change-color>
 
               <button mat-icon-button>
               <i class="material-icons" style="opacity: 0.5;">photo</i>
               </button>
 
-              <button mat-icon-button>
-                <i class="material-icons" style="opacity: 0.5;"> archive </i>
-              </button>
+              <app-archive  (eventEmit)=eventOccured($event) ></app-archive>
 
-            <button mat-icon-button>
-            <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
-            </button>
+            <app-more (labelEvent)=eventlabel($event) ></app-more>
 
             <button mat-icon-button>
             <i class="material-icons" style="opacity: 0.5;">rotate_left </i>

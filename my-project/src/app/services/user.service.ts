@@ -82,6 +82,21 @@ deletingNote(adress,bodydata,acessToken)
 
     return this.http.post(this.url+"/"+adress,bodydata,httpAuthOptions1)
   }
+  post(adress,bodydata,acessToken)
+  {
+
+
+    var httpAuthOptions1 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': acessToken
+      })
+
+    };
+
+
+    return this.http.post(this.url+"/"+adress,bodydata,httpAuthOptions1)
+  }
   colorChange(adress,bodydata,acessToken)
   {
 
@@ -97,6 +112,10 @@ deletingNote(adress,bodydata,acessToken)
 
     return this.http.post(this.url+"/"+adress,bodydata,httpAuthOptions1)
   }
+
+delete(path){
+  return this.http.delete(this.url+"/"+path)
+}
   getFormUrlEncoded(toConvert) {
     const formBody = [];
     for (const property in toConvert) {

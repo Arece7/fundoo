@@ -62,6 +62,21 @@ var token=localStorage.getItem('token')
     )
 
   }
+
+  updateColor = this.data.color;
+
+  colorUpdate(event){
+    if(event){
+
+      this.updateColor = event;
+    }
+  }
+  eventOccured(event){
+    if(event){
+
+      this.dialogRef.close();
+    }
+  }
   }
 
 

@@ -1,0 +1,4 @@
+<button mat-stroked-button (click)=createLabel() ><img class="img" src="../../../assets/images/label.svg" >Create new label</button>
+<div *ngFor="let data of labelList">
+    <button mat-stroked-button><img class="img" src="../../../assets/images/labelicon.svg">{{data.label}}</button><br>
+</div>

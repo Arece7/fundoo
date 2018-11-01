@@ -5,10 +5,23 @@
     <button mat-menu-item (click)=deleteNotes()>
       Delete
     </button>
-    <button mat-menu-item >
+    <button mat-menu-item [matMenuTriggerFor]="addLabel" >
       Add label
     </button>
     <button mat-menu-item>
    Show checkboxes
     </button>
+  </mat-menu>
+
+
+  <mat-menu #addLabel="matMenu" yPosition="below" xPosition="after">
+
+      <div fxLayout="column" style="width: 257px;padding-left: 10px;" (click)="$event.stopPropagation()">
+          <div fxflex=10 style="display:flex;align-items:flex-start;font-size: 17px;"  >Label Note</div>
+          <div fxflex=15 ><input class="input" type="text" placeholder="Enter label name" [(ngModel)]="searchLabel"/><button mat-icon-button>
+            <img src="../../../assets/images/search.svg"></button></div>
+          <div fxflex=75 fxLayout="column" *ngFor="let data of labelList | search: searchLabel  " style="overflow-y: auto" (click)="$event.stopPropagation()">
+          <button class="wrap" mat-menu-item  ><mat-checkbox  class="box" (change)="addDeleteLabel(data)" [(ngModel)]="data.isChecked">{{data.label}}</mat-checkbox></button>
+          </div>
+      </div>
   </mat-menu>

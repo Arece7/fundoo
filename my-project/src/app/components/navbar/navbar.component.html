@@ -11,11 +11,11 @@
       <span class="head" fxHide.xs="true" fxHide.sm="true">Fundoo</span>
       <span class="head1" >Notes</span>
       <div >
-     <button mat-icon-button class="searchicon" fxHide.xs="true" fxHide.sm="true">
+     <button mat-icon-button class="searchicon"(click)="search()" fxHide.xs="true" fxHide.sm="true">
       <i class="material-icons">
          search
           </i></button>
-          <input type="input" placeholder="search" class= "search" fxHide.xs="true" fxHide.sm="true">
+          <input type="input" (click)="search()" (keyup)="sendmessage()" placeholder="search" class= "search" fxHide.xs="true" fxHide.sm="true" [(ngModel)]="searchInput">
        </div>
       <button mat-icon-button class="refresh">
       <i class="material-icons ">
@@ -51,8 +51,8 @@
               <mat-divider></mat-divider>
               <mat-list>
               <p class="para">Labels<button mat-button>EDIT</button></p>
-
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/label.svg" >Create new label</button>
+              <app-addlabel></app-addlabel>
+              <!-- <button mat-stroked-button (click)="createLabel()" ><img class="img" src="../../../assets/images/label.svg" >Create new label</button> -->
               </mat-list>
               <mat-divider></mat-divider>
               <mat-list>

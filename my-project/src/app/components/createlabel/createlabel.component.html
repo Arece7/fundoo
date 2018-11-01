@@ -1,0 +1,26 @@
+<p>Edit label</p>
+
+<div fxLayout="row"  fxLayoutAlign="space-around center">
+    <div fxFlex="10%"><mat-icon class="icon" (click)=clear() >clear</mat-icon></div>
+    <div fxFlex=70% data-text="Create new label" class="textarea" contenteditable="true" #labelName></div>
+    <div fxFlex="10%"><mat-icon  class="icon" (click)=addbox()>done</mat-icon>
+    </div>
+</div>
+
+
+<div *ngFor="let data of labelList" >
+<div fxLayout=row fxLayoutAlign="space-around center" >
+    <div fxFlex=10%><mat-icon class="icon" (click)=delete(data.id)>delete</mat-icon></div>
+
+    <div fxFlex="80%"  [innerHTML]="data.label" class="label" *ngIf="!editable || data.label!=editLabel" class="area"></div>
+<div fxFlex="80%"  [innerHTML]="data.label" class="label" contenteditable="true" *ngIf="editable && data.label==editLabel" class="area" #editDiv></div>
+<div fxFlex="10%" ><mat-icon class="icon" (click)=edit(data) *ngIf="editDoneIcon || data.id!=editId">edit</mat-icon>
+                  <mat-icon class="icon" (click)=editparticular(data) *ngIf="editClick && data.id==editId">done</mat-icon></div>
+
+
+</div>
+</div>
+
+<button mat-button style="float:right;margin-top: 15px" (click)=add();done();show() >Done</button>
+
+

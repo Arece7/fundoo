@@ -8,6 +8,7 @@ import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
 import { UserService } from '../../services/user.service';
 import {MatDialog} from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
+import { DataService } from "../../services/data.service";
 @Component({
   selector: 'app-notes-collection',
   templateUrl: './notes-collection.component.html',
@@ -17,11 +18,11 @@ import { UpdateComponent } from '../update/update.component';
 
 export class NotesCollectionComponent implements OnInit {
   public notes=[];
-@Output()   onNewEntryDeleted = new EventEmitter();
+@Output()   onNewEntryDeleted = new EventEmitter();   //creating instances of event emitter
+@Input() searchInput
+  constructor(private service:UserService,public dialog: MatDialog,private data: DataService) { }
 
-  constructor(private service:UserService,public dialog: MatDialog) { }
-
-  @Input() NoteArray;                               //creating instances of event emitter
+  @Input() NoteArray;        //receving the array
 
 @Output() update=new EventEmitter();
   ngOnInit() {

@@ -22,6 +22,7 @@ export class ChangeColorComponent implements OnInit {
   }
                          // for changing the color
   setcolor(str) {
+    if(this.note){
     var idlist = []
     idlist.push(this.note.id);
     var token=localStorage.getItem('token')
@@ -37,7 +38,7 @@ export class ChangeColorComponent implements OnInit {
 
       data => {
         console.log(data);
-        this.eventEmit.emit({});
+        this.eventEmit.emit(str);
         this.snackbar.open("Note", "Color Changed", {
           duration: 2000,
         });
@@ -51,6 +52,9 @@ export class ChangeColorComponent implements OnInit {
     )
 
   }
-
+  else{
+    this.eventEmit.emit(str);
+  }
+  }
 
 }

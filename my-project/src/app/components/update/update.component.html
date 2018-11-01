@@ -1,4 +1,5 @@
-<div [ngStyle]="{'background-color':data.color}" >
+
+ <mat-card class="matcard" [ngStyle]="{'background-color':updateColor}">
 <mat-card-header>
       <div data-text="Title" id="title" contenteditable="true" class="div2" [innerHTML]="data.title">
       </div>
@@ -19,15 +20,13 @@
     <i class="material-icons" style="opacity: 0.5;"> person_add </i>
     </button>
 
-  <app-change-color [note]=data></app-change-color>
+  <app-change-color (eventEmit)="colorUpdate($event)" [note]=data></app-change-color>
 
     <button mat-icon-button>
     <i class="material-icons" style="opacity: 0.5;">photo</i>
     </button>
 
-    <button mat-icon-button>
-      <i class="material-icons" style="opacity: 0.5;">archive</i>
-    </button>
+    <app-archive [note]=data (eventEmit)=eventOccured($event)> </app-archive>
 
   <button mat-icon-button>
   <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
@@ -43,5 +42,5 @@
 
   <button mat-button style="float:right" (click)="onNoClick()"> Close</button>
   </mat-card-actions>
+</mat-card>
 
-</div>
