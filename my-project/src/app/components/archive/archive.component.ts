@@ -9,13 +9,20 @@ import {MatSnackBar} from '@angular/material';
 export class ArchiveComponent implements OnInit {
   @Input() note:any;
   @Output() eventEmit=new EventEmitter();
-
+  @Input()Delete: any;
   constructor(private service:UserService,public snackbar:MatSnackBar) { }
-
+  public isArchived=false;
+  public isDeleted=false;
   ngOnInit() {
+    if (this.note != undefined && this.note.isArchived==true){
+      this.isArchived=true;
+    }
+    if (this.note != undefined && this.note.isDeleted==true){
+      this.isDeleted=true;
+    }
   }
 
-  ArchiveNotes()
+  ArchiveNotes(flag)
   {
     if(this.note ){
   var token=localStorage.getItem('token')
@@ -24,22 +31,18 @@ export class ArchiveComponent implements OnInit {
   idList.push(this.note.id);
   var body=
   {
-    "isArchived":true,
+    "isArchived":flag,
     "noteIdList":idList
   };
   if(this.note!=undefined && this.note.noteLabels.length!=undefined){
     this.service.deletingNote('/notes/archiveNotes',body,token).subscribe(
       data=>{
-    console.log("succes");
-    this.snackbar.open("Note", "Archived", {
-      duration: 2000,
-    });
+    console.log("success");
+
     this.eventEmit.emit({});
       },
       error=>{
-        this.snackbar.open("Note", "not archived", {
-          duration: 2000,
-        });
+
     console.log("error");
 
       });

@@ -15,12 +15,14 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
-
+  @Output() onNewEntryAdded = new EventEmitter();
+  public labels = [];
   constructor( public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,public service:UserService,public snackbar:MatSnackBar) { }
-  ngOnInit() {
 
-console.log(this.data);
+    ngOnInit() {
+    this.labels = this.data.noteLabels
+// console.log(this.data.);
 
   }
 
@@ -37,7 +39,8 @@ console.log(this.data);
 
             'title':title,
             'description':description,
-            'noteId':[this.data.id]
+            'noteId':[this.data.id],
+
           }
 
 var token=localStorage.getItem('token')
@@ -46,11 +49,15 @@ var token=localStorage.getItem('token')
     this.service.addingNote('/notes/UpdateNotes',body,token).subscribe(
 
           data=>{
+            this.labels=[]
               console.log('post sucessfull');
               this.snackbar.open("Note", "Updated", {
                 duration: 2000,
               });
+              this.onNewEntryAdded.emit
+              ({
 
+                  })
           },
           error=>{
 
@@ -76,6 +83,50 @@ var token=localStorage.getItem('token')
 
       this.dialogRef.close();
     }
+  }
+
+
+
+
+  labelAdded(event){
+
+    if (event.isChecked==true) {
+          this.labels.push(event)
+      console.log("push ka",this.labels)
+    }
+    else {
+      // this.labels.splice(this.labels.indexOf(event), 1);
+
+      let temp = [];
+      for(let i=0; i<this.labels.length; i++){
+
+        if(this.labels[i].id === event.id){
+
+          continue;
+        }
+        temp.push(this.labels[i]);
+      }
+      this.labels = temp;
+
+      console.log("uncheck ka",this.labels)
+
+
+    }
+
+
+  }
+  deleteLabel(note,label)
+  {
+
+    this.labels.splice(this.labels.indexOf(event), 1);
+    var token=localStorage.getItem('token');
+    this.service.post("/notes/" + note + "/addLabelToNotes/" + label + "/remove", null, token)
+    .subscribe(Response => {
+      console.log(Response);
+
+    }, error => {
+      console.log(error)
+    })
   }
   }
 

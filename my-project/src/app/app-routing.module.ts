@@ -11,6 +11,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import{SearchBarComponent} from './components/search-bar/search-bar.component'
+import { LabelNotesComponent } from './components/label-notes/label-notes.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent,  },
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path: 'archive', component:MainArchiveComponent },
     {path: 'trash', component: TrashComponent},
     { path: 'search', component: SearchBarComponent,  },
+    { path: 'label/:labelName', component: LabelNotesComponent,  }
   ]
 }
 ];

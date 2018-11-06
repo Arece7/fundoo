@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import { CreatelabelComponent } from '../createlabel/createlabel.component';
 import { UserService } from '../../services/user.service';
-
+import {  Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +26,8 @@ export class AddlabelComponent implements OnInit {
 
   constructor(
     private _Service:UserService,
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    private router:Router
 
   ) { this.show() }
 
@@ -53,6 +54,10 @@ export class AddlabelComponent implements OnInit {
       console.log("failed");
       console.log(error);
     });
+  }
+  labelClick(data){
+     var labelName=data.label;
+     this.router.navigate(["label/"+labelName]);
   }
 
 }

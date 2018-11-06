@@ -1,7 +1,9 @@
 
  <mat-card class="matcard" [ngStyle]="{'background-color':updateColor}">
 <mat-card-header>
-      <div data-text="Title" id="title" contenteditable="true" class="div2" [innerHTML]="data.title">
+      <div data-text="Title" id="title" *ngIf="!data.isDeleted"  contenteditable="true" class="div2" [innerHTML]="data.title">
+      </div>
+      <div data-text="Title"  *ngIf="data.isDeleted" id="title" contenteditable="false" class="div2" [innerHTML]="data.title">
       </div>
       <span style="float:right;"><button mat-icon-button><img src="../../../assets/images/pin.svg"></button></span>
   </mat-card-header>
@@ -12,33 +14,18 @@
   </mat-card-content>
 
   <mat-card-actions flexLayout="row">
-    <button mat-icon-button>
-      <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
-    </button>
+      <mat-chip-list>
+          <div *ngFor="let data1 of labels"><mat-chip >{{data1.label}}
+            <mat-icon matChipRemove (click)= deleteLabel(data.id,data1.id) >cancel</mat-icon>
+          </mat-chip></div>
+        </mat-chip-list>
+        <app-reminder [Delete]="data.isDeleted"> </app-reminder>
+        <app-collaborator [Delete]="data.isDeleted"></app-collaborator>
+        <app-change-color (eventEmit)="colorUpdate($event)" [Delete]="data.isDeleted" [note]=data></app-change-color>
+        <app-add-image  [Delete]="data.isDeleted"> </app-add-image>
+       <app-archive [note]=data [Delete]="data.isDeleted" (eventEmit)=eventOccured($event)> </app-archive>
+       <app-more [note]="data" (labelEvent)=labelAdded($event) > </app-more>
 
-    <button mat-icon-button>
-    <i class="material-icons" style="opacity: 0.5;"> person_add </i>
-    </button>
-
-  <app-change-color (eventEmit)="colorUpdate($event)" [note]=data></app-change-color>
-
-    <button mat-icon-button>
-    <i class="material-icons" style="opacity: 0.5;">photo</i>
-    </button>
-
-    <app-archive [note]=data (eventEmit)=eventOccured($event)> </app-archive>
-
-  <button mat-icon-button>
-  <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
-  </button>
-
-  <button mat-icon-button>
-  <i class="material-icons" style="opacity: 0.5;">rotate_left </i>
-  </button>
-
-  <button mat-icon-button>
-  <i class="material-icons" style="opacity: 0.5;">rotate_right</i>
-  </button>
 
   <button mat-button style="float:right" (click)="onNoClick()"> Close</button>
   </mat-card-actions>

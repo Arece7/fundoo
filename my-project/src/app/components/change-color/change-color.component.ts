@@ -13,7 +13,7 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./change-color.component.css']
 })
 export class ChangeColorComponent implements OnInit {
-
+  @Input() Delete:any;
   @Input() note
   @Output() eventEmit=new EventEmitter();
   constructor(private service: UserService,public snackbar:MatSnackBar) { }

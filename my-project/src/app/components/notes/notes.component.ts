@@ -58,4 +58,9 @@ export class NotesComponent implements OnInit {
   change(event){
       this.getNotes();            // event for catching the changes
   }
+  eventLabel(event)
+  {
+    console.log(event);
+    this.getNotes();
+  }
 }

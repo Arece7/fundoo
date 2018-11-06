@@ -12,6 +12,7 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
     this.getNotes();
   }
+
   getNotes()                   //for getting the notes in archive
   {
     var token=localStorage.getItem('token')
@@ -33,6 +34,11 @@ export class TrashComponent implements OnInit {
 
       }
     )
+  }
+  eventLabel(event)
+  {
+   console.log(event);
+    this.getNotes()
   }
 
 

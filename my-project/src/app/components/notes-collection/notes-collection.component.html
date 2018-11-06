@@ -16,20 +16,17 @@
 
       <mat-card-actions class="action" >
           <mat-chip-list>
-              <div *ngFor="let label of note.noteLabels"><mat-chip *ngIf="!label.isDeleted">{{label.label}}</mat-chip></div>
+              <div *ngFor="let label of note.noteLabels"><mat-chip>{{label.label}}
+                <mat-icon matChipRemove (click)=deleteLabel(note,label)>cancel</mat-icon>
+              </mat-chip></div>
             </mat-chip-list>
-        <button mat-icon-button>
-          <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
-        </button>
-        <button mat-icon-button>
-        <i class="material-icons" style="opacity: 0.5;"> person_add </i>
-        </button>
-        <app-change-color [note]="note" (eventEmit)=eventOccured($event)></app-change-color>
-        <button mat-icon-button>
-        <i class="material-icons" style="opacity: 0.5;">photo</i>
-        </button>
-        <app-archive [note]="note" (eventEmit)=eventOccured($event)> </app-archive>
-       <app-more [note]="note" (eventEmit)=eventOccured($event)></app-more>
+
+       <app-reminder [Delete]="note.isDeleted"> </app-reminder>
+        <app-collaborator [Delete]="note.isDeleted"></app-collaborator>
+        <app-change-color [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-change-color>
+        <app-add-image [Delete]="note.isDeleted"> </app-add-image>
+        <app-archive [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)> </app-archive>
+       <app-more [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-more>
       </mat-card-actions>
 
     </mat-card>

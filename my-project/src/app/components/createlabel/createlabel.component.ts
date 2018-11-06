@@ -66,7 +66,7 @@ export class CreatelabelComponent implements OnInit {
   }
   clear()
   {
-    document.getElementById("labelName").innerHTML=null;
+    this.labelName.nativeElement.innerHTML=null;
   }
   delete(labelId){
     this.Service.delete("/noteLabels/"+labelId+"/deleteNoteLabel")

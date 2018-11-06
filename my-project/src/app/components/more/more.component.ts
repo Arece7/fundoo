@@ -18,30 +18,22 @@ import {MatDialog} from '@angular/material';
 })
 export class MoreComponent implements OnInit {
 
+ public searchLabel;
 
+  @Input() Delete:any;
   @Input() note;
   @Output() eventEmit=new EventEmitter();
   @Output() labelEvent= new EventEmitter();    //creating instance of event emitter
   constructor(private service:UserService,public snackbar:MatSnackBar,public dialog:MatDialog) { }
   public noteLabels=[];
-  public searchLabel;
+
 
   ngOnInit() {
 
-    if(this.note!=undefined && this.note['noteLabels']!=undefined ){
-
-      for (var i = 0; i < this.note['noteLabels'].length; i++) {
-        this.noteLabels.push(this.note['noteLabels'][i])
-      }
-
-
-
-    }
       this.getLabels();
 
-
-  }
-deleteNotes()                //for deleting the notes
+            }
+deleteNotes(val)                //for deleting the notes
 {
 
   var token=localStorage.getItem('token')
@@ -50,22 +42,43 @@ deleteNotes()                //for deleting the notes
   idList.push(this.note.id);
   var body=
   {
-    "isDeleted":true,
+    "isDeleted":val,
     "noteIdList":idList
   };                                 //api call for deleting the notes
 this.service.deletingNote('/notes/trashNotes',body,token).subscribe(
   data=>{
-console.log("succes");
-this.snackbar.open("Note", "Deleted", {
-  duration: 2000,
-});
-this.eventEmit.emit({})
+  console.log("success");
+  this.eventEmit.emit({})
   },
   error=>{
-    this.snackbar.open("Note", "not deleted,Try again", {
-      duration: 2000,
-    });
-console.log("error");
+
+    console.log("error");
+
+  }
+)
+
+
+}
+deleteForever()                //for deleting the notes
+{
+
+  var token=localStorage.getItem('token')
+
+  var idList=[];
+  idList.push(this.note.id);
+  var body=
+  {
+    "isDeleted":false,
+    "noteIdList":idList
+  };                                 //api call for deleting the notes
+this.service.deletingNote('/notes/deleteForeverNotes',body,token).subscribe(
+  data=>{
+  console.log("success");
+  this.eventEmit.emit({})
+  },
+  error=>{
+
+    console.log("error");
 
   }
 )

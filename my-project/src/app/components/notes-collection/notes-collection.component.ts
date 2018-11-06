@@ -18,7 +18,8 @@ import { DataService } from "../../services/data.service";
 
 export class NotesCollectionComponent implements OnInit {
   public notes=[];
-@Output()   onNewEntryDeleted = new EventEmitter();   //creating instances of event emitter
+@Output()   onNewEntryDeleted = new EventEmitter();
+@Output() eventEmit=new EventEmitter();              //creating instances of event emitter
 @Input() searchInput
   constructor(private service:UserService,public dialog: MatDialog,private data: DataService) { }
 
@@ -28,6 +29,7 @@ export class NotesCollectionComponent implements OnInit {
   ngOnInit() {
 
   }
+
   eventOccured(event){
     if(event){
 
@@ -37,8 +39,7 @@ export class NotesCollectionComponent implements OnInit {
   openDialog(note): void {                            // for dialog mateial
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '600px',
-       data: {"title" :note.title, "description":note.description,"id":note.id,
-       "color":note.color}
+       data: note
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -46,6 +47,19 @@ export class NotesCollectionComponent implements OnInit {
       this.update.emit()
 
     });
+  }
+
+
+  deleteLabel(note,label)
+  {
+    var token=localStorage.getItem('token');
+    this.service.post("/notes/" + note['id'] + "/addLabelToNotes/" + label.id + "/remove", null, token)
+    .subscribe(Response => {
+      console.log(Response);
+      this.eventEmit.emit({})
+    }, error => {
+      console.log(error)
+    })
   }
 
 }

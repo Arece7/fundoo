@@ -1,4 +1,4 @@
-<button mat-icon-button [matMenuTriggerFor]="menuColor">
+<button mat-icon-button [matMenuTriggerFor]="menuColor" *ngIf="!Delete">
   <i class="material-icons" matTooltip="Change-color" style="opacity: 0.5;" >color_lens</i>
   </button>
   <mat-menu #menuColor="matMenu" yPosition="above" [overlapTrigger]="false" class="colorCard">

@@ -1,8 +1,8 @@
-<button mat-icon-button  matTooltip="More" [matMenuTriggerFor]="menu">
+<button mat-icon-button  matTooltip="More" *ngIf="!Delete" [matMenuTriggerFor]="menu">
   <i class="material-icons" style="opacity: 0.5;"> more_vert </i>
   </button>
   <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-    <button mat-menu-item (click)=deleteNotes()>
+    <button mat-menu-item (click)=deleteNotes(true)>
       Delete
     </button>
     <button mat-menu-item [matMenuTriggerFor]="addLabel" >
@@ -20,8 +20,15 @@
           <div fxflex=10 style="display:flex;align-items:flex-start;font-size: 17px;"  >Label Note</div>
           <div fxflex=15 ><input class="input" type="text" placeholder="Enter label name" [(ngModel)]="searchLabel"/><button mat-icon-button>
             <img src="../../../assets/images/search.svg"></button></div>
-          <div fxflex=75 fxLayout="column" *ngFor="let data of labelList | search: searchLabel  " style="overflow-y: auto" (click)="$event.stopPropagation()">
+          <div fxflex=75 fxLayout="column" *ngFor="let data of labelList | searchLabel: searchLabel  " style="overflow-y: auto" (click)="$event.stopPropagation()">
           <button class="wrap" mat-menu-item  ><mat-checkbox  class="box" (change)="addDeleteLabel(data)" [(ngModel)]="data.isChecked">{{data.label}}</mat-checkbox></button>
           </div>
       </div>
   </mat-menu>
+
+ <button mat-icon-button matTooltip="More"> <mat-icon  [matMenuTriggerFor]="delete" *ngIf="Delete" >more_vert</mat-icon></button>
+<mat-menu #delete="matMenu">
+<button mat-menu-item (click)="deleteForever()">Delete Forever</button>
+<button mat-menu-item (click)="deleteNotes(false)">Restore</button>
+
+</mat-menu>

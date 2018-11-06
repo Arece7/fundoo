@@ -15,8 +15,15 @@ import { UserService } from '../../services/user.service';
 export class MainArchiveComponent implements OnInit {
 
   constructor(private service:UserService) { }
-public Array=[]
+public notes=[]
   ngOnInit() {
+    this.getNotes();
+  }
+  addNewEntry(event){
+    this.getNotes();
+  }
+  eventLabel(event)
+  {
     this.getNotes();
   }
   getNotes()                   //for getting the notes in archive
@@ -26,14 +33,14 @@ public Array=[]
     this.service.getnotes('/notes/getArchiveNotesList',token).subscribe(
 
       data=>{
-        this.Array=[];
+        this.notes=[];
        for(var i=data["data"].data.length-1;i>=0;i--)
        {
-
-          this.Array.push(data["data"].data[i])
+        if(data["data"].data[i].isDeleted==false)
+          this.notes.push(data["data"].data[i])
 
        }
-       console.log(this.Array);
+       console.log(this.notes);
 
       },
       error=>{

@@ -22,6 +22,8 @@ export class AddNotesComponent implements OnInit {
   constructor(private service:UserService,public snackbar:MatSnackBar) { }
 
   ngOnInit() {
+   this.labelId=[]
+   this.labelName=[]
   }
   postValue()                //for posting the data of Notes
   {
@@ -39,11 +41,17 @@ export class AddNotesComponent implements OnInit {
 
 var token=localStorage.getItem('token')
 
-                                 //api call for add notes
+     if(title=="" && description=="" )    {
+      this.labelId=[]
+      this.labelName=[]
+       return;
+     }                      //api call for add notes
 
     this.service.addingNote('/notes/addNotes',body,token).subscribe(
 
           data=>{
+            this.labelId=[]
+           this.labelName=[]
             this.cardColor="#FFFFFF";
               console.log('post sucessfull');
               this.snackbar.open("Note", "Added", {
@@ -55,6 +63,8 @@ var token=localStorage.getItem('token')
                   })
           },
           error=>{
+            this.labelId=[]
+           this.labelName=[]
             this.cardColor="#FFFFFF";
             this.snackbar.open("Note", "not added", {
               duration: 2000,
@@ -89,9 +99,15 @@ var token=localStorage.getItem('token')
   this.labelName.push(event);
 
   else{
+
     this.labelName.splice(this.labelName.indexOf(event,1));
     this.labelId.splice(this.labelId.indexOf(event,1));
 
   }
+  }
+  delete()
+  {
+    this.labelName.splice(this.labelName.indexOf(event,1));
+    this.labelId.splice(this.labelId.indexOf(event,1));
   }
 }

@@ -34,7 +34,10 @@
 
             <mat-card-actions flexLayout="row">
                 <mat-chip-list>
-                    <div *ngFor="let label of labelName"><mat-chip *ngIf="!label.isDeleted">{{label.label}}</mat-chip></div>
+                    <div *ngFor="let label of labelName"><mat-chip *ngIf="!label.isDeleted">{{label.label}}
+                        <mat-icon matChipRemove (click)= delete()>cancel</mat-icon>
+                    </mat-chip></div>
+
                   </mat-chip-list>
               <button mat-icon-button>
                 <i class="material-icons" style="opacity: 0.5;"> touch_app </i>

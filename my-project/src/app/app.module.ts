@@ -44,8 +44,13 @@ import { CreatelabelComponent } from './components/createlabel/createlabel.compo
 import { AddlabelComponent } from './components/addlabel/addlabel.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
-import { SearchPipe } from './search.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchLabelPipe } from './pipes/search-label.pipe';
+import { LabelNotesComponent } from './components/label-notes/label-notes.component';
+import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { AddImageComponent } from './components/add-image/add-image.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +84,17 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 
     SearchPipe,
 
-    SearchBarComponent
+    SearchBarComponent,
+
+    SearchLabelPipe,
+
+    LabelNotesComponent,
+
+    CollaboratorComponent,
+
+    ReminderComponent,
+
+    AddImageComponent
 
   ],
   imports: [
