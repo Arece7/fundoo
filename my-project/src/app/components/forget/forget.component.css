@@ -1,16 +1,15 @@
-
-  .container > * {
-    width: 100%;
-  }
-  #field1
-  {
-    width: 100%
-  }
-  #button
-{
-  float:right;
+.container > * {
+  width: 100%;
 }
-a
-{
+#field1 {
+  width: 100%;
+}
+#button {
+  float: right;
+}
+a {
   text-decoration: none;
+}
+.maindiv {
+  padding: 30px 0px;
 }

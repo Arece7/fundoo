@@ -1,33 +1,34 @@
 <div class="container" fxLayout>
-  <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-  <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
-  <div fxLayout="column" fxLayoutGap = "5%">
-    <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" [formGroup]='rForm' >
-      <mat-card class="card">
-        <!-- <div style="padding: 10px 0px;"> -->
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+  <div fxFlex="34" fxFlex.xs="100" fxFlex.sm="84">
+    <div fxLayout="column" fxLayoutGap="5%">
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+      <div fxFlex="34%" fxFlex.xs="100" fxFlex.sm="84" [formGroup]='rForm'>
+        <mat-card class="card">
 
-          <img src="../../../assets/images/google.svg"alt="google" class="center">
-          <mat-card-title >FundooNote Account</mat-card-title>
+
+          <img src="../../../assets/images/google.svg" alt="google" class="center">
+          <mat-card-title>FundooNote Account</mat-card-title>
           <mat-card-subtitle>to continue to your account</mat-card-subtitle>
           <div fxLayout="column">
-          <mat-form-field id="pass1">
-            <input matInput placeholder="Password" formControlName="password" [(ngModel)]="model.password" [type]="hide ? 'text' : 'password'" required>
-            <mat-error class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">Enter a password(min-length:6) </mat-error>
-          </mat-form-field>
-          <mat-form-field id="pass2">
-            <input matInput placeholder="Confirm password"  formControlName="cnfpassword" [type]="hide ? 'text' : 'password'">
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error class="alert" *ngIf="!rForm.controls['cnfpassword'].valid && rForm.controls['cnfpassword'].touched">Both password should be same</mat-error>
-          </mat-form-field>
-         </div>
-          <button mat-flat-button id="button" [disabled]="!rForm.valid" (click)="ChangePassword()" >Reset</button>
+            <mat-form-field id="pass1">
+              <input matInput placeholder="Password" formControlName="password" [(ngModel)]="model.password" [type]="hide ? 'text' : 'password'"
+                required>
+              <mat-error class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">Enter a password(min-length:6) </mat-error>
+            </mat-form-field>
+            <mat-form-field id="pass2">
+              <input matInput placeholder="Confirm password" formControlName="cnfpassword" [type]="hide ? 'text' : 'password'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error class="alert" *ngIf="!rForm.controls['cnfpassword'].valid && rForm.controls['cnfpassword'].touched">Both password should be same</mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-flat-button id="button" [disabled]="!rForm.valid" (click)="ChangePassword()">Reset</button>
 
-      </mat-card>
+        </mat-card>
+      </div>
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
     </div>
-    <div class="item item-1" fxFlex="33%"fxFlex.xs = "0" fxFlex.sm = "8"></div>
-  </div>
 
-</div>
-<div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  </div>
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
 </div>

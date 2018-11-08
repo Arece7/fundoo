@@ -1,68 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { UserService } from '../../services/user.service';
+
+/** Purpose         : For update Notes
+ *  @description
+ *  @file           : label-notes.component.ts
+ *  @author         : Arghya Ray
+ */
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+import { UserService } from "../../core/services/user.service";
 
 @Component({
-  selector: 'app-label-notes',
-  templateUrl: './label-notes.component.html',
-  styleUrls: ['./label-notes.component.css']
+  selector: "app-label-notes",
+  templateUrl: "./label-notes.component.html",
+  styleUrls: ["./label-notes.component.css"]
 })
 export class LabelNotesComponent implements OnInit {
+  constructor(public route: ActivatedRoute, private service: UserService) {}
 
-  constructor(public route: ActivatedRoute,
-    private service: UserService) { }
-
-
-  public labelName ;
-  public labelNOtes=[];
+  public labelName;
+  public labelNOtes = [];
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
 
-    this.route.params.subscribe(
-      (params: Params) => {
-
-        console.log(params['labelName']);
-        this.labelName = params['labelName']
-        this.getLabelNOtes(this.labelName);
-
-      })
-
-
+      this.labelName = params["labelName"];
+      this.getLabelNOtes(this.labelName);
+    });
   }
-  getLabelNOtes(labelName){
+  /**@function:  getLabelNOtes() for getting note lists by label */
+  getLabelNOtes(labelName) {
+    var url = "notes/getNotesListByLabel/" + labelName;
+    this.service.post(url, null, localStorage.getItem("token")).subscribe(
+      response => {
 
-    var url ="notes/getNotesListByLabel/"+labelName
-    this.service.post(url, null, localStorage.getItem('token')).subscribe(response => {
-      console.log("successfull", response);
-      this.labelNOtes=response['data'].data
-      console.log(this.labelNOtes);
+        this.labelNOtes = response["data"].data;
 
-    }, error => {
-      console.log("failed", error)
-    })
+      },
+      error => {
 
+      }
+    );
   }
-  eventLabel(event)
-  {
+   /**@function:  eventLabel() for catching the changes */
+  eventLabel(event) {
     this.getLabelNOtes(this.labelName);
   }
-  addNewEntry(event){
-    console.log(event);
-    if(event){
+    /**@function: addNewEntry() for catching the changes */
+  addNewEntry(event) {
+
+    if (event) {
       this.getLabelNOtes(this.labelName);
     }
   }
-  change(event){
-    this.getLabelNOtes(this.labelName);           // event for catching the changes
+   /**@function: change() for catching the changes */
+  change(event) {
+    this.getLabelNOtes(this.labelName); // event for catching the changes
+  }
+
+
 }
-
-
-  // eventDone(event){
-  //  this.getLabelNOtes(this.labelName)
-  // }
-}
-
-
-
-
-

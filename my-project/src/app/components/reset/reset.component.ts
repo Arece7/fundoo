@@ -1,67 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { Router  , ActivatedRoute } from '@angular/router';
-import {MatSnackBar} from '@angular/material';
-import { UserService } from '../../services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {passValidator} from './cutomReset'
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { UserService } from "../../core/services/user.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { passValidator } from "./cutomReset";
 @Component({
-  selector: 'app-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.css']
+  selector: "app-reset",
+  templateUrl: "./reset.component.html",
+  styleUrls: ["./reset.component.css"]
 })
 export class ResetComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute,private _Service:UserService,public snackbar:MatSnackBar,private router: Router,fb: FormBuilder)
-  {
+  public hide;
+  constructor(
+    private route: ActivatedRoute,
+    private _Service: UserService,
+    public snackbar: MatSnackBar,
+    private router: Router,
+    fb: FormBuilder
+  ) {
     this.rForm = fb.group({
-
-      'password': [null,[Validators.required,Validators.minLength(6),Validators.maxLength(10)]],
-      'cnfpassword': [null, passValidator]
-
+      password: [
+        null,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(10)]
+      ],
+      cnfpassword: [null, passValidator]
     });
-   }
-  public acessToken=  this.route.snapshot.params['token'];
+  }
+  public acessToken = this.route.snapshot.params["token"];
   rForm: FormGroup;
   post: any;
 
-  password: string = '';
-  cnfpassword: string = '';
-
+  password: string = "";
+  cnfpassword: string = "";
 
   ngOnInit() {
-    console.log(this.acessToken);
 
   }
-  model:any={};
+  model: any = {};
 
-  ChangePassword()
-  {
+  ChangePassword() {
     // let input = new FormData();
 
-var mybody={"newPassword":this.model.password}
+    var mybody = { newPassword: this.model.password };
 
-    console.log(this.model.password);
 
-    this._Service.postPassword("user/reset-password",mybody,this.acessToken).subscribe(response=>
-      {
-        console.log("reset done");
 
-        this.snackbar.open("Reset", "success", {
-          duration: 2000,
-        });
-        this.router.navigate(['/', 'login']);
+    this._Service
+      .postPassword("user/reset-password", mybody, this.acessToken)
+      .subscribe(
+        response => {
 
-        console.log(response);
-      },error=>
-      {
-        console.log(this.acessToken);
-        this.snackbar.open("Reset", "failed,Try again", {
-          duration: 2000,
-        });
-        console.log(error);
+          this.snackbar.open("Reset", "success", {
+            duration: 2000
+          });
+          this.router.navigate(["/", "login"]);
 
-      }
-    )
+
+        },
+        error => {
+
+          this.snackbar.open("Reset", "failed,Try again", {
+            duration: 2000
+          });
+
+        }
+      );
   }
-
 }

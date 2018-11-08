@@ -1,35 +1,40 @@
 <div class="container" fxLayout>
-  <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-  <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
-  <div fxLayout="column" fxLayoutGap = "20%">
-    <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" [formGroup]='lForm'>
-      <mat-card class="card">
-        <div style="padding: 30px 0px;">
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+  <div fxFlex="34" fxFlex.xs="100" fxFlex.sm="84">
+    <div fxLayout="column" fxLayoutGap="20%">
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+      <div fxFlex="34%" fxFlex.xs="100" fxFlex.sm="84" [formGroup]='lForm'>
+        <mat-card class="card">
+          <div class="div1">
 
-          <img src="../../../assets/images/google.svg"alt="google" class="center">
-          <mat-card-title >Sign In</mat-card-title>
-          <mat-card-subtitle>to continue to fundooNotes</mat-card-subtitle>
-          <mat-form-field id="field1">
-            <input matInput placeholder="Email" formControlName="email"[(ngModel)]="model.uname">
-            <mat-error class="alert" *ngIf="!lForm.controls['email'].valid && lForm.controls['email'].touched">provide a valid email</mat-error>
-          </mat-form-field><br>
-          <mat-form-field id="field1">
-            <input matInput placeholder="Password"[type]="hide ? 'text' : 'password'" formControlName="password" [(ngModel)]="model.pass">
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error class="alert" *ngIf="!lForm.controls['password'].valid && lForm.controls['password'].touched">Enter a password(min-length:6)</mat-error>
-          </mat-form-field>
-          <a routerLink="/forget" id="link">Forgot password ?</a> <br><br><br>
-          <button mat-flat-button id="button"[disabled]="!lForm.valid" (click)="login()">Log In</button>
-          <a routerLink="/signup">Create an account</a>
-          <br><br><br>
-        </div>
-      </mat-card>
+            <img src="../../../assets/images/google.svg" alt="google" class="center">
+            <mat-card-title>Sign In</mat-card-title>
+            <mat-card-subtitle>to continue to fundooNotes</mat-card-subtitle>
+            <mat-form-field id="field1">
+              <input matInput placeholder="Email" formControlName="email" [(ngModel)]="model.uname">
+              <mat-error class="alert" *ngIf="!lForm.controls['email'].valid && lForm.controls['email'].touched">provide a valid email</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field id="field1">
+              <input matInput placeholder="Password" [type]="hide ? 'text' : 'password'" formControlName="password" [(ngModel)]="model.pass">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error class="alert" *ngIf="!lForm.controls['password'].valid && lForm.controls['password'].touched">Enter a password(min-length:6)</mat-error>
+            </mat-form-field>
+            <a routerLink="/forget" id="link">Forgot password ?</a>
+            <br>
+            <br>
+            <button mat-flat-button id="button" [disabled]="!lForm.valid" (click)="login()">Log In</button>
+            <a routerLink="/signup">Create an account</a>
+            <br>
+            <br>
+            <br>
+          </div>
+        </mat-card>
+      </div>
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
     </div>
-    <div class="item item-1" fxFlex="33%"fxFlex.xs = "0" fxFlex.sm = "8"></div>
-  </div>
 
-</div>
-<div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  </div>
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
 </div>
 <router-outlet></router-outlet>

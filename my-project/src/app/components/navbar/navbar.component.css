@@ -1,67 +1,55 @@
+.menu {
+  margin-right: 1%;
+  color: black;
+}
+.head {
+  margin-right: 5px;
+  color: black;
+}
+.head1 {
+  margin-right: 20px;
+  color: black;
+}
+.refresh {
+  margin-left: 25px;
+  margin-right: 20px;
+  color: black;
+}
+.view {
+  margin-right: 40px;
+  color: black;
+}
+.apps {
+  margin-right: 15px;
+  color: black;
+}
+.notify {
+  margin-right: 15px;
+  color: black;
+}
+.person {
+  margin-right: 15px;
+  color: black;
+}
+.search {
+  height: 39px;
+  width: 699px;
 
-.menu
-{
-margin-right: 1%;
-color: black;
+  background-color: rgb(235, 174, 22);
+  border: 0px;
+  border-radius: 5px;
+  font-size: 20px;
+  outline: none;
+  padding: 0px 0px 0px 47px;
 }
-.head
-{
-    margin-right: 5px;
-    color: black;
+.searchicon {
+  position: absolute;
+  padding-left: 10px;
+  color: black;
 }
-.head1
-{
-    margin-right: 20px;
-    color: black;
-}
-.refresh
-{
-margin-left:25px;
-margin-right: 20px;
-color: black;
-}
-.view
-{
-    margin-right: 50px;
-    color: black;
-}
-.apps
-{
-    margin-right: 20px;
-    color: black;
-}
-.notify
-{
-    margin-right: 20px;
-    color: black;
-}
-.person{
-    margin-right: 20px;
-    color: black;
-}
-.search
-{
-    height:39px;
-    width:699px;
-
-    background-color:  rgb(235, 174, 22);
-    border:0px;
-    border-radius: 5px;
-    font-size: 20px;
-     outline:none;
-     padding: 0px 0px 0px 47px;
-
-}
-.searchicon
-  {
-    position: absolute;
-    padding-left: 10px;
-    color: black
-}
-
 
 input:focus {
-    background-color: white;
+  background-color: white;
 }
 /* .mat-drawer-container {
     position: fixed;
@@ -72,24 +60,21 @@ input:focus {
     overflow: hidden;
 } */
 
-.toolbar{
-    background-color: #fb0;
-    /* display:flex; */
-    position: fixed;
-    z-index: 2;
+.toolbar {
+  background-color: #fb0;
+  /* display:flex; */
+  position: fixed;
+  z-index: 2;
 }
 
-.material-icons{
-    font-size: 30px;
+.material-icons {
+  font-size: 30px;
 }
 .example-container {
-
-    height: fit-content;
-    width: 100%;
-
-
-  }
-      /* .example-sidenav-content {
+  height: fit-content;
+  width: 100%;
+}
+/* .example-sidenav-content {
 
     overflow:auto;
 
@@ -100,53 +85,45 @@ input:focus {
 
   } */
 
-  .example-sidenav {
-
-    padding-left: 0%;
-    padding-right: 0%;
-    padding-top: 5px;
-    background-color: rgb(214, 218, 216);
-    position: fixed;
-    margin: 55px 0px 0px 0px;
-    width: 286px;
-
-
+.example-sidenav {
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 5px;
+  background-color: rgb(214, 218, 216);
+  position: fixed;
+  margin: 55px 0px 0px 0px;
+  width: 286px;
 }
 
-
-  /* .example-sidenav[_ngcontent-c3] {
+/* .example-sidenav[_ngcontent-c3] {
     padding-left:0px;
     padding-right: 0px;
     padding-top: 5px;
 } */
 .mat-stroked-button {
-  border:0px ;
+  border: 0px;
   line-height: 58px;
   width: 270px;
   background-color: rgb(214, 218, 216);
   text-align: left;
   font-weight: 400;
-
 }
 
-.Link{
-    color: rgba(0,0,0,.54);
-    cursor: pointer;
-    font-size: 12px;
-    padding: 2px 5px;
-    text-decoration: none;
-    white-space: nowrap
+.Link {
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 5px;
+  text-decoration: none;
+  white-space: nowrap;
 }
 .terms {
-    display: block;
-    margin: 12px 15px 12px 24px;
+  display: block;
+  margin: 12px 15px 12px 24px;
 }
 
-.img{
-
-  margin-right:20px;
-
-
+.img {
+  margin-right: 20px;
 }
 /* .button1{
 padding-left: 100px;
@@ -156,26 +133,34 @@ padding-left: 100px;
  font-weight: 700;
 
 } */
-.para{
-
+.para {
   margin-left: 20px;
-
 }
 .example-card {
   max-width: 300px;
   max-height: 150px;
   position: fixed;
   right: 0;
-  top:50px;
+  top: 50px;
   z-index: 1;
 }
 
+.button2 {
+  margin-left: 109px;
+margin-top: 30px;
 
-.button2{
-  margin-left: 85px;
-  color:azure;
-  border: 1px solid  black;
-  color:black;
-  float:left;
-  opacity: 0.5;
+  border: 1px solid black;
+  color: black;
+
 }
+.profilepic1 {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.profilepic2 {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+

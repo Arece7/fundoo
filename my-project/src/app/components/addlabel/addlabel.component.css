@@ -1,18 +1,21 @@
-.textarea{
-  width:90%;
+.textarea {
+  width: 90%;
   outline: none;
 }
-.textarea:empty:before{
+.textarea:empty:before {
   content: attr(data-text);
   opacity: 0.5;
   font-size: 12px;
 }
 .mat-stroked-button {
-  border:0px ;
+  border: 0px;
   line-height: 58px;
   width: 270px;
   background-color: rgb(214, 218, 216);
   text-align: left;
   font-weight: 400;
-
+}
+.button
+{
+  float:right;
 }

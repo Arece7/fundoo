@@ -1,33 +1,50 @@
-<div class="note-card" fxLayout="row wrap" style="margin-top:7%" fxLayoutGap="10px" fxLayoutAlign="center" fxLayout.lt-sm="column" >
-  <mat-card class="card_note"  *ngFor="let note of NoteArray | search:searchInput"  fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
-  fxFlex.lt-sm="100%" [ngStyle]="{'background-color':note.color}"  >
+<div class="note-card" [ngClass]="{'grid-card':!toggle,'list-card ':toggle}"  fxLayout="row wrap" class="div1" fxLayoutGap="10px" fxLayoutAlign="center" fxLayout.lt-sm="column">
 
-    <mat-card-header>
+  <mat-card class="card_note" [ngClass]="{'grid-view':!toggle,'list-view':toggle}" *ngFor="let note of NoteArray | search:searchInput" fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
+    fxFlex.lt-sm="100%" [ngStyle]="{'background-color':note.color}">
 
-          <div  (click)="openDialog(note)" class="div2"[innerHTML]="note.title"></div>
-          <span style="float:right ;" class="action"><button mat-icon-button><img src="../../../assets/images/pin.svg"></button></span>
-      </mat-card-header>
 
-      <mat-card-content class="take_note">
-          <div (click)="openDialog(note)"  class="div2" [innerHTML]="note.description">
-          </div>
+        <div fxLayout="row">
+      <div fxFlex=90% (click)="openDialog(note)" class="div2" [innerHTML]="note.title"></div>
+      <div fxFlex=10% class="action">
+       <app-pin [note]="note" ></app-pin>
+      </div>
+    </div>
 
-      </mat-card-content>
 
-      <mat-card-actions class="action" >
-          <mat-chip-list>
-              <div *ngFor="let label of note.noteLabels"><mat-chip>{{label.label}}
-                <mat-icon matChipRemove (click)=deleteLabel(note,label)>cancel</mat-icon>
-              </mat-chip></div>
-            </mat-chip-list>
+    <mat-card-content class="take_note">
+      <div (click)="openDialog(note)" class="div2" [innerHTML]="note.description">
+      </div>
 
-       <app-reminder [Delete]="note.isDeleted"> </app-reminder>
-        <app-collaborator [Delete]="note.isDeleted"></app-collaborator>
-        <app-change-color [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-change-color>
-        <app-add-image [Delete]="note.isDeleted"> </app-add-image>
-        <app-archive [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)> </app-archive>
-       <app-more [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-more>
-      </mat-card-actions>
+    </mat-card-content>
+    <mat-chip-list>
+      <div *ngFor="let label of note.noteLabels">
+        <mat-chip>{{label.label}}
+          <mat-icon matChipRemove (click)=deleteLabel(note,label)>cancel</mat-icon>
+        </mat-chip>
+      </div>
+    </mat-chip-list>
+    <mat-card-actions class="action">
+        <!-- reminder starts -->
+      <app-reminder [Delete]="note.isDeleted"> </app-reminder>
+        <!-- reminder starts -->
+       <!-- collaborator starts -->
+      <app-collaborator [Delete]="note.isDeleted"></app-collaborator>
+      <!-- collaborator ends -->
+       <!-- color change starts -->
+      <app-change-color [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-change-color>
+       <!-- color change ends -->
+        <!-- add image starts -->
+      <app-add-image [Delete]="note.isDeleted"> </app-add-image>
+       <!-- add image ends -->
+        <!--  archive starts -->
+      <app-archive [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)> </app-archive>
+       <!--  archive ends -->
+       <!-- more starts -->
+      <app-more [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-more>
+      <!-- more ends -->
+    </mat-card-actions>
 
-    </mat-card>
+  </mat-card>
+
 </div>

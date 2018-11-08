@@ -2,65 +2,60 @@
  *  @description
  *  @file           : notes.component.ts
  *  @author         : Arghya Ray
-*/
+ */
 
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { Component, OnInit } from "@angular/core";
+import { UserService } from "../../core/services/user.service";
+
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: "app-notes",
+  templateUrl: "./notes.component.html",
+  styleUrls: ["./notes.component.css"]
 })
 export class NotesComponent implements OnInit {
-
-  constructor(private service:UserService) { }
- public notes=[];
+  constructor(private service: UserService) {}
+  public notes = [];
 
   ngOnInit() {
     this.getNotes();
   }
-  addNewEntry(event){
-    console.log(event);
-    if(event){
+  addNewEntry(event) {
+
+    if (event) {
       this.getNotes();
     }
   }
 
-  getNotes()              //for getting the data of the notes
+  getNotes() //for getting the data of the notes
   {
-    var token=window.localStorage.getItem('token')
+    var token = window.localStorage.getItem("token");
 
-                             //api call for getting note list
+    //api call for getting note list
 
-
-    this.service.getnotes('/notes/getNotesList',token).subscribe(
-
-      data=>{
-        this.notes=[];
-       for(var i=data["data"].data.length-1;i>=0;i--)
-       {
-         if(data["data"].data[i].isDeleted==false && data["data"].data[i].isArchived==false )
-         {                                                   //checking the flags
-          this.notes.push(data["data"].data[i])            //pusing in note array
-         }
-
-       }
-       console.log(this.notes);
+    this.service.getnotes("/notes/getNotesList", token).subscribe(
+      data => {
+        this.notes = [];
+        for (var i = data["data"].data.length - 1; i >= 0; i--) {
+          if (
+            //checking the flags
+            data["data"].data[i].isDeleted == false &&
+            data["data"].data[i].isArchived == false
+          ) {
+            this.notes.push(data["data"].data[i]); //pusing in note array
+          }
+        }
 
       },
-      error=>{
-       console.log(error);
+      error => {
 
       }
+    );
+  }
+  change(event) {
+    this.getNotes(); // event for catching the changes
+  }
+  eventLabel(event) {
 
-    )
-  }
-  change(event){
-      this.getNotes();            // event for catching the changes
-  }
-  eventLabel(event)
-  {
-    console.log(event);
     this.getNotes();
   }
 }

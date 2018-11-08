@@ -1,103 +1,130 @@
 <div fxFlex>
-<div fxLayout="column wrap">
-<div>
-<mat-toolbar color="primary" class="toolbar"  >
-    <mat-toolbar-row>
-            <button mat-icon-button class="menu"  matTooltip="Menu">
-        <i (click)="drawer.toggle()" class="material-icons ">
-            menu
+  <div fxLayout="column wrap">
+    <div>
+      <mat-toolbar color="primary" class="toolbar">
+        <mat-toolbar-row>
+          <button mat-icon-button class="menu" matTooltip="Menu">
+            <i (click)="drawer.toggle()" class="material-icons ">
+              menu
             </i>
-        </button>
-      <span class="head" fxHide.xs="true" fxHide.sm="true">Fundoo</span>
-      <span class="head1" >Notes</span>
-      <div >
-     <button mat-icon-button class="searchicon"(click)="search()" fxHide.xs="true" fxHide.sm="true">
-      <i class="material-icons">
-         search
-          </i></button>
-          <input type="input" (click)="search()" (keyup)="sendmessage()" placeholder="search" class= "search" fxHide.xs="true" fxHide.sm="true" [(ngModel)]="searchInput">
-       </div>
-      <button mat-icon-button class="refresh">
-      <i class="material-icons ">
-          refresh
-          </i></button>
-          <button mat-icon-button class="view" fxHide.xs="true" fxHide.sm="true">
-          <i class="material-icons">
+          </button>
+          <span class="head" fxHide.xs="true" fxHide.sm="true">Fundoo</span>
+          <span class="head1">Notes</span>
+          <div>
+            <button mat-icon-button class="searchicon" (click)="search()" fxHide.xs="true" fxHide.sm="true">
+              <i class="material-icons">
+                search
+              </i>
+            </button>
+            <input type="input" (click)="search()" (keyup)="sendmessage()" placeholder="search" class="search" fxHide.xs="true" fxHide.sm="true"
+              [(ngModel)]="searchInput">
+          </div>
+          <button mat-icon-button class="refresh">
+            <i class="material-icons ">
+              refresh
+            </i>
+          </button>
+          <!-- <button mat-icon-button class="view" fxHide.xs="true" fxHide.sm="true">
+            <i class="material-icons">
               view_agenda
-              </i> </button>
-              <button mat-icon-button class="apps" fxHide.xs="true" fxHide.sm="true">
-              <i class="material-icons " >
-                  apps
-                  </i> </button>
-                  <button mat-icon-button class="notify" fxHide.xs="true" fxHide.sm="true">
-                  <i class="material-icons " >
-                      notifications
-                      </i></button>
-                      <button  mat-icon-button class=" person" (click)="logout=!logout" (clickOutside)="logout=false" >
-                  <i class="material-icons" >
-                      person
-                      </i>
-                      </button>
+            </i>
+          </button> -->
 
-    </mat-toolbar-row></mat-toolbar></div>
+          <button mat-icon-button aria-label="view_agenda" class="view" fxShow.xs="false" fxShow.sm="false" fxShow.md="true" fxShow.lg="true">
+            <mat-icon aria-label="view_stream" (click)="viewList()" *ngIf="grid==0">view_stream</mat-icon>
+            <mat-icon aria-label="view_module" (click)="viewGrid()" *ngIf="grid==1">view_module</mat-icon>
+
+          </button>
+          <button mat-icon-button class="apps" fxHide.xs="true" fxHide.sm="true">
+            <i class="material-icons ">
+              apps
+            </i>
+          </button>
+          <button mat-icon-button class="notify" fxHide.xs="true" fxHide.sm="true">
+            <i class="material-icons ">
+              notifications
+            </i>
+          </button>
+          <button mat-icon-button class=" person" [matMenuTriggerFor]="appMenu" (clickOutside)="logout=false">
+            <img src="{{img}}" class="profilepic2">
+          </button>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
 
     <div>
-        <mat-sidenav-container  class="example-container" fxFill hasBackdrop="false" >
-            <mat-sidenav  #drawer class="example-sidenav" mode="side">
-         <mat-list>
-              <button mat-stroked-button (click)="notes()"><img class="img" src="../../../assets/images/note.svg" >Notes</button><br>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/reminders.svg" >Reminder</button>
-              </mat-list>
-              <mat-divider></mat-divider>
-              <mat-list>
+      <mat-sidenav-container class="example-container" fxFill hasBackdrop="false">
+        <mat-sidenav #drawer class="example-sidenav" mode="side">
+          <mat-list>
+            <button mat-stroked-button (click)="notes()">
+              <img class="img" src="../../../assets/images/note.svg">Notes</button>
+            <br>
+            <button mat-stroked-button>
+              <img class="img" src="../../../assets/images/reminders.svg">Reminder</button>
+          </mat-list>
+          <mat-divider></mat-divider>
+          <mat-list>
 
-              <app-addlabel></app-addlabel>
-              <!-- <button mat-stroked-button (click)="createLabel()" ><img class="img" src="../../../assets/images/label.svg" >Create new label</button> -->
-              </mat-list>
-              <mat-divider></mat-divider>
-              <mat-list>
-              <button mat-stroked-button (click)="archive()" ><img class="img" src="../../../assets/images/archive.svg" >Archive</button><br>
-              <button mat-stroked-button (click)="trash()"><img class="img" src="../../../assets/images/tash.svg" >Trash</button>
-              </mat-list>
-              <mat-divider></mat-divider>
-              <mat-list>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/settings.svg" >Settings</button><br>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/feedback.svg" >Send feedback</button><br>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/help.svg" >Help</button><br>
-              <button mat-stroked-button ><img class="img" src="../../../assets/images/appdownloads.svg" >App downloads</button><br>
-            </mat-list>
-              <div class="terms">
-                  <a href="https://www.google.com/policies/privacy/" class="Link" >Privacy</a>&nbsp;·&nbsp;
-                  <a href="http://www.google.com/policies/terms/"  class="Link" >Terms</a><br>
-                  <a href="http://ssl.gstatic.com/keep/open-source_licenses.txt"  class="Link" >Open-source licenses</a>
-                </div>
+            <app-addlabel></app-addlabel>
 
+          </mat-list>
+          <mat-divider></mat-divider>
+          <mat-list>
+            <button mat-stroked-button (click)="archive()">
+              <img class="img" src="../../../assets/images/archive.svg">Archive</button>
+            <br>
+            <button mat-stroked-button (click)="trash()">
+              <img class="img" src="../../../assets/images/tash.svg">Trash</button>
+          </mat-list>
+          <mat-divider></mat-divider>
+          <mat-list>
+            <button mat-stroked-button>
+              <img class="img" src="../../../assets/images/settings.svg">Settings</button>
+            <br>
+            <button mat-stroked-button>
+              <img class="img" src="../../../assets/images/feedback.svg">Send feedback</button>
+            <br>
+            <button mat-stroked-button>
+              <img class="img" src="../../../assets/images/help.svg">Help</button>
+            <br>
+            <button mat-stroked-button>
+              <img class="img" src="../../../assets/images/appdownloads.svg">App downloads</button>
+            <br>
+          </mat-list>
+          <div class="terms">
+            <a href="https://www.google.com/policies/privacy/" class="Link">Privacy</a>&nbsp;·&nbsp;
+            <a href="http://www.google.com/policies/terms/" class="Link">Terms</a>
+            <br>
+            <a href="http://ssl.gstatic.com/keep/open-source_licenses.txt" class="Link">Open-source licenses</a>
+          </div>
+        </mat-sidenav>
+        <div class="example-sidenav-content">
+          <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
 
-            </mat-sidenav>
-
-            <div class="example-sidenav-content"  >
-
-<mat-card class="example-card" *ngIf="logout">
-    <mat-list flexLayout="row">
-    <mat-card-header>
-
-      <div mat-card-avatar class="">
-        <button mat-mini-fab disabled>{{word}}</button>
-      </div>
-      <mat-card-title>{{Fname}}&nbsp;{{Lname}}</mat-card-title>
-      <mat-card-subtitle>{{Email}}</mat-card-subtitle>
-
-    </mat-card-header></mat-list>
-<mat-divider></mat-divider>
-<mat-list>
-    <mat-card-actions>
-    <button mat-button class="button2" style="margin-left: 116px;" (click)="Logout()" >Log out</button>
-    </mat-card-actions>
-</mat-list>
-</mat-card>
-<router-outlet></router-outlet>
+            <div flexLayout="row" fxLayoutAlign="space-around start">
+              <div>
+                <img src="{{img}}" class="profilepic1">
+              </div>
+              <div>
+                <div>{{Fname}}&nbsp;{{Lname}}</div>
+                <div>{{Email}}</div>
+              </div>
             </div>
-          </mat-sidenav-container>
+            <hr>
+            <div flexLayout="row">
+              <div fxFlex=27%  fxLayout="column" fxLayoutAlign="space-evenly start" >
+               <div> <input type="file" (change)="onFileSelected($event)"></div>
+               <div>  <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button></div>
+              </div>
+              <div fxFLEX=20%>
+                <button mat-button class="button2" (click)="Logout()">Log out</button>
+              </div>
+            </div>
+          </mat-menu>
+          <router-outlet></router-outlet>
         </div>
+      </mat-sidenav-container>
     </div>
+  </div>
 </div>

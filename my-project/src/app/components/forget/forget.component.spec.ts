@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ForgetComponent } from './forget.component';
+import { ForgetComponent } from "./forget.component";
 
-describe('ForgetComponent', () => {
+describe("ForgetComponent", () => {
   let component: ForgetComponent;
   let fixture: ComponentFixture<ForgetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgetComponent ]
-    })
-    .compileComponents();
+      declarations: [ForgetComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ForgetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

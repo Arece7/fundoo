@@ -1,33 +1,93 @@
-
- <mat-card class="matcard" [ngStyle]="{'background-color':updateColor}">
-<mat-card-header>
-      <div data-text="Title" id="title" *ngIf="!data.isDeleted"  contenteditable="true" class="div2" [innerHTML]="data.title">
-      </div>
-      <div data-text="Title"  *ngIf="data.isDeleted" id="title" contenteditable="false" class="div2" [innerHTML]="data.title">
-      </div>
-      <span style="float:right;"><button mat-icon-button><img src="../../../assets/images/pin.svg"></button></span>
-  </mat-card-header>
+<mat-card class="matcard" [ngStyle]="{ 'background-color': updateColor }">
+  <div fxLayout="row">
+    <div
+      fxFlex="90%"
+      data-text="Title"
+      id="title"
+      *ngIf="!data.isDeleted"
+      contenteditable="true"
+      class="div2"
+      [innerHTML]="data.title"
+    ></div>
+    <div
+      fxFlex="90%"
+      data-text="Title"
+      *ngIf="data.isDeleted"
+      id="title"
+      contenteditable="false"
+      class="div2"
+      [innerHTML]="data.title"
+    ></div>
+    <div fxFlex="10%" class="action">
+      <!-- pin starts -->
+      <app-pin [note]="data"></app-pin>
+      <!-- pin ends -->
+    </div>
+  </div>
 
   <mat-card-content class="take_note">
-      <div data-text="Take a note.." id="description" contenteditable="true" class="div2" [innerHTML]="data.description">
-      </div>
+    <div
+      data-text="Take a note.."
+      id="description"
+      contenteditable="true"
+      *ngIf="!data.isDeleted"
+      class="div2"
+      [innerHTML]="data.description"
+    ></div>
+    <div
+      data-text="Take a note.."
+      id="description"
+      *ngIf="data.isDeleted"
+      contenteditable="false"
+      class="div2"
+      [innerHTML]="data.description"
+    ></div>
   </mat-card-content>
 
   <mat-card-actions flexLayout="row">
-      <mat-chip-list>
-          <div *ngFor="let data1 of labels"><mat-chip >{{data1.label}}
-            <mat-icon matChipRemove (click)= deleteLabel(data.id,data1.id) >cancel</mat-icon>
-          </mat-chip></div>
-        </mat-chip-list>
-        <app-reminder [Delete]="data.isDeleted"> </app-reminder>
-        <app-collaborator [Delete]="data.isDeleted"></app-collaborator>
-        <app-change-color (eventEmit)="colorUpdate($event)" [Delete]="data.isDeleted" [note]=data></app-change-color>
-        <app-add-image  [Delete]="data.isDeleted"> </app-add-image>
-       <app-archive [note]=data [Delete]="data.isDeleted" (eventEmit)=eventOccured($event)> </app-archive>
-       <app-more [note]="data" (labelEvent)=labelAdded($event) > </app-more>
+    <mat-chip-list>
+      <div *ngFor="let data1 of labels">
+        <mat-chip
+          >{{ data1.label }}
+          <mat-icon matChipRemove (click)="deleteLabel(data.id, data1.id)"
+            >cancel</mat-icon
+          >
+        </mat-chip>
+      </div>
+    </mat-chip-list>
+    <!-- reminder starts -->
+    <app-reminder [Delete]="data.isDeleted"> </app-reminder>
+    <!-- reminder endss -->
+    <!-- collaborator starts -->
+    <app-collaborator [Delete]="data.isDeleted"></app-collaborator>
+    <!-- collaborator ends -->
+    <!-- color change starts -->
+    <app-change-color
+      (eventEmit)="colorUpdate($event)"
+      [Delete]="data.isDeleted"
+      [note]="data"
+    ></app-change-color>
+    <!-- color change ends -->
+    <!-- add image starts -->
+    <app-add-image [Delete]="data.isDeleted"> </app-add-image>
+    <!-- add image ends -->
+    <!-- archive starts -->
+    <app-archive
+      [note]="data"
+      [Delete]="data.isDeleted"
+      (eventEmit)="eventOccured($event)"
+    >
+    </app-archive>
+    <!-- archive ends -->
+    <!-- more starts -->
+    <app-more
+      [note]="data"
+      [Delete]="data.isDeleted"
+      (labelEvent)="labelAdded($event)"
+    >
+    </app-more>
+    <!-- more ends -->
 
-
-  <button mat-button style="float:right" (click)="onNoClick()"> Close</button>
+    <button mat-button class="float" (click)="onNoClick()">Close</button>
   </mat-card-actions>
 </mat-card>
-

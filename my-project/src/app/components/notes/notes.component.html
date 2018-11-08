@@ -1,4 +1,13 @@
- <app-add-notes (onNewEntryAdded)="addNewEntry($event)"></app-add-notes>
-  <app-notes-collection [NoteArray]=notes (onNewEntryDeleted)= "addNewEntry($event)" (onNewColorChange)="addNewEntry($event)" (eventEmit)="eventLabel($event)" (update)="change($event)"></app-notes-collection>
+<!-- add notes starts -->
+<app-add-notes (onNewEntryAdded)="addNewEntry($event)"></app-add-notes>
+<!-- add notes ends -->
 
-
+<!-- note cards starts -->
+<app-notes-collection
+  [NoteArray]="notes"
+  (onNewEntryDeleted)="addNewEntry($event)"
+  (onNewColorChange)="addNewEntry($event)"
+  (eventEmit)="eventLabel($event)"
+  (update)="change($event)"
+></app-notes-collection>
+<!-- note cards ends -->

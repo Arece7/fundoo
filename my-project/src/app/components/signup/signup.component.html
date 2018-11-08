@@ -1,62 +1,65 @@
 <div class="container" fxLayout>
-  <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-  <div fxFlex = "34" fxFlex.xs = "100" fxFlex.sm = "84">
-  <div fxLayout="column" fxLayoutGap = "5%">
-    <div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
-    <div fxFlex = "34%" fxFlex.xs = "100" fxFlex.sm = "84" [formGroup]='rForm'>
-      <mat-card class="card">
-        <!-- <div style="padding: 10px 0px;"> -->
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+  <div fxFlex="34" fxFlex.xs="100" fxFlex.sm="84">
+    <div fxLayout="column" fxLayoutGap="5%">
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+      <div fxFlex="34%" fxFlex.xs="100" fxFlex.sm="84" [formGroup]='rForm'>
+        <mat-card class="card">
 
-          <img src="../../../assets/images/google.svg"alt="google" class="center">
-          <mat-card-title >Create your FundooNote Account</mat-card-title>
+
+          <img src="../../../assets/images/google.svg" alt="google" class="center">
+          <mat-card-title>Create your FundooNote Account</mat-card-title>
           <mat-card-subtitle>to continue to fundooNotes</mat-card-subtitle>
           <mat-form-field id="field1">
             <input matInput placeholder="First name" [(ngModel)]="model.fname" formControlName="fname" required>
             <mat-error class="alert" *ngIf="!rForm.controls['fname'].valid && rForm.controls['fname'].touched">Please provide first name</mat-error>
           </mat-form-field>
           <mat-form-field id="field2">
-            <input matInput placeholder="Last name"[(ngModel)]="model.lname" formControlName="lname" required>
+            <input matInput placeholder="Last name" [(ngModel)]="model.lname" formControlName="lname" required>
             <mat-error class="alert" *ngIf="!rForm.controls['lname'].valid && rForm.controls['lname'].touched">please provide last name</mat-error>
           </mat-form-field>
           <mat-form-field class="user">
-            <input matInput placeholder="Email"[(ngModel)]="model.uname " formControlName="email"required>
+            <input matInput placeholder="Email" [(ngModel)]="model.uname " formControlName="email" required>
             <mat-error class="alert" *ngIf="!rForm.controls['email'].valid && rForm.controls['email'].touched">provide a valid email</mat-error>
           </mat-form-field>
           <mat-form-field id="pass1">
-            <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'text' : 'password'" [(ngModel)]="model.pass"required>
+            <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'text' : 'password'" [(ngModel)]="model.pass"
+              required>
             <mat-error class="alert" *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">Enter a password(min-length:6) </mat-error>
           </mat-form-field>
           <mat-form-field id="pass2">
-            <input matInput placeholder="Confirm password" formControlName="cnfpassword"  [type]="hide ? 'text' : 'password'">
+            <input matInput placeholder="Confirm password" formControlName="cnfpassword" [type]="hide ? 'text' : 'password'">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             <mat-error class="alert" *ngIf="!rForm.controls['cnfpassword'].valid && rForm.controls['cnfpassword'].touched">Both password should be same</mat-error>
           </mat-form-field>
-         <div fxLayout="row" fxLayoutGap= "10px" >
-          <mat-card class="example-card" fxFlex="50" *ngFor="let card of cards" (click)="toggle(card)"   [ngClass]="card.select ? 'select' : 'deselect'">
-            <mat-card-header>
-              
-              <mat-card-title>{{card.name}}</mat-card-title>
-             
-            </mat-card-header>
-            
-            <mat-card-content>
-              <p>
-              {{card.description}}
-              </p>
-            </mat-card-content>
-            
-          </mat-card>
-         </div>
-          <br><br><br>
-          <button mat-flat-button id="button" [disabled]="!rForm.valid"(click)="Signup()">Sign Up</button>
+          <div fxLayout="row" fxLayoutGap="10px">
+            <mat-card class="example-card" fxFlex="50" *ngFor="let card of cards" (click)="toggle(card)" [ngClass]="card.select ? 'select' : 'deselect'">
+              <mat-card-header>
+
+                <mat-card-title>{{card.name}}</mat-card-title>
+
+              </mat-card-header>
+
+              <mat-card-content>
+                <p>
+                  {{card.description}}
+                </p>
+              </mat-card-content>
+
+            </mat-card>
+          </div>
+          <br>
+          <br>
+
+          <button mat-flat-button id="button" [disabled]="!rForm.valid" (click)="Signup()">Sign Up</button>
           <a routerLink="/login" id="link">Sign in instead</a>
           <br>
-        
-      </mat-card>
+
+        </mat-card>
+      </div>
+      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
     </div>
-    <div class="item item-1" fxFlex="33%"fxFlex.xs = "0" fxFlex.sm = "8"></div>
+
   </div>
-  
-</div>
-<div class="item item-1" fxFlex="33%" fxFlex.xs = "0" fxFlex.sm = "8"></div>
+  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
 </div>
