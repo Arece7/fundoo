@@ -2,24 +2,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
-
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { AppRoutingModule } from "./app-routing.module";
-
-
-import { MatCardModule } from "@angular/material/card";
 import { SignupComponent } from "./components/signup/signup.component";
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ForgetComponent } from "./components/forget/forget.component";
 import { RouterModule } from "@angular/router";
 import { ResetComponent } from "./components/reset/reset.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { MatToolbarModule } from "@angular/material/toolbar";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import {
@@ -27,26 +19,30 @@ import {
   MatListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTooltipModule,
+  MatMenuModule,
+  MatDialogModule,
+  MatCardModule,
+  MatIconModule,
+  MatButtonToggleModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatChipsModule
 } from "@angular/material";
-import { MatMenuModule } from "@angular/material/menu";
 import { NotesComponent } from "./components/notes/notes.component";
 import { ClickOutsideModule } from "ng4-click-outside";
 import { AddNotesComponent } from "./components/add-notes/add-notes.component";
-
 import { NotesCollectionComponent } from "./components/notes-collection/notes-collection.component";
 import { MoreComponent } from "./components/more/more.component";
 import { ChangeColorComponent } from "./components/change-color/change-color.component";
-import { MatTooltipModule } from "@angular/material/tooltip";
 import { ArchiveComponent } from "./components/archive/archive.component";
 import { TrashComponent } from "./components/trash/trash.component";
 import { MainArchiveComponent } from "./components/main-archive/main-archive.component";
-import { MatDialogModule } from "@angular/material/dialog";
 import { UpdateComponent } from "./components/update/update.component";
 import { CreatelabelComponent } from "./components/createlabel/createlabel.component";
 import { AddlabelComponent } from "./components/addlabel/addlabel.component";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatChipsModule } from "@angular/material/chips";
 import { SearchPipe } from "./pipes/search.pipe";
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 import { SearchLabelPipe } from "./pipes/search-label.pipe";

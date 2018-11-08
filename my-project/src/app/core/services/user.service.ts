@@ -6,8 +6,6 @@ import { environment } from "../../../environments/environment"
   providedIn: "root"
 })
 export class UserService {
-  // url = "http://34.213.106.173/api";
-
   constructor(private http: HttpClient) {}
 
   getData(adress) {
