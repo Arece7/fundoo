@@ -10,7 +10,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-main-archive",
   templateUrl: "./main-archive.component.html",
-  styleUrls: ["./main-archive.component.css"]
+  styleUrls: ["./main-archive.component.scss"]
 })
 export class MainArchiveComponent implements OnInit {
   constructor(private service: UserService) {}

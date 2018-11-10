@@ -12,15 +12,14 @@ import { MatDialog } from "@angular/material";
 @Component({
   selector: "app-more",
   templateUrl: "./more.component.html",
-  styleUrls: ["./more.component.css"]
+  styleUrls: ["./more.component.scss"]
 })
 export class MoreComponent implements OnInit {
   public searchLabel;
 
   @Input()
   Delete: any;
-  @Input()
-  note;
+  @Input() note;
   @Output()
   eventEmit = new EventEmitter();
   @Output()
@@ -29,15 +28,14 @@ export class MoreComponent implements OnInit {
     private service: UserService,
     public snackbar: MatSnackBar,
     public dialog: MatDialog
-  ) {}
+  ) { }
   public noteLabels = [];
 
   ngOnInit() {
     this.getLabels();
   }
-  deleteNotes(
-    val //for deleting the notes
-  ) {
+  /**@function:  deleteNotes() for deleting the notes*/
+  deleteNotes(val) {
     var token = localStorage.getItem("token");
 
     var idList = [];
@@ -48,16 +46,13 @@ export class MoreComponent implements OnInit {
     }; //api call for deleting the notes
     this.service.deletingNote("/notes/trashNotes", body, token).subscribe(
       data => {
-
         this.eventEmit.emit({});
       },
-      error => {
-
-      }
+      error => { }
     );
   }
-  deleteForever() //for deleting the notes
-  {
+  /**@function:  deleteNotes() for deleting the notes forever*/
+  deleteForever() {
     var token = localStorage.getItem("token");
 
     var idList = [];
@@ -70,12 +65,9 @@ export class MoreComponent implements OnInit {
       .deletingNote("/notes/deleteForeverNotes", body, token)
       .subscribe(
         data => {
-
           this.eventEmit.emit({});
         },
-        error => {
-
-        }
+        error => { }
       );
   }
   public labelList;
@@ -98,8 +90,6 @@ export class MoreComponent implements OnInit {
             }
           }
         }
-
-
       });
   }
 
@@ -107,51 +97,41 @@ export class MoreComponent implements OnInit {
    * @function:addDeleteLabel() for adding & deleteing the note labels
    */
   addDeleteLabel(labelObj) {
-
     this.labelEvent.emit(labelObj);
     if (this.note != null && labelObj.isChecked == true) {
-
-
-
       this.service
         .post(
           "/notes/" +
-            this.note["id"] +
-            "/addLabelToNotes/" +
-            labelObj.id +
-            "/add",
+          this.note["id"] +
+          "/addLabelToNotes/" +
+          labelObj.id +
+          "/add",
           null,
           this.token
         )
         .subscribe(
           Response => {
-
             this.eventEmit.emit({});
           },
-          error => {
-            }
+          error => { }
         );
     }
     if (this.note != null && labelObj.isChecked == false) {
-
       this.service
         .post(
           "/notes/" +
-            this.note["id"] +
-            "/addLabelToNotes/" +
-            labelObj.id +
-            "/remove",
+          this.note["id"] +
+          "/addLabelToNotes/" +
+          labelObj.id +
+          "/remove",
           null,
           this.token
         )
         .subscribe(
           Response => {
-
             this.eventEmit.emit({});
           },
-          error => {
-
-          }
+          error => { }
         );
     }
   }

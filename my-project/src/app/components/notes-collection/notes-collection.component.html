@@ -1,7 +1,6 @@
-<div class="note-card" [ngClass]="{'grid-card':!toggle,'list-card ':toggle}"  fxLayout="row wrap" class="div1" fxLayoutGap="10px" fxLayoutAlign="center" fxLayout.lt-sm="column">
+<div class="note-card" [ngClass]="{'grid-card':!toggle,'list-card ':toggle}"  class="div1"  >
 
-  <mat-card class="card_note" [ngClass]="{'grid-view':!toggle,'list-view':toggle}" *ngFor="let note of NoteArray | search:searchInput" fxFlex="0 1 calc(30% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)"
-    fxFlex.lt-sm="100%" [ngStyle]="{'background-color':note.color}">
+  <mat-card class="card_note" [ngClass]="{'grid-view':!toggle,'list-view':toggle}" *ngFor="let note of NoteArray | search:searchInput"  [ngStyle]="{'background-color':note.color}">
 
 
         <div fxLayout="row">

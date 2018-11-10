@@ -5,7 +5,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-createlabel",
   templateUrl: "./createlabel.component.html",
-  styleUrls: ["./createlabel.component.css"]
+  styleUrls: ["./createlabel.component.scss"]
 })
 export class CreatelabelComponent implements OnInit {
   @ViewChild("labelName")

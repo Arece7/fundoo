@@ -1,3 +1,4 @@
+
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
@@ -14,6 +15,7 @@ import { ResetComponent } from "./components/reset/reset.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LayoutModule } from "@angular/cdk/layout";
+import { ImageCropperModule } from 'ngx-image-cropper';
 import {
   MatSidenavModule,
   MatListModule,
@@ -43,14 +45,16 @@ import { MainArchiveComponent } from "./components/main-archive/main-archive.com
 import { UpdateComponent } from "./components/update/update.component";
 import { CreatelabelComponent } from "./components/createlabel/createlabel.component";
 import { AddlabelComponent } from "./components/addlabel/addlabel.component";
-import { SearchPipe } from "./pipes/search.pipe";
+import { SearchPipe } from "./core/pipes/search.pipe";
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
-import { SearchLabelPipe } from "./pipes/search-label.pipe";
+import { SearchLabelPipe } from "./core/pipes/search-label.pipe";
 import { LabelNotesComponent } from "./components/label-notes/label-notes.component";
 import { CollaboratorComponent } from "./components/collaborator/collaborator.component";
 import { ReminderComponent } from "./components/reminder/reminder.component";
 import { AddImageComponent } from "./components/add-image/add-image.component";
 import { PinComponent } from "./components/pin/pin.component";
+import { CropImageComponent } from './components/crop-image/crop-image.component';
+
 
 @NgModule({
   declarations: [
@@ -96,7 +100,13 @@ import { PinComponent } from "./components/pin/pin.component";
 
     AddImageComponent,
 
-    PinComponent
+    PinComponent,
+
+
+
+    CropImageComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -124,7 +134,8 @@ import { PinComponent } from "./components/pin/pin.component";
     MatTooltipModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -132,7 +143,8 @@ import { PinComponent } from "./components/pin/pin.component";
     UpdateComponent,
     NotesCollectionComponent,
     CreatelabelComponent,
-    AddlabelComponent
+    AddlabelComponent,
+    CropImageComponent
   ]
 })
 export class AppModule {}

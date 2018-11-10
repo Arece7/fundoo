@@ -11,7 +11,7 @@ import { MatSnackBar } from "@angular/material";
 @Component({
   selector: "app-update",
   templateUrl: "./update.component.html",
-  styleUrls: ["./update.component.css"]
+  styleUrls: ["./update.component.scss"]
 })
 export class UpdateComponent implements OnInit {
   @Output()
@@ -60,7 +60,9 @@ export class UpdateComponent implements OnInit {
   }
 
   updateColor = this.data.color;
+
 /**@function: colorUpdate() for catching the changes */
+
   colorUpdate(event) {
     if (event) {
       this.updateColor = event;

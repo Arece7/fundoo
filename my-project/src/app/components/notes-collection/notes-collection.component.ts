@@ -13,7 +13,7 @@ import { DataService } from "../../core/services/data.service";
 @Component({
   selector: "app-notes-collection",
   templateUrl: "./notes-collection.component.html",
-  styleUrls: ["./notes-collection.component.css"]
+  styleUrls: ["./notes-collection.component.scss"]
 })
 export class NotesCollectionComponent implements OnInit {
   public notes = [];

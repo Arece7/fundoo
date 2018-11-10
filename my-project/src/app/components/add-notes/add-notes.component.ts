@@ -10,10 +10,11 @@ import { MatSnackBar } from "@angular/material";
 @Component({
   selector: "app-add-notes",
   templateUrl: "./add-notes.component.html",
-  styleUrls: ["./add-notes.component.css"]
+  styleUrls: ["./add-notes.component.scss"]
 })
 export class AddNotesComponent implements OnInit {
   public note1: boolean = true;
+  public checklist:boolean=false;
   public archive = false;
   public cardColor = "#FFFFFF";
   @Output()
@@ -26,7 +27,7 @@ export class AddNotesComponent implements OnInit {
     this.labelName = [];
   }
   public isPinned=false;
-  postValue() //for posting the data of Notes
+  postValue()      //for posting the data of Notes
   {
     var title = document.getElementById("title").innerHTML;
     var description = document.getElementById("description").innerHTML;
@@ -97,5 +98,11 @@ export class AddNotesComponent implements OnInit {
   delete() {
     this.labelName.splice(this.labelName.indexOf(event, 1));
     this.labelId.splice(this.labelId.indexOf(event, 1));
+  }
+
+
+  noteOpen()
+  {
+    this.note1 = !this.note1;
   }
 }

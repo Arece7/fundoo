@@ -3,7 +3,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: 'app-pin',
   templateUrl: './pin.component.html',
-  styleUrls: ['./pin.component.css']
+  styleUrls: ['./pin.component.scss']
 })
 
 export class PinComponent implements OnInit {

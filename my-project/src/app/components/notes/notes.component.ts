@@ -10,7 +10,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-notes",
   templateUrl: "./notes.component.html",
-  styleUrls: ["./notes.component.css"]
+  styleUrls: ["./notes.component.scss"]
 })
 export class NotesComponent implements OnInit {
   constructor(private service: UserService) {}

@@ -1,0 +1,97 @@
+.span {
+  top: 10px;
+  right: 0px;
+  position: absolute;
+}
+
+.div2 {
+  outline: none;
+  width: 130px;
+  position: relative;
+  word-wrap: break-word;
+}
+div:empty:before {
+  content: attr(data-text);
+  color: gray;
+}
+
+.take_note {
+  padding-top: 12px;
+  padding-left: 14px;
+  padding-bottom: 0px;
+}
+.card_note {
+  margin: 1%;
+  height: min-content;
+  flex: 0 1 calc(30% - 12px);
+}
+/* .note-card
+{
+
+  display:flex;
+  flex-wrap:wrap;
+
+} */
+.card_note:hover .action {
+  opacity: 1;
+}
+.action {
+  opacity: 0;
+}
+.div1 {
+  margin-top: 7%;
+}
+.grid-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+
+
+}
+.list-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.grid-card > * {
+  box-sizing: border-box;
+}
+.grid-card > *:not(:last-child) {
+  margin-right: 12px;
+}
+/* medium size viewport */
+@media screen and (max-width: 959px) {
+  /* Column Gap */
+  .grid-card > *:not(:last-child) {
+    margin-right: 32px;
+  }
+  /* Item sizing */
+  .grid-view {
+    flex: 0 1 calc(50% - 12px);
+  }
+}
+/* small size viewport */
+@media screen and (max-width: 599px) {
+  .grid-card {
+    display: flex;
+    flex-direction: column;
+
+  }
+  .grid-card > *:not(:last-child) {
+    margin-right: unset;
+    margin-bottom: 12px;
+  }
+}
+.list-card > *:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.grid-view {
+
+}
+.list-view {
+  width: 870px;
+}

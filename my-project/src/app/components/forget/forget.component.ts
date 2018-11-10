@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 @Component({
   selector: "app-forget",
   templateUrl: "./forget.component.html",
-  styleUrls: ["./forget.component.css"]
+  styleUrls: ["./forget.component.scss"]
 })
 export class ForgetComponent implements OnInit {
   rForm: FormGroup;

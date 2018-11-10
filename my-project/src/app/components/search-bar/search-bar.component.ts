@@ -5,7 +5,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-search-bar",
   templateUrl: "./search-bar.component.html",
-  styleUrls: ["./search-bar.component.css"]
+  styleUrls: ["./search-bar.component.scss"]
 })
 export class SearchBarComponent implements OnInit {
   constructor(private data: DataService, private service: UserService) {}
@@ -42,5 +42,18 @@ export class SearchBarComponent implements OnInit {
 
       }
     );
+  }
+  addNewEntry(event) {
+
+    if (event) {
+      this.getNotes();
+    }
+  }
+  change(event) {
+    this.getNotes(); // event for catching the changes
+  }
+  eventLabel(event) {
+
+    this.getNotes();
   }
 }

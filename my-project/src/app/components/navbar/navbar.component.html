@@ -103,7 +103,8 @@
           <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
 
             <div flexLayout="row" fxLayoutAlign="space-around start">
-              <div>
+              <div  class="profilepic1" (click)="$event.stopPropagation()"
+              [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
                 <img src="{{img}}" class="profilepic1">
               </div>
               <div>
@@ -115,7 +116,7 @@
             <div flexLayout="row">
               <div fxFlex=27%  fxLayout="column" fxLayoutAlign="space-evenly start" >
                <div> <input type="file" (change)="onFileSelected($event)"></div>
-               <div>  <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button></div>
+
               </div>
               <div fxFLEX=20%>
                 <button mat-button class="button2" (click)="Logout()">Log out</button>

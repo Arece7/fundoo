@@ -11,7 +11,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-label-notes",
   templateUrl: "./label-notes.component.html",
-  styleUrls: ["./label-notes.component.css"]
+  styleUrls: ["./label-notes.component.scss"]
 })
 export class LabelNotesComponent implements OnInit {
   constructor(public route: ActivatedRoute, private service: UserService) {}

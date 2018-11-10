@@ -1,14 +1,17 @@
 <div fxLayoutAlign="space-evenly center" class="div1">
-  <mat-card class="matcard" *ngIf="note1">
+  <mat-card class="matcard"  *ngIf="note1">
     <div
       data-text="Take a note..."
       contenteditable="true"
       class="div2"
-      (click)="note1 = !note1"
+      (click)=noteOpen()
+
+
     ></div>
 
     <span class="span">
-      <button mat-icon-button><i class="material-icons">list</i></button>
+
+      <button mat-icon-button (click)="checklist=true;noteOpen() "><i class="material-icons">list</i></button>
 
       <button mat-icon-button><i class="material-icons">photo</i></button>
 
@@ -16,18 +19,14 @@
     </span>
   </mat-card>
 
-  <mat-card
-    [ngStyle]="{ 'background-color': cardColor }"
-    class="matcard"
-    *ngIf="!note1"
-  >
+  <mat-card [ngStyle]="{ 'background-color': cardColor }"class="matcard"*ngIf="!note1">
+  <div>
     <div fxLayout="row">
       <div
         data-text="Title"
         id="title"
         contenteditable="true"
-        class="div2"
-      ></div>
+        class="div2"></div>
       <div class="action">
         <!-- pin starts -->
         <app-pin (eventEmit)="eventpin($event)"></app-pin>
@@ -41,8 +40,21 @@
         id="description"
         contenteditable="true"
         class="div2"
+        *ngIf="!checklist"
       ></div>
+      <div *ngIf="checklist" >
+
+        <hr>
+         <div fxLayout="row">
+          <mat-icon fxFlex="5%">add</mat-icon>
+          <mat-checkbox fxFlex="5%" ></mat-checkbox>
+
+          <input [ngStyle]="{ 'background-color': cardColor }" fxFlex="95%" class="note" placeholder="List Item" />
+          </div>
+         <hr>
+      </div>
     </mat-card-content>
+  </div>
 
     <mat-card-actions flexLayout="row">
       <mat-chip-list>
@@ -53,6 +65,7 @@
           </mat-chip>
         </div>
       </mat-chip-list>
+
       <!-- reminder starts -->
       <app-reminder></app-reminder>
       <!-- reminder ends -->
@@ -77,8 +90,8 @@
       <button
         mat-button
         class="close"
-        (click)="note1 = !note1; postValue()"
-        (clickOutside)="note1 = false"
+        (click)="checklist=false;noteOpen(); postValue()"
+
       >
         Close
       </button>

@@ -8,7 +8,7 @@ import { UserService } from "../../core/services/user.service";
 @Component({
   selector: "app-trash",
   templateUrl: "./trash.component.html",
-  styleUrls: ["./trash.component.css"]
+  styleUrls: ["./trash.component.scss"]
 })
 export class TrashComponent implements OnInit {
   public notes = [];
