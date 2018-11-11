@@ -14,6 +14,16 @@
     <mat-card-content class="take_note">
       <div (click)="openDialog(note)" class="div2" [innerHTML]="note.description">
       </div>
+      <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" >
+        <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
+        <input *ngIf="!checklist.isDeleted && checklist.status=='open' " [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
+          (click)="openDialog(note)" [style.backgroundColor]="note.color">
+       </div>
+
+        <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
+        <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
+        <del *ngIf="!checklist.isDeleted && checklist.status=='close'" (click)="openDialog(note)">{{checklist.itemName}}</del>
+      </div>
 
     </mat-card-content>
     <mat-chip-list>

@@ -11,7 +11,7 @@
 
     <span class="span">
 
-      <button mat-icon-button (click)="checklist=true;noteOpen() "><i class="material-icons">list</i></button>
+      <button mat-icon-button (click)="check=true;noteOpen() "><i class="material-icons">list</i></button>
 
       <button mat-icon-button><i class="material-icons">photo</i></button>
 
@@ -35,21 +35,19 @@
     </div>
 
     <mat-card-content class="take_note">
-      <div
-        data-text="Take a note.."
-        id="description"
-        contenteditable="true"
-        class="div2"
-        *ngIf="!checklist"
-      ></div>
-      <div *ngIf="checklist" >
-
+      <div data-text="Take a note.." id="description" contenteditable="true" class="div2" *ngIf="!check" ></div>
+      <div *ngIf="check" >
+        <div *ngFor="let data of dataArray" fxLayout="row">
+          <mat-checkbox fxFlex="5%" [(ngModel)]=data.isChecked (click)="isChecked=!isChecked"></mat-checkbox>
+          <input fxFlex="90%"  class="note"  [(ngModel)]=data.data  [ngStyle]="{ 'background-color': cardColor }">
+               <mat-icon fxFlex="5%" (click)=onDelete(data) matTooltip="delete">clear</mat-icon>
+         </div>
         <hr>
          <div fxLayout="row">
-          <mat-icon fxFlex="5%">add</mat-icon>
-          <mat-checkbox fxFlex="5%" ></mat-checkbox>
+          <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+          <mat-checkbox fxFlex="5%" *ngIf="adding" [(ngModel)]=addCheck (click)="isChecked=!isChecked" ></mat-checkbox>
 
-          <input [ngStyle]="{ 'background-color': cardColor }" fxFlex="95%" class="note" placeholder="List Item" />
+          <input  [(ngModel)]=data [ngStyle]="{ 'background-color': cardColor }" fxFlex="95%" class="note" placeholder="List Item" (keydown)="onEnter($event)"(keydown.backspace)="onDelete()"  />
           </div>
          <hr>
       </div>
@@ -90,9 +88,7 @@
       <button
         mat-button
         class="close"
-        (click)="checklist=false;noteOpen(); postValue()"
-
-      >
+        (click)="postValue();check=false;noteOpen();" >
         Close
       </button>
     </mat-card-actions>

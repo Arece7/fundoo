@@ -81,4 +81,28 @@ export class NotesCollectionComponent implements OnInit {
     this.toggle=message
     })
   }
+  public modifiedCheckList
+  checkBox(checkList,note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    this.modifiedCheckList = checkList;
+    this.updatelist(note.id);
+  }
+  updatelist(id){
+    var apiData = {
+      "itemName": this.modifiedCheckList.itemName,
+      "status": this.modifiedCheckList.status
+    }
+    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
+    this.service.post(url, JSON.stringify(apiData), localStorage.getItem('token')).subscribe(response => {
+      console.log(response);
+
+    })
+  }
 }

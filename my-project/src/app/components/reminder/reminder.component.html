@@ -1,3 +1,19 @@
+<span data-toggle="tooltip" title="{{!isDeleted ? 'Remind Me':''}}">
 <button mat-icon-button *ngIf="!Delete">
-  <i class="material-icons" style="opacity: 0.5;"> touch_app </i>
+  <i class="material-icons" style="opacity: 0.5;" *ngIf="!isDeleted" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();"> touch_app </i>
 </button>
+</span>
+<mat-menu (click)="$event.stopPropagation();" class="menu" #menu="matMenu" [overlapTrigger]="false">
+  <button (click)="$event.stopPropagation();" mat-menu-item><span>Reminder : </span></button>
+  <button (click)="$event.stopPropagation();" mat-menu-item>
+      <div><span (click)="remindToday()">Later today</span>
+          <span class="spaceremain">8:00 PM</span></div>
+  </button>
+  <button (click)="$event.stopPropagation();" mat-menu-item>
+      <div><span (click)="remindTomorrow()">Tomorrow </span>
+          <span class="spaceremain">8:00 AM</span></div>
+  </button>
+  <button (click)="$event.stopPropagation();" mat-menu-item>
+      <div><span (click)="weekRemainder()">Next week</span>
+          <span class="remainder">Mon,8:00 AM</span></div>
+  </button>

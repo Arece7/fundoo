@@ -95,3 +95,13 @@ div:empty:before {
 .list-view {
   width: 870px;
 }
+::ng-deep.note{
+  width: 100%;
+height: auto;
+border:none;
+ border: transparent;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 15px;
+outline: none
+
+}

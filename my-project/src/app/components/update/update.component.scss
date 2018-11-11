@@ -57,4 +57,13 @@ mat-card-actions {
 }
 .float {
   float: right;
+  margin-top: 9px;
+}
+.material-icons {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.material-icons:hover {
+  cursor: pointer;
+  opacity: 1.5;
 }
