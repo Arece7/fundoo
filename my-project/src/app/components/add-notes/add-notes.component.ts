@@ -31,6 +31,10 @@ public status="open"
   ngOnInit() {
     this.labelId = [];
     this.labelName = [];
+    this.cardColor = "#FFFFFF";
+        this.dataArray=[];
+        this.dataArrayApi=[];
+        this.adding = false
   }
   public isPinned=false;
   postValue()      //for posting the data of Notes
@@ -50,7 +54,7 @@ public status="open"
   }
   else{
     console.log("else part");
-    
+
 for(var i=0;i<this.dataArray.length;i++){
 if(this.dataArray[i].isChecked==true){
 this.status="close"
@@ -141,7 +145,14 @@ console.log(this.dataArrayApi);
 
   noteOpen()
   {
+    this.data=null;
     this.note1 = !this.note1;
+    this.labelId = [];
+    this.labelName = [];
+    this.cardColor = "#FFFFFF";
+        this.dataArray=[];
+        this.dataArrayApi=[];
+        this.adding = false
   }
   public data;
   public i=0;
@@ -178,7 +189,7 @@ console.log(this.dataArrayApi);
             this.dataArray.splice(i,1);
             break;
        }
-        
+
       }
     console.log(this.dataArray)
   }

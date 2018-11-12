@@ -31,7 +31,9 @@ import {
   MatSnackBarModule,
   MatToolbarModule,
   MatCheckboxModule,
-  MatChipsModule
+  MatChipsModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from "@angular/material";
 import { NotesComponent } from "./components/notes/notes.component";
 import { ClickOutsideModule } from "ng4-click-outside";
@@ -135,9 +137,11 @@ import { CropImageComponent } from './components/crop-image/crop-image.component
     MatDialogModule,
     MatCheckboxModule,
     MatChipsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent],
   entryComponents: [
     UpdateComponent,

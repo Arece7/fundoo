@@ -105,4 +105,21 @@ export class NotesCollectionComponent implements OnInit {
 
     })
   }
+  removeRemainder(label) {
+    var id =[];
+    id.push(label)
+    var body={
+      "noteIdList" : id
+    }
+    this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
+      .subscribe((response) => {
+        console.log("Reminder deleted" + response)
+        this.eventEmit.emit({});
+      },
+        (error) => {
+          console.log("error occured" + error)
+        }
+      )
+  }
+
 }

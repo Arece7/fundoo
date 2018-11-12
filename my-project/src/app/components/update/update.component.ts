@@ -40,6 +40,7 @@ export class UpdateComponent implements OnInit {
   /**@function:onClick() for closing & update the change in note card */
   onNoClick(): void {
     this.dialogRef.close();
+
     this.update();
   }
   /**@function:update() for updating the contents */
@@ -65,12 +66,12 @@ export class UpdateComponent implements OnInit {
         error => {}
       );
     } else {
-     
+      if(this.modifiedCheckList!=null){
       var apiData = {
         itemName: this.modifiedCheckList.itemName,
         status: this.modifiedCheckList.status
       };
-     
+
       var url =
         "notes/" +
         this.data.id +
@@ -83,11 +84,13 @@ export class UpdateComponent implements OnInit {
           console.log(response);
           console.log(this.modifiedCheckList.itemName);
         });
+      }
     }
   }
   editing(editedList, event) {
     console.log(editedList);
-    if (event.code == "Enter") {
+    console.log(event);
+    if (event.code == "Enter"||event.isTrusted==true) {
       this.modifiedCheckList = editedList;
       this.update();
     }
