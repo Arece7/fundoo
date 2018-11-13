@@ -49,6 +49,9 @@ export class NavbarComponent implements OnInit {
   search() {
     this.router.navigate(["/search"]); //redirecting to search
   }
+  reminder() {
+    this.router.navigate(["/reminder"]); //redirecting to reminder
+  }
   Logout() //logout function
   {
     var Token = localStorage.getItem("token");
@@ -83,28 +86,7 @@ export class NavbarComponent implements OnInit {
     this.grid = 0;
     this.data.changeView(false);
   }
-  // public selectedFile = null;
-  // public ProfilePath = null;
 
-  // public onFileSelected(event) {
-  //   this.selectedFile = event.path[0].files[0];
-
-  //   this.ProfilePath = event.target.value;
-  // }
-
-  // image = {};
-  // public image2 = localStorage.getItem("imageUrl");
-  // img = environment.apiurl + this.image2;
-
-  // public onUpload() {
-  //   var token = localStorage.getItem("token");
-
-  //   const uploadData = new FormData();
-  //   uploadData.append("file", this.selectedFile, this.selectedFile.name);
-  //   this._Service
-  //     .AddImage("user/uploadProfileImage", uploadData, token)
-  //     .subscribe(res => {}, error => {});
-  // }
  public selectedFile = null;
  public image2 = localStorage.getItem("imageUrl");
  public img = environment.apiurl + this.image2;

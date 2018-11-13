@@ -31,13 +31,15 @@ export const MY_FORMATS = {
 
 })
 export class ReminderComponent implements OnInit {
-  reminders = [
-    {viewPeriod: 'Morning',viewTime: '8:00AM'},
-    {viewPeriod: 'Afternoon',viewTime: '1:00PM'},
-    {viewPeriod: 'Evening', viewTime: '6:00PM'},
-    {viewPeriod: 'Night', viewTime: '8.00PM'},
-  ];
 
+  reminders = [
+    {viewPeriod: 'Morning',viewTime: '08:00 AM'},
+    {viewPeriod: 'Afternoon',viewTime: '01:00 PM'},
+    {viewPeriod: 'Evening', viewTime: '06:00 PM'},
+    {viewPeriod: 'Night', viewTime: '08.00 PM'},
+  ];
+  currentDate = new Date();
+  minDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate());
   @Input()Delete: any;
 
   date = new FormControl(moment());
@@ -46,30 +48,23 @@ export class ReminderComponent implements OnInit {
 @Input() note
 @Output() eventEmit = new EventEmitter();
 
+
+
+reminderBody = {
+  "date": new FormControl(new Date()),
+  "time": ""
+}
+
 public isDeleted=false;
 public flag = false;
   ngOnInit() {
     if(this.note!=undefined && this.note.isDeleted==true){
       this.isDeleted=true
     }
-    this.getRemainder();
+    // this.reminderBody.date =
     console.log(this.note);
 
   }
-  // reminderBody = {
-  //   "date": new FormControl(new Date()),
-  //   "time": ""
-  // }
-  getRemainder() {
-    this.Service.getnotes("/notes/getReminderNotesList", localStorage.getItem('token')).subscribe((response) => {
-
-  },
-  (error)=>{
-    console.log("error",error)
-
-  })
-  }
-
   remindToday(){
     let currentDate = new Date()
     this.body =
@@ -121,32 +116,39 @@ public flag = false;
           console.log("error in week reminders",error)
         })
   }
-//   addRemCustom(reminderBody.date.value,reminderBody.time){
-// var x;
-// var splitTime = this.reminderBody.time.split("", 8);
-// var hour = Number(splitTime[0] + splitTime[1]);
-// var minute = Number(splitTime[3] + splitTime[4]);
-// var ampm = (splitTime[6] + splitTime[7]);
-// console.log(ampm);
-// console.log(hour);
-// console.log(minute);
-// if (ampm == 'AM' || ampm == 'am') {
-//   this.body = {
-//     "noteIdList": [this.noteDetails.id],
-//     "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(), date.getDate(), hour, minute, 0, 0)
-//   }
-//   this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-//     console.log(result);
-//     this.todayEvent.emit();
-//   })
-// } else if (ampm == 'PM' || ampm == 'pm') {
-//   this.body = {
-//     "noteIdList": [this.noteDetails.id],
-//     "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 12, minute, 0, 0)
-//   }
-//   this.httpService.httpAddReminder('notes/addUpdateReminderNotes', localStorage.getItem('token'), this.body).subscribe((result) => {
-//     console.log(result);
-//     this.todayEvent.emit();
-//   })
-// }
+  addRemCustom(date, timing) {
+
+    timing.match('^[0-2][0-3]:[0-5][0-9]$');
+   if (timing == this.reminderBody.time) {
+      console.log(this.reminderBody.time)
+      var splitTime = this.reminderBody.time.split("", 8);
+      var hour = Number(splitTime[0] + splitTime[1]);
+      var minute = Number(splitTime[3] + splitTime[4]);
+      var ampm = (splitTime[6] + splitTime[7]);
+      console.log(ampm);
+      console.log(hour);
+      console.log(minute);
+      if (ampm == 'AM' || ampm == 'am') {
+        this.body = {
+          "noteIdList": [this.note.id],
+          "reminder": new Date((new Date(date)).getFullYear(), (new Date(date)).getMonth(), (new Date(date)).getDate(), hour, minute, 0, 0)
+        }
+        this.Service.deletingNote('notes/addUpdateReminderNotes',this.body, localStorage.getItem('token')).subscribe((result) => {
+          console.log(result);
+          this.eventEmit.emit({});
+        })
+      } else if (ampm == 'PM' || ampm == 'pm') {
+        this.body = {
+          "noteIdList": [this.note.id],
+          "reminder": new Date((new Date(date)).getFullYear(), (new Date(date)).getMonth(), (new Date(date)).getDate(), hour + 12, minute, 0, 0)
+        }
+        this.Service.deletingNote('notes/addUpdateReminderNotes',this.body, localStorage.getItem('token')).subscribe((result) => {
+          console.log(result);
+          this.eventEmit.emit({});
+        })
+      }
+
+    }
+  }
+
 }

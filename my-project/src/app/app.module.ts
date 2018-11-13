@@ -56,6 +56,7 @@ import { ReminderComponent } from "./components/reminder/reminder.component";
 import { AddImageComponent } from "./components/add-image/add-image.component";
 import { PinComponent } from "./components/pin/pin.component";
 import { CropImageComponent } from './components/crop-image/crop-image.component';
+import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
 
 
 @NgModule({
@@ -107,6 +108,10 @@ import { CropImageComponent } from './components/crop-image/crop-image.component
 
 
     CropImageComponent,
+
+
+
+    MainReminderComponent,
 
 
   ],
