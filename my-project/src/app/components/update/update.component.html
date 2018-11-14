@@ -33,7 +33,7 @@
 
 
     <div class="note" *ngFor="let check of tempArray" fxLayout="row">
-    
+
       <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
       <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
       [ngStyle]="{ 'background-color': updateColor }" *ngIf="!check.isDeleted && check.status=='open' ">
@@ -47,7 +47,7 @@
         <input  fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{ 'background-color': updateColor }" [(ngModel)]=newList (keydown)=addList($event)/>
       </div>
       <hr *ngIf="checklist">
-     
+
       <div class="note" *ngFor="let check of tempArray" fxLayout="row">
         <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
         <input [(ngModel)]=check.itemName class="note" [ngStyle]="{ 'background-color': updateColor }" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
@@ -65,8 +65,17 @@
         </mat-chip>
       </div>
     </mat-chip-list>
+    <mat-chip-list>
+      <div *ngFor="let label of data.reminder">
+        <mat-chip *ngIf="!label.isDeleted">
+        <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+        {{label | date:"medium"}}
+          <mat-icon matChipRemove (click)="removeRemainder(data.id)">cancel</mat-icon>
+        </mat-chip>
+      </div>
+    </mat-chip-list>
     <!-- reminder starts -->
-    <app-reminder [Delete]="data.isDeleted"> </app-reminder>
+    <app-reminder  [note]="data" (eventEmit)="eventOccured($event)" [Delete]="data.isDeleted"> </app-reminder>
     <!-- reminder endss -->
     <!-- collaborator starts -->
     <app-collaborator [Delete]="data.isDeleted"></app-collaborator>

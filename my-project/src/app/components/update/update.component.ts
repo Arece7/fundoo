@@ -21,6 +21,7 @@ export class UpdateComponent implements OnInit {
   public newData: any = {};
   @Output()
   onNewEntryAdded = new EventEmitter();
+  eventEmit = new EventEmitter();
   public labels = [];
   constructor(
     public dialogRef: MatDialogRef<UpdateComponent>,
@@ -202,5 +203,23 @@ export class UpdateComponent implements OnInit {
           console.log(this.tempArray);
         });
     }
+  }
+  removeRemainder(reminder) {
+    var id =[];
+    id.push(reminder)
+    var body={
+      "noteIdList" : id
+    }
+    this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
+      .subscribe((response) => {
+        console.log("Reminder deleted" + response)
+        this.data.reminder.pop();
+        this.eventEmit.emit({});
+
+      },
+        (error) => {
+          console.log("error occured" + error)
+        }
+      )
   }
 }
