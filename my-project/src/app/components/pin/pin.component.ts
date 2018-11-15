@@ -33,7 +33,7 @@ export class PinComponent implements OnInit {
       }
       var arr = []
       arr.push(this.note.id)
-      console.log(arr);
+    
       if (this.note.id != undefined) {
         this.service.post("notes/pinUnpinnotes",
           {
@@ -42,10 +42,10 @@ export class PinComponent implements OnInit {
 
           }, localStorage.getItem("token"))
           .subscribe(response => {
-            console.log(response);
+            
             this.eventEmit.emit({})
           }, error => {
-            console.log(error)
+           
           })
       }
     }

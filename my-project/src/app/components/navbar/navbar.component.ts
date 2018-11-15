@@ -112,4 +112,13 @@ public pic;
 
       })
     }
+    public name="Notes";
+    displayName(changename)
+    {
+      this.name=changename;
+    }
+    eventlabel(event)
+    {
+      this.name=event;
+    }
 }

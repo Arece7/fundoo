@@ -63,9 +63,18 @@
           </mat-chip>
         </div>
       </mat-chip-list>
+      <mat-chip-list>
+        <div>
+          <mat-chip *ngIf="reminder!=null">
+          <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+          {{reminder | date:"medium"}}
+            <mat-icon matChipRemove (click)="removeRemainder()" >cancel</mat-icon>
+          </mat-chip>
+        </div>
+      </mat-chip-list>
 
       <!-- reminder starts -->
-      <app-reminder></app-reminder>
+      <app-reminder (reminderEmit)="reminderEvent($event)"></app-reminder>
       <!-- reminder ends -->
       <!-- collaborator starts -->
       <app-collaborator></app-collaborator>

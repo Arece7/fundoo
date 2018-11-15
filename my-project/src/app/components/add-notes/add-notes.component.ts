@@ -34,7 +34,8 @@ public status="open"
     this.cardColor = "#FFFFFF";
         this.dataArray=[];
         this.dataArrayApi=[];
-        this.adding = false
+        this.adding = false;
+        this.reminder=null;
   }
   public isPinned=false;
   postValue()      //for posting the data of Notes
@@ -49,11 +50,12 @@ public status="open"
       isPined:this.isPinned,
       isArchived: this.archive,
       color: this.cardColor,
-      labelIdList: JSON.stringify(this.labelId)
+      labelIdList: JSON.stringify(this.labelId),
+      reminder:this.reminder
     };
   }
   else{
-    console.log("else part");
+    
 
 for(var i=0;i<this.dataArray.length;i++){
 if(this.dataArray[i].isChecked==true){
@@ -66,7 +68,7 @@ var apiObj={
 this.dataArrayApi.push(apiObj)
 this.status="open"
 }
-console.log(this.dataArrayApi);
+
 
     this.body={
      "title": title,
@@ -74,7 +76,8 @@ console.log(this.dataArrayApi);
      "isPined": this.isPinned,
      "color": this.cardColor,
      "isArchived":this.archive,
-     "labelIdList": JSON.stringify(this.labelId)
+     "labelIdList": JSON.stringify(this.labelId),
+     "reminder":this.reminder
     }
 }
     var token = localStorage.getItem("token");
@@ -82,6 +85,7 @@ console.log(this.dataArrayApi);
     if (title == "" && description == "") {
       this.labelId = [];
       this.labelName = [];
+      this.reminder=null;
       return;
     } //api call for add notes
     if (title != ""){
@@ -92,6 +96,7 @@ console.log(this.dataArrayApi);
         this.cardColor = "#FFFFFF";
         this.dataArray=[];
         this.dataArrayApi=[];
+        this.reminder=null;
         this.adding=false;
         this.snackbar.open("Note", "Added", {
           duration: 2000
@@ -100,6 +105,7 @@ console.log(this.dataArrayApi);
       },
       error => {
         this.labelId = [];
+        this.reminder=null;
         this.labelName = [];
         this.cardColor = "#FFFFFF";
         this.dataArray=[];
@@ -111,6 +117,15 @@ console.log(this.dataArrayApi);
       }
     );
   }
+  }
+  public reminder
+  reminderEvent(event)
+  {
+this.reminder=event;
+  }
+  removeRemainder()
+  {
+    this.reminder=null;
   }
   eventOccured(event) {
     if (event) {
@@ -168,14 +183,14 @@ console.log(this.dataArrayApi);
    this.i++;
    this.isChecked=this.addCheck
     if (this.data != null && event.code == "Enter"){
-    console.log(event,"keydown");
+
     var obj={
       "index":this.i,
       "data":this.data,
       "isChecked":this.isChecked
     }
     this.dataArray.push(obj)
-    console.log(this.dataArray);
+   
     this.data=null;
     this.adding=false;
     this.isChecked=false;
@@ -183,7 +198,7 @@ console.log(this.dataArrayApi);
      }
   }
   onDelete(deletedObj){
-    console.log("onDelete function");
+    
        for(var i=0;i<this.dataArray.length;i++){
           if(deletedObj.index==this.dataArray[i].index){
             this.dataArray.splice(i,1);
@@ -191,6 +206,6 @@ console.log(this.dataArrayApi);
        }
 
       }
-    console.log(this.dataArray)
+    
   }
 }

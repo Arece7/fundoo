@@ -82,15 +82,13 @@ export class UpdateComponent implements OnInit {
       this.service
         .post(url, JSON.stringify(apiData), localStorage.getItem("token"))
         .subscribe(response => {
-          console.log(response);
-          console.log(this.modifiedCheckList.itemName);
+          
         });
       }
     }
   }
   editing(editedList, event) {
-    console.log(editedList);
-    console.log(event);
+   
     if (event.code == "Enter"||event.isTrusted==true) {
       this.modifiedCheckList = editedList;
       this.update();
@@ -144,13 +142,13 @@ export class UpdateComponent implements OnInit {
     } else {
       checkList.status = "open";
     }
-    console.log(checkList);
+  
     this.modifiedCheckList = checkList;
     this.update();
   }
   public removedList;
   removeList(checklist) {
-    console.log(checklist);
+   
     this.removedList = checklist;
     this.removeCheckList();
   }
@@ -160,7 +158,7 @@ export class UpdateComponent implements OnInit {
     this.service
       .post(url, null, localStorage.getItem("token"))
       .subscribe(response => {
-        console.log(response);
+    
         for (var i = 0; i < this.tempArray.length; i++) {
           if (this.tempArray[i].id == this.removedList.id) {
             this.tempArray.splice(i, 1);
@@ -192,15 +190,15 @@ export class UpdateComponent implements OnInit {
       this.service
         .post(url, this.newData, localStorage.getItem("token"))
         .subscribe(response => {
-          console.log(response);
+         
           this.newList = null;
           this.addCheck = false;
           this.adding = false;
-          console.log(response["data"].details);
+          
 
           this.tempArray.push(response["data"].details);
 
-          console.log(this.tempArray);
+       
         });
     }
   }
@@ -212,13 +210,13 @@ export class UpdateComponent implements OnInit {
     }
     this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
       .subscribe((response) => {
-        console.log("Reminder deleted" + response)
+       
         this.data.reminder.pop();
         this.eventEmit.emit({});
 
       },
         (error) => {
-          console.log("error occured" + error)
+          
         }
       )
   }

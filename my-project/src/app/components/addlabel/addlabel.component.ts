@@ -1,10 +1,11 @@
+import { EventEmitter } from '@angular/core';
 /** Purpose         : For more components
  *  @description
  *  @file           : addlabel.component.ts
  *  @author         : Arghya Ray
  */
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Output } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { CreatelabelComponent } from "../createlabel/createlabel.component";
 import { UserService } from "../../core/services/user.service";
@@ -18,6 +19,7 @@ import { Router } from "@angular/router";
 export class AddlabelComponent implements OnInit {
   public labelList;
   public token = localStorage.getItem("token");
+  @Output() labelname=new EventEmitter();
 
   constructor(
     private _Service: UserService,
@@ -56,5 +58,7 @@ export class AddlabelComponent implements OnInit {
   labelClick(data) {
     var labelName = data.label;
     this.router.navigate(["label/" + labelName]);
+    this.labelname.emit(labelName)
   }
+
 }

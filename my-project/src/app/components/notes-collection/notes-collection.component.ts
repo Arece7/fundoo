@@ -9,6 +9,7 @@ import { UserService } from "../../core/services/user.service";
 import { MatDialog } from "@angular/material";
 import { UpdateComponent } from "../update/update.component";
 import { DataService } from "../../core/services/data.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-notes-collection",
@@ -26,12 +27,12 @@ export class NotesCollectionComponent implements OnInit {
   constructor(
     private service: UserService,
     public dialog: MatDialog,
-    private data: DataService
+    private data: DataService, private router: Router
   ) {}
 
   @Input()
   NoteArray; //receving the array
-
+  @Output() labelname=new EventEmitter();
   @Output()
   update = new EventEmitter();
   ngOnInit() {
@@ -90,7 +91,7 @@ export class NotesCollectionComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
+
     this.modifiedCheckList = checkList;
     this.updatelist(note.id);
   }
@@ -101,7 +102,7 @@ export class NotesCollectionComponent implements OnInit {
     }
     var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
     this.service.post(url, JSON.stringify(apiData), localStorage.getItem('token')).subscribe(response => {
-      console.log(response);
+
 
     })
   }
@@ -113,13 +114,26 @@ export class NotesCollectionComponent implements OnInit {
     }
     this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
       .subscribe((response) => {
-        console.log("Reminder deleted" + response)
+
         this.eventEmit.emit({});
       },
         (error) => {
-          console.log("error occured" + error)
+
         }
       )
   }
+  checkDate(date){
+  var Present=new Date().getTime();
+  var value=new Date(date).getTime();
+  if(value > Present){
+  return true;
+  }
+  else false;
+}
+labelClick(data) {
+  var labelName = data;
+  this.router.navigate(["label/" + labelName]);
+  this.labelname.emit(labelName)
+}
 
 }

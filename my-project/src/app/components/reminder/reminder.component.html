@@ -39,7 +39,7 @@
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="center center" >
       <mat-form-field (click)="$event.stopPropagation()">
-          <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" [(ngModel)]="reminderBody.time" >
+          <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" [(ngModel)]="reminderBody.time" (keyup)="disable($event)" >
       </mat-form-field>
           <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu" class="timeSet">keyboard_arrow_down</mat-icon>
 
@@ -47,7 +47,7 @@
   </div>
   <mat-menu #timeMenu [overlapTrigger]=false class="menu">
   <div fxLayout="column" *ngFor="let timing of reminders">
-          <button mat-button (click)="reminderBody.time = timing.viewTime" (click)="$event.stopPropagation()">
+          <button mat-button (click)="reminderBody.time = timing.viewTime; dateflag = true"  (click)="$event.stopPropagation()">
 
                   <div fxFlex="35" >{{timing.viewPeriod}}</div>
                   <div fxFlex="40"></div>
@@ -60,7 +60,7 @@
       <button mat-button (click)="$event.stopPropagation()"class="button">Custom Time</button>
   </div>
 </mat-menu>
-<div><button mat-button (click)="addRemCustom(reminderBody.date.value,reminderBody.time)">Save</button></div>
+<div><button mat-button [disabled]="dateflag==false" (click)="addRemCustom(reminderBody.date.value,reminderBody.time)">Save</button></div>
 
     </div>
 

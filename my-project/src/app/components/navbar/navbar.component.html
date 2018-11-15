@@ -8,15 +8,15 @@
               menu
             </i>
           </button>
-          <span class="head" fxHide.xs="true" fxHide.sm="true">Fundoo</span>
-          <span class="head1">Notes</span>
+          <span class="head" >{{name}}</span>
+          <!-- <span class="head1">Notes</span> -->
           <div>
-            <button mat-icon-button class="searchicon" (click)="search()" fxHide.xs="true" fxHide.sm="true">
+            <button mat-icon-button class="searchicon" (click)="search();displayName(' Fundoo Notes  ')" fxHide.xs="true" fxHide.sm="true">
               <i class="material-icons">
                 search
               </i>
             </button>
-            <input type="input" (click)="search()" (keyup)="sendmessage()" placeholder="search" class="search" fxHide.xs="true" fxHide.sm="true"
+            <input type="input" (click)="search();displayName(' Notes')" (keyup)="sendmessage()" placeholder="search" class="search" fxHide.xs="true" fxHide.sm="true"
               [(ngModel)]="searchInput">
           </div>
           <button mat-icon-button class="refresh">
@@ -57,24 +57,24 @@
       <mat-sidenav-container class="example-container" fxFill hasBackdrop="false">
         <mat-sidenav #drawer class="example-sidenav" mode="side">
           <mat-list>
-            <button mat-stroked-button (click)="notes()">
+            <button mat-stroked-button (click)="notes();displayName('  Notes  ')">
               <img class="img" src="../../../assets/images/note.svg">Notes</button>
             <br>
-            <button mat-stroked-button (click)="reminder()">
+            <button mat-stroked-button (click)="reminder();displayName('  Reminders   ')">
               <img class="img" src="../../../assets/images/reminders.svg">Reminder</button>
           </mat-list>
           <mat-divider></mat-divider>
           <mat-list>
 
-            <app-addlabel></app-addlabel>
+            <app-addlabel  (labelname)="eventlabel($event)"></app-addlabel>
 
           </mat-list>
           <mat-divider></mat-divider>
           <mat-list>
-            <button mat-stroked-button (click)="archive()">
+            <button mat-stroked-button (click)="archive();displayName(' Archive  ')">
               <img class="img" src="../../../assets/images/archive.svg">Archive</button>
             <br>
-            <button mat-stroked-button (click)="trash()">
+            <button mat-stroked-button (click)="trash();displayName(' Trash    ')">
               <img class="img" src="../../../assets/images/tash.svg">Trash</button>
           </mat-list>
           <mat-divider></mat-divider>

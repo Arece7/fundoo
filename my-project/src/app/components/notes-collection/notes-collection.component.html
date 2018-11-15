@@ -28,19 +28,30 @@
     </mat-card-content>
     <mat-chip-list>
       <div *ngFor="let label of note.noteLabels">
-        <mat-chip>{{label.label}}
+        <mat-chip (click)=labelClick(label.label)>{{label.label}}
           <mat-icon matChipRemove (click)=deleteLabel(note,label)>cancel</mat-icon>
         </mat-chip>
       </div>
     </mat-chip-list>
     <mat-chip-list>
+       <div  *ngIf="checkDate(note.reminder[0])">
       <div *ngFor="let label of note.reminder">
-        <mat-chip *ngIf="!label.isDeleted">
+        <mat-chip *ngIf="!label.isDeleted && note.reminder[0]!='Invalid Date'">
         <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
         {{label | date:"medium"}}
           <mat-icon matChipRemove (click)="removeRemainder(note.id)">cancel</mat-icon>
         </mat-chip>
       </div>
+    </div>
+    <div  *ngIf="!checkDate(note.reminder[0])">
+      <div *ngFor="let label of note.reminder">
+        <mat-chip *ngIf="!label.isDeleted && note.reminder[0]!='Invalid Date'">
+        <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
+       <del> {{label | date:"medium"}}</del>
+          <mat-icon matChipRemove (click)="removeRemainder(note.id)">cancel</mat-icon>
+        </mat-chip>
+      </div>
+    </div>
     </mat-chip-list>
     <mat-card-actions class="action">
         <!-- reminder starts -->
