@@ -60,7 +60,34 @@ reminderBody = {
 public isDeleted=false;
 public flag = false;
 dateflag=false;
+public dateDisable=false;
+setDate=this.reminderBody.date.value;
   ngOnInit() {
+
+
+    if ((new Date(this.setDate).getFullYear() - new Date(this.currentDate).getFullYear()) === 0) {
+
+      if ((new Date(this.setDate).getMonth() - new Date(this.currentDate).getMonth()) === 0) {
+        if ((new Date(this.setDate).getDate() - new Date(this.currentDate).getDate()) === 0) {
+
+
+          if ((new Date(this.setDate).getHours()) > 8) {
+            this.reminders[0].disableStatus = true;
+             } if ((new Date(this.setDate).getHours()) > 13) {
+
+            this.reminders[1].disableStatus = true;
+
+          } if ((new Date(this.setDate).getHours()) > 18) {
+            this.reminders[2].disableStatus = true;
+
+          } if ((new Date(this.setDate).getHours()) > 20) {
+            this.reminders[3].disableStatus = true;
+
+          }
+        }
+
+      }
+    }
 
   }
   remindToday(){
@@ -72,7 +99,7 @@ dateflag=false;
     this.body=
     {
       'noteIdList': [this.note.id],
-      'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 8, 0, 0)
+      'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 20, 0, 0)
     }
     this.Service. deletingNote('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('token'))
       .subscribe(data => {
@@ -179,5 +206,6 @@ this.dateflag=false;
    else
    this.dateflag=false;
   }
+
 
 }

@@ -1,3 +1,4 @@
+import { LoggerService } from './../../core/services/logger.service';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../core/services/user.service";
@@ -58,6 +59,20 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("lName", response["lastName"]);
           localStorage.setItem("email", response["email"]);
           localStorage.setItem("imageUrl", response["imageUrl"]);
+
+          var body=
+          {
+            "pushToken": localStorage.getItem('pushtoken')
+          }
+          this._Service.post('user/registerPushToken',body,localStorage.getItem('token'))
+          .subscribe(
+            data => {
+             LoggerService.log("success" +  data)
+            },
+            error => {
+              LoggerService.error("error" + error)
+            }
+          );
           this.snackbar.open("login", "success", {
             duration: 2000
           });

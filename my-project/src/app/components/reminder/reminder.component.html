@@ -46,8 +46,8 @@
   </div>
   </div>
   <mat-menu #timeMenu [overlapTrigger]=false class="menu">
-  <div fxLayout="column" *ngFor="let timing of reminders">
-          <button mat-button (click)="reminderBody.time = timing.viewTime; dateflag = true"  (click)="$event.stopPropagation()">
+  <div fxLayout="column" *ngFor="let timing of reminders;let i=index">
+          <button mat-button (click)="reminderBody.time = timing.viewTime; dateflag = true"  (click)="$event.stopPropagation()" [disabled]="timing.disableStatus">
 
                   <div fxFlex="35" >{{timing.viewPeriod}}</div>
                   <div fxFlex="40"></div>

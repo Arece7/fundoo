@@ -57,6 +57,7 @@ import { AddImageComponent } from "./components/add-image/add-image.component";
 import { PinComponent } from "./components/pin/pin.component";
 import { CropImageComponent } from './components/crop-image/crop-image.component';
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
+import { MessagingService } from "./core/services/messaging.service";
 
 
 @NgModule({
@@ -146,7 +147,7 @@ import { MainReminderComponent } from './components/main-reminder/main-reminder.
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule,MessagingService],
   bootstrap: [AppComponent],
   entryComponents: [
     UpdateComponent,
