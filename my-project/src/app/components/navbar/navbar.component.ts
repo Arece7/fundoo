@@ -12,7 +12,7 @@ import { UserService } from "../../core/services/user.service";
 import { MatSnackBar } from "@angular/material";
 import { MatDialog } from "@angular/material";
 import { DataService } from "../../core/services/data.service";
-import { CropImageComponent } from './../crop-image/crop-image.component';
+import { CropImageComponent } from '../crop-image/crop-image.component';
 import{environment} from '../../../environments/environment'
 @Component({
   selector: "app-navbar",
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   public Lname = localStorage.getItem("lName");
   public Email = localStorage.getItem("email");
   public word = this.Fname[0];
+  public width;
 
   constructor(
     private router: Router,
@@ -35,8 +36,10 @@ export class NavbarComponent implements OnInit {
   ) {}
   message: string;
   ngOnInit() {
+    this.isLargeScreen()
     this.data.currentMessage.subscribe(message => (this.message = message));
-  }
+    this.data.currentView2.subscribe(message => (this.name = message));
+this.name='Notes'  }
   notes() {
     this.router.navigate(["/dashboard"]); //redirecting to dashboard
   }
@@ -121,4 +124,7 @@ public pic;
     {
       this.name=event;
     }
+    isLargeScreen() {
+      this.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      }
 }

@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/services/authGuard/auth.guard';
 import { MainArchiveComponent } from "./components/main-archive/main-archive.component";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -7,21 +8,21 @@ import { ForgetComponent } from "./components/forget/forget.component";
 import { ResetComponent } from "./components/reset/reset.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotesComponent } from "./components/notes/notes.component";
-import { ArchiveComponent } from "./components/archive/archive.component";
 import { TrashComponent } from "./components/trash/trash.component";
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 import { LabelNotesComponent } from "./components/label-notes/label-notes.component";
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
+
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent,canActivate: [AuthGuard] },
   { path: "signup", component: SignupComponent },
   { path: "forget", component: ForgetComponent },
   { path: "resetpassword/:token", component: ResetComponent },
 
   {
     path: "",
-    component: DashboardComponent,
+    component: DashboardComponent,canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: NotesComponent },
       { path: "archive", component: MainArchiveComponent },

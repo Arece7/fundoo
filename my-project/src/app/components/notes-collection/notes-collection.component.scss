@@ -23,7 +23,7 @@ div:empty:before {
 .card_note {
   margin: 1%;
   height: min-content;
-  flex: 0 1 calc(30% - 12px);
+
 }
 /* .note-card
 {
@@ -38,14 +38,14 @@ div:empty:before {
 .action {
   opacity: 0;
 }
-.div1 {
-  margin-top: 7%;
-}
+
 .grid-card {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
+  justify-content: center;
+
 
 
 }
@@ -53,8 +53,9 @@ div:empty:before {
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
-  align-items: center;
+  align-items: center
+
+
 }
 .grid-card > * {
   box-sizing: border-box;
@@ -63,21 +64,22 @@ div:empty:before {
   margin-right: 12px;
 }
 /* medium size viewport */
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 859px) {
   /* Column Gap */
   .grid-card > *:not(:last-child) {
     margin-right: 32px;
   }
   /* Item sizing */
   .grid-view {
-    flex: 0 1 calc(50% - 12px);
+    flex: 0 1 calc(30% - 12px);
+
   }
 }
 /* small size viewport */
 @media screen and (max-width: 599px) {
-  .grid-card {
-    display: flex;
-    flex-direction: column;
+
+  .grid-view {
+    flex: 0 1 calc(95% - 12px);
 
   }
   .grid-card > *:not(:last-child) {
@@ -90,6 +92,7 @@ div:empty:before {
 }
 
 .grid-view {
+  width:300px;
 
 }
 .list-view {
@@ -104,4 +107,14 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 font-size: 15px;
 outline: none
 
+}
+.wrap
+{
+  white-space: nowrap;
+ text-overflow: ellipsis;
+ overflow: hidden !important;
+}
+.label
+{
+ max-width:100px;
 }

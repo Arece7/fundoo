@@ -1,4 +1,4 @@
-import { LoggerService } from './../../core/services/logger.service';
+import { LoggerService } from '../../core/services/logger.service';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../core/services/user.service";
@@ -40,6 +40,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
+if(localStorage.getItem('token')!=null)
+{
+  this.router.navigateByUrl('/dashboard')
+}
   }
   model: any = {};
   login() {

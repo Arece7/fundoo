@@ -1,6 +1,6 @@
 <div class="note-card" [ngClass]="{'grid-card':!toggle,'list-card ':toggle}"  class="div1"  >
 
-  <mat-card class="card_note" [ngClass]="{'grid-view':!toggle,'list-view':toggle}" *ngFor="let note of NoteArray | search:searchInput"  [ngStyle]="{'background-color':note.color}">
+  <mat-card   class="card_note" [ngClass]="{'grid-view':!toggle,'list-view':toggle}" *ngFor="let note of NoteArray | search:searchInput"  [ngStyle]="{'background-color':note.color}">
 
 
         <div fxLayout="row">
@@ -27,8 +27,9 @@
 
     </mat-card-content>
     <mat-chip-list>
-      <div *ngFor="let label of note.noteLabels">
-        <mat-chip (click)=labelClick(label.label)>{{label.label}}
+      <div *ngFor="let label of note.noteLabels" >
+        <mat-chip  (click)=labelClick(label.label) class="label">
+          <span class="wrap">{{label.label}}</span>
           <mat-icon matChipRemove (click)=deleteLabel(note,label)>cancel</mat-icon>
         </mat-chip>
       </div>

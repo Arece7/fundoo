@@ -133,7 +133,9 @@ export class NotesCollectionComponent implements OnInit {
 labelClick(data) {
   var labelName = data;
   this.router.navigate(["label/" + labelName]);
-  this.labelname.emit(labelName)
+
+  this.data.changeView2(labelName)
+  // this.labelname.emit(labelName)
 }
 
 }

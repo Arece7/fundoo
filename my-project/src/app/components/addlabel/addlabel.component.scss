@@ -19,3 +19,9 @@
 {
   float:right;
 }
+.wrap
+{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+}

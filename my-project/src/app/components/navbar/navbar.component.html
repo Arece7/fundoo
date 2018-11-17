@@ -1,61 +1,48 @@
 <div fxFlex>
   <div fxLayout="column wrap">
     <div>
-      <mat-toolbar color="primary" class="toolbar">
-        <mat-toolbar-row>
-          <button mat-icon-button class="menu" matTooltip="Menu">
+      <mat-toolbar color="primary" class="toolbar" >
+        <mat-toolbar-row >
+          <div div fxLayout="row" fxFlex=100 >
+
+            <div fxFlex=20 >
+          <button mat-icon-button class="menu" matTooltip="Menu" >
             <i (click)="drawer.toggle()" class="material-icons ">
               menu
             </i>
           </button>
-          <span class="head" >{{name}}</span>
+          <span class="head"  >{{name}}</span>
           <!-- <span class="head1">Notes</span> -->
-          <div>
-            <button mat-icon-button class="searchicon" (click)="search();displayName(' Fundoo Notes  ')" fxHide.xs="true" fxHide.sm="true">
+         </div>
+          <div fxFlex=80>
+            <button mat-icon-button class="searchicon" (click)="search();displayName(' Fundoo Notes  ')" >
               <i class="material-icons">
                 search
               </i>
             </button>
-            <input type="input" (click)="search();displayName(' Notes')" (keyup)="sendmessage()" placeholder="search" class="search" fxHide.xs="true" fxHide.sm="true"
+            <input type="input" (click)="search();displayName(' Notes')" (keyup)="sendmessage()" placeholder="search" class="search"
               [(ngModel)]="searchInput">
           </div>
-          <button mat-icon-button class="refresh">
-            <i class="material-icons ">
-              refresh
-            </i>
-          </button>
-          <!-- <button mat-icon-button class="view" fxHide.xs="true" fxHide.sm="true">
-            <i class="material-icons">
-              view_agenda
-            </i>
-          </button> -->
-
+          <div fxFlex=20 fxLayoutAlign="end none" >
           <button mat-icon-button aria-label="view_agenda" class="view" fxShow.xs="false" fxShow.sm="false" fxShow.md="true" fxShow.lg="true">
             <mat-icon aria-label="view_stream" (click)="viewList()" *ngIf="grid==0">view_stream</mat-icon>
             <mat-icon aria-label="view_module" (click)="viewGrid()" *ngIf="grid==1">view_module</mat-icon>
 
           </button>
-          <button mat-icon-button class="apps" fxHide.xs="true" fxHide.sm="true">
-            <i class="material-icons ">
-              apps
-            </i>
-          </button>
-          <button mat-icon-button class="notify" fxHide.xs="true" fxHide.sm="true">
-            <i class="material-icons ">
-              notifications
-            </i>
-          </button>
+
+
           <button mat-icon-button class=" person" [matMenuTriggerFor]="appMenu" (clickOutside)="logout=false">
             <img src="{{img}}" class="profilepic2">
           </button>
-
+        </div>
+        </div>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
 
     <div>
-      <mat-sidenav-container class="example-container" fxFill hasBackdrop="false">
-        <mat-sidenav #drawer class="example-sidenav" mode="side">
+      <mat-sidenav-container class="example-container" fxFill hasBackdrop="false" >
+        <mat-sidenav #drawer class="example-sidenav" mode="side"  [mode]="width > 720?'side':'over'">
           <mat-list>
             <button mat-stroked-button (click)="notes();displayName('  Notes  ')">
               <img class="img" src="../../../assets/images/note.svg">Notes</button>
@@ -102,10 +89,11 @@
         <div class="example-sidenav-content">
           <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
 
-            <div flexLayout="row" fxLayoutAlign="space-around start">
-              <div  class="profilepic1" (click)="$event.stopPropagation()"
+            <div flexLayout="row" fxLayoutAlign="space-around center" >
+              <div  class="profilepic1" (click)="$event.stopPropagation();input.click()"
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
-                <img src="{{img}}" class="profilepic1">
+                <!-- <img src="{{img}}" class="profilepic1"> -->
+                <input type="file" class="input" (change)="onFileSelected($event)" #input>
               </div>
               <div>
                 <div>{{Fname}}&nbsp;{{Lname}}</div>
@@ -113,15 +101,9 @@
               </div>
             </div>
             <hr>
-            <div flexLayout="row">
-              <div fxFlex=25%  fxLayout="column" fxLayoutAlign="space-evenly start" >
-               <div> <input type="file" (change)="onFileSelected($event)"></div>
 
-              </div>
-              <div fxFLEX=20%>
                 <button mat-button class="button2" (click)="Logout()">Log out</button>
-              </div>
-            </div>
+
           </mat-menu>
           <router-outlet></router-outlet>
         </div>

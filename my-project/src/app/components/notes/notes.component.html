@@ -1,8 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="30px">
 <!-- add notes starts -->
+<div  fxLayoutAlign=" center">
 <app-add-notes (onNewEntryAdded)="addNewEntry($event)"></app-add-notes>
+</div>
 <!-- add notes ends -->
 
 <!-- note cards starts -->
+<div  fxLayout="row wrap" fxLayoutAlign="center center"  >
 <app-notes-collection
   [NoteArray]="notes"
   (onNewEntryDeleted)="addNewEntry($event)"
@@ -10,4 +14,6 @@
   (eventEmit)="eventLabel($event)"
   (update)="change($event)"
 ></app-notes-collection>
+</div>
 <!-- note cards ends -->
+</div>
