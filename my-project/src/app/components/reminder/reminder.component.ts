@@ -64,30 +64,30 @@ public dateDisable=false;
 setDate=this.reminderBody.date.value;
   ngOnInit() {
 
+    this.updateDate();
+    // if ((new Date(this.setDate).getFullYear() - new Date(this.currentDate).getFullYear()) === 0) {
 
-    if ((new Date(this.setDate).getFullYear() - new Date(this.currentDate).getFullYear()) === 0) {
-
-      if ((new Date(this.setDate).getMonth() - new Date(this.currentDate).getMonth()) === 0) {
-        if ((new Date(this.setDate).getDate() - new Date(this.currentDate).getDate()) === 0) {
+    //   if ((new Date(this.setDate).getMonth() - new Date(this.currentDate).getMonth()) === 0) {
+    //     if ((new Date(this.setDate).getDate() - new Date(this.currentDate).getDate()) === 0) {
 
 
-          if ((new Date(this.setDate).getHours()) > 8) {
-            this.reminders[0].disableStatus = true;
-             } if ((new Date(this.setDate).getHours()) > 13) {
+    //       if ((new Date(this.setDate).getHours()) > 8) {
+    //         this.reminders[0].disableStatus = true;
+    //          } if ((new Date(this.setDate).getHours()) > 13) {
 
-            this.reminders[1].disableStatus = true;
+    //         this.reminders[1].disableStatus = true;
 
-          } if ((new Date(this.setDate).getHours()) > 18) {
-            this.reminders[2].disableStatus = true;
+    //       } if ((new Date(this.setDate).getHours()) > 18) {
+    //         this.reminders[2].disableStatus = true;
 
-          } if ((new Date(this.setDate).getHours()) > 20) {
-            this.reminders[3].disableStatus = true;
+    //       } if ((new Date(this.setDate).getHours()) > 20) {
+    //         this.reminders[3].disableStatus = true;
 
-          }
-        }
+    //       }
+    //     }
 
-      }
-    }
+    //   }
+    // }
 
   }
   remindToday(){
@@ -205,6 +205,40 @@ this.dateflag=false;
    }
    else
    this.dateflag=false;
+  }
+
+  updateDate()
+  {
+    this.reminders[0].disableStatus = false;
+    this.reminders[1].disableStatus = false;
+    this.reminders[2].disableStatus = false;
+    this.reminders[3].disableStatus = false;
+    this.setDate=this.reminderBody.date.value;
+
+    if ((new Date(this.setDate).getFullYear() - new Date(this.currentDate).getFullYear()) === 0) {
+
+      if ((new Date(this.setDate).getMonth() - new Date(this.currentDate).getMonth()) === 0) {
+        if ((new Date(this.setDate).getDate() - new Date(this.currentDate).getDate()) === 0) {
+
+
+          if ((new Date(this.setDate).getHours()) > 8) {
+            this.reminders[0].disableStatus = true;
+             } if ((new Date(this.setDate).getHours()) > 13) {
+
+            this.reminders[1].disableStatus = true;
+
+          } if ((new Date(this.setDate).getHours()) > 18) {
+            this.reminders[2].disableStatus = true;
+
+          } if ((new Date(this.setDate).getHours()) > 20) {
+            this.reminders[3].disableStatus = true;
+
+          }
+        }
+
+      }
+    }
+
   }
 
 

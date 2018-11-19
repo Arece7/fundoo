@@ -5,25 +5,28 @@
         <mat-toolbar-row >
           <div div fxLayout="row" fxFlex=100 >
 
-            <div fxFlex=20 >
+            <div fxFlex=30 fxFlex.xs=35  style="width:200px" fxLayout="row" fxLayoutAlign="start center"  >
+              <div>
           <button mat-icon-button class="menu" matTooltip="Menu" >
             <i (click)="drawer.toggle()" class="material-icons ">
               menu
             </i>
           </button>
-          <span class="head"  >{{name}}</span>
-          <!-- <span class="head1">Notes</span> -->
+        </div>
+          <div  class="head" >
+          <span>{{name}}</span></div>
+
          </div>
-          <div fxFlex=80>
+          <div fxFlex=40 fxFlex.xs=45>
             <button mat-icon-button class="searchicon" (click)="search();displayName(' Fundoo Notes  ')" >
               <i class="material-icons">
                 search
               </i>
             </button>
-            <input type="input" (click)="search();displayName(' Notes')" (keyup)="sendmessage()" placeholder="search" class="search"
+            <input type="input" (click)="search();displayName('Fundoo Notes')" (keyup)="sendmessage()" placeholder="search" class="search"
               [(ngModel)]="searchInput">
           </div>
-          <div fxFlex=20 fxLayoutAlign="end none" >
+          <div fxFlex=30 fxFlex.xs=30 fxLayoutAlign="end none" >
           <button mat-icon-button aria-label="view_agenda" class="view" fxShow.xs="false" fxShow.sm="false" fxShow.md="true" fxShow.lg="true">
             <mat-icon aria-label="view_stream" (click)="viewList()" *ngIf="grid==0">view_stream</mat-icon>
             <mat-icon aria-label="view_module" (click)="viewGrid()" *ngIf="grid==1">view_module</mat-icon>
@@ -44,7 +47,7 @@
       <mat-sidenav-container class="example-container" fxFill hasBackdrop="false" >
         <mat-sidenav #drawer class="example-sidenav" mode="side"  [mode]="width > 720?'side':'over'">
           <mat-list>
-            <button mat-stroked-button (click)="notes();displayName('  Notes  ')">
+            <button mat-stroked-button (click)="notes();displayName('Fundoo Notes  ')">
               <img class="img" src="../../../assets/images/note.svg">Notes</button>
             <br>
             <button mat-stroked-button (click)="reminder();displayName('  Reminders   ')">

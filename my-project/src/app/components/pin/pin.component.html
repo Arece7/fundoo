@@ -1,1 +1,7 @@
-<mat-icon (click)=pin() *ngIf="!isDeleted">fiber_pin</mat-icon>
+
+<span data-toggle="tooltip" title="{{!Pin ? 'Pin': 'Unpin'}}" class="tooltip">
+    <button mat-icon-button>
+        <span mat-list-item  class="notepin" (click)=pin(true) *ngIf="!Pin && !isDeleted"><img class="pintop" src="../../../assets/images/pinChange.svg"></span>
+        <span mat-list-item  class="notepin" (click)=pin(false) *ngIf="Pin && !isDeleted"><img  class="pintop" src="../../../assets/images/pin.svg"></span>
+    </button>
+  </span>

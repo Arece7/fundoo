@@ -33,7 +33,7 @@
     <mat-divider></mat-divider>
     <div fxLayout="column" fxLayoutAlign="center center">
     <mat-form-field>
-        <input (click)="$event.stopPropagation();" [min]="minDate"   matInput [matDatepicker]="dp" [(ngModel)]= "reminderBody.date.value" [formControl]="date">
+        <input (click)="$event.stopPropagation();" [min]="minDate"   matInput [matDatepicker]="dp" (dateChange)="updateDate()" [(ngModel)]= "reminderBody.date.value" [formControl]="date">
         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp></mat-datepicker>
     </mat-form-field>

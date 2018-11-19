@@ -115,7 +115,7 @@ public pic;
 
       })
     }
-    public name="Notes";
+    public name=" Fundoo Notes";
     displayName(changename)
     {
       this.name=changename;

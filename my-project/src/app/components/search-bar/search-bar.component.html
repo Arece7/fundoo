@@ -1,6 +1,8 @@
 <!-- note card starts -->
+<div class="bar">
 <app-notes-collection [searchInput]="searchInput" (onNewEntryDeleted)="addNewEntry($event)"
 (onNewColorChange)="addNewEntry($event)"
 (eventEmit)="eventLabel($event)"
 (update)="change($event)"[NoteArray]=notes> </app-notes-collection>
+</div>
 <!-- note card ends -->

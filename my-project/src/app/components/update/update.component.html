@@ -67,7 +67,7 @@
     </mat-chip-list>
     <mat-chip-list>
       <div *ngFor="let label of data.reminder">
-        <mat-chip *ngIf="!label.isDeleted">
+        <mat-chip *ngIf="!label.isDeleted && data.reminder[0]!='Invalid Date'">
         <mat-icon class="clock" mat-icon-button>access_time</mat-icon>
         {{label | date:"medium"}}
           <mat-icon matChipRemove (click)="removeRemainder(data.id)">cancel</mat-icon>

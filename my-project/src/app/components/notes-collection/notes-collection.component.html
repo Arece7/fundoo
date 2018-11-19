@@ -6,7 +6,7 @@
         <div fxLayout="row">
       <div fxFlex=90% (click)="openDialog(note)" class="div2" [innerHTML]="note.title"></div>
       <div fxFlex=10% class="action">
-       <app-pin [note]="note" ></app-pin>
+       <app-pin [note]="note" [Pin]="note.isPined" (eventEmit)=eventOccured($event)></app-pin>
       </div>
     </div>
 

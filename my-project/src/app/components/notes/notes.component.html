@@ -6,7 +6,16 @@
 <!-- add notes ends -->
 
 <!-- note cards starts -->
-<div  fxLayout="row wrap" fxLayoutAlign="center center"  >
+<div  fxLayout="column wrap"  *ngIf="pin.length"  >
+ <h3 >PINNED</h3>
+<app-notes-collection
+  [NoteArray]="pin"
+  (onNewEntryDeleted)="addNewEntry($event)"
+  (onNewColorChange)="addNewEntry($event)"
+  (eventEmit)="eventLabel($event)"
+  (update)="change($event)"
+></app-notes-collection>
+<h3 >OTHERS</h3>
 <app-notes-collection
   [NoteArray]="notes"
   (onNewEntryDeleted)="addNewEntry($event)"
@@ -15,5 +24,16 @@
   (update)="change($event)"
 ></app-notes-collection>
 </div>
+<div *ngIf="!pin.length">
+    <app-notes-collection
+    [NoteArray]="notes"
+    (onNewEntryDeleted)="addNewEntry($event)"
+    (onNewColorChange)="addNewEntry($event)"
+    (eventEmit)="eventLabel($event)"
+    (update)="change($event)"
+  ></app-notes-collection>
+    </div>
 <!-- note cards ends -->
 </div>
+
+
