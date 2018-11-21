@@ -7,7 +7,7 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { SignupComponent } from "./components/signup/signup.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ForgetComponent } from "./components/forget/forget.component";
 import { RouterModule } from "@angular/router";
@@ -58,6 +58,7 @@ import { PinComponent } from "./components/pin/pin.component";
 import { CropImageComponent } from './components/crop-image/crop-image.component';
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
 import { MessagingService } from "./core/services/messaging.service";
+import { InterceptService } from "./core/services/Intrerceptor/intercept.service";
 
 
 @NgModule({
@@ -147,7 +148,12 @@ import { MessagingService } from "./core/services/messaging.service";
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [MatDatepickerModule,MessagingService],
+  providers: [MatDatepickerModule,MessagingService,InterceptService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true
+    }],
   bootstrap: [AppComponent],
   entryComponents: [
     UpdateComponent,

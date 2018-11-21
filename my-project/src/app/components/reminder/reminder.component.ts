@@ -6,7 +6,7 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
 import * as _moment1 from 'moment';
-import { UserService } from './../../core/services/user.service';
+import { NoteService } from '../../core/services/noteService/note.service'
 import{LoggerService} from '../../core/services/logger.service'
 
 const moment = _moment1 || _moment;
@@ -21,6 +21,7 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
@@ -46,7 +47,7 @@ export class ReminderComponent implements OnInit {
 
   date = new FormControl(moment());
   public body:any={}
-  constructor(private Service: UserService) { }
+  constructor(private Service:NoteService) { }
 @Input()note
 @Output() eventEmit = new EventEmitter();
 @Output() reminderEmit = new EventEmitter();
@@ -65,29 +66,6 @@ setDate=this.reminderBody.date.value;
   ngOnInit() {
 
     this.updateDate();
-    // if ((new Date(this.setDate).getFullYear() - new Date(this.currentDate).getFullYear()) === 0) {
-
-    //   if ((new Date(this.setDate).getMonth() - new Date(this.currentDate).getMonth()) === 0) {
-    //     if ((new Date(this.setDate).getDate() - new Date(this.currentDate).getDate()) === 0) {
-
-
-    //       if ((new Date(this.setDate).getHours()) > 8) {
-    //         this.reminders[0].disableStatus = true;
-    //          } if ((new Date(this.setDate).getHours()) > 13) {
-
-    //         this.reminders[1].disableStatus = true;
-
-    //       } if ((new Date(this.setDate).getHours()) > 18) {
-    //         this.reminders[2].disableStatus = true;
-
-    //       } if ((new Date(this.setDate).getHours()) > 20) {
-    //         this.reminders[3].disableStatus = true;
-
-    //       }
-    //     }
-
-    //   }
-    // }
 
   }
   remindToday(){
@@ -101,7 +79,7 @@ setDate=this.reminderBody.date.value;
       'noteIdList': [this.note.id],
       'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 0, 20, 0, 0)
     }
-    this.Service. deletingNote('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('token'))
+    this.Service.addReminder(this.body)
       .subscribe(data => {
 
         this.eventEmit.emit({});
@@ -122,7 +100,7 @@ setDate=this.reminderBody.date.value;
         'noteIdList': [this.note.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, 8, 0, 0)
       }
-    this.Service. deletingNote('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('token'))
+    this.Service.addReminder( this.body)
       .subscribe(data => {
 
         this.eventEmit.emit({});
@@ -143,7 +121,7 @@ setDate=this.reminderBody.date.value;
         'noteIdList': [this.note.id],
         'reminder': new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7, 8, 0, 0)
       }
-    this.Service. deletingNote('/notes/addUpdateReminderNotes', this.body,localStorage.getItem('token'))
+    this.Service.addReminder( this.body)
       .subscribe(data => {
 
         this.eventEmit.emit({});
@@ -172,7 +150,7 @@ LoggerService.log("value passed  "+ timing);
           "noteIdList": [this.note.id],
           "reminder": new Date((new Date(date)).getFullYear(), (new Date(date)).getMonth(), (new Date(date)).getDate(), hour, minute, 0, 0)
         }
-        this.Service.deletingNote('notes/addUpdateReminderNotes',this.body, localStorage.getItem('token')).subscribe((result) => {
+        this.Service.addReminder(this.body).subscribe((result) => {
 
           this.eventEmit.emit({});
         })
@@ -185,7 +163,7 @@ LoggerService.log("value passed  "+ timing);
           "noteIdList": [this.note.id],
           "reminder": new Date((new Date(date)).getFullYear(), (new Date(date)).getMonth(), (new Date(date)).getDate(), hour + 12, minute, 0, 0)
         }
-        this.Service.deletingNote('notes/addUpdateReminderNotes',this.body, localStorage.getItem('token')).subscribe((result) => {
+        this.Service.addReminder(this.body).subscribe((result) => {
 
           this.eventEmit.emit({});
         })

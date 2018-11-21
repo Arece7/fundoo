@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { MatDialogRef } from "@angular/material";
 import { NavbarComponent } from "../navbar/navbar.component";
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from '../../core/services/noteService/note.service'
+
 @Component({
   selector: "app-createlabel",
   templateUrl: "./createlabel.component.html",
@@ -17,9 +18,9 @@ export class CreatelabelComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NavbarComponent>,
-    private Service: UserService
+    private Service: NoteService
   ) {}
-  public token = localStorage.getItem("token");
+
   public id = localStorage.getItem("uId");
   public labelList;
 
@@ -41,14 +42,14 @@ export class CreatelabelComponent implements OnInit {
       return false;
     }
 
-    this.Service.post(
-      "/noteLabels",
+    this.Service.createLabel(
+
       {
         label: label,
         isDeleted: false,
         userId: this.id
-      },
-      this.token
+      }
+
     ).subscribe(
       response => {
         this.show();
@@ -61,7 +62,7 @@ export class CreatelabelComponent implements OnInit {
     );
   }
   show() {
-    this.Service.getnotes("/noteLabels/getNoteLabelList", this.token).subscribe(
+    this.Service.getLabel().subscribe(
       response => {
         this.labelList = response["data"].details;
 
@@ -75,9 +76,7 @@ export class CreatelabelComponent implements OnInit {
     this.labelName.nativeElement.innerHTML = null;
   }
   delete(labelId) {
-    this.Service.delete(
-      "/noteLabels/" + labelId + "/deleteNoteLabel"
-    ).subscribe(
+    this.Service.deleteLabel(labelId ).subscribe(
       response => {
 
         this.show();
@@ -91,12 +90,12 @@ export class CreatelabelComponent implements OnInit {
   update(labelId) {
     var label1 = this.updateName.nativeElement.innerHTML;
 
-    this.Service.post(
-      "/noteLabels/" + labelId + "/updateNoteLabel",
+    this.Service.updateLabel(
+      labelId ,
       {
         label: label1
-      },
-      this.token
+      }
+
     ).subscribe(
       response => {
         this.show();
@@ -125,17 +124,17 @@ export class CreatelabelComponent implements OnInit {
     this.editDoneIcon = true;
     this.editClick = false;
     this.editable = false;
-    var url = "noteLabels/" + label.id + "/updateNoteLabel";
 
-    this.Service.colorChange(
-      url,
+
+    this.Service.updateLabel(
+      label.id,
       {
         label: this.editDiv.nativeElement.innerHTML,
         isDeleted: false,
         id: label.id,
         userId: localStorage.getItem("userId")
       },
-      localStorage.getItem("token")
+
     ).subscribe(
       response => {
 

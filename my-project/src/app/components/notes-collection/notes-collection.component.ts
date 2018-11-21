@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import {NoteService} from '../../core/services/noteService/note.service'
 import { MatDialog } from "@angular/material";
 import { UpdateComponent } from "../update/update.component";
 import { DataService } from "../../core/services/data.service";
@@ -25,7 +25,7 @@ export class NotesCollectionComponent implements OnInit {
   @Input()
   searchInput;
   constructor(
-    private service: UserService,
+    private service: NoteService,
     public dialog: MatDialog,
     private data: DataService, private router: Router
   ) {}
@@ -58,13 +58,9 @@ export class NotesCollectionComponent implements OnInit {
   }
 
   deleteLabel(note, label) {
-    var token = localStorage.getItem("token");
+
     this.service
-      .post(
-        "/notes/" + note["id"] + "/addLabelToNotes/" + label.id + "/remove",
-        null,
-        token
-      )
+      .removeLabelToNote(note["id"] , label.id )
       .subscribe(
         Response => {
 
@@ -100,8 +96,8 @@ export class NotesCollectionComponent implements OnInit {
       "itemName": this.modifiedCheckList.itemName,
       "status": this.modifiedCheckList.status
     }
-    var url = "notes/" + id + "/checklist/" + this.modifiedCheckList.id + "/update";
-    this.service.post(url, JSON.stringify(apiData), localStorage.getItem('token')).subscribe(response => {
+
+    this.service.updateCheckBox( this.modifiedCheckList.id ,id, JSON.stringify(apiData)).subscribe(response => {
 
 
     })
@@ -112,7 +108,7 @@ export class NotesCollectionComponent implements OnInit {
     var body={
       "noteIdList" : id
     }
-    this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
+    this.service.deleteReminder(body)
       .subscribe((response) => {
 
         this.eventEmit.emit({});

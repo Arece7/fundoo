@@ -1,5 +1,5 @@
 import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from "../../core/services/noteService/note.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-pin',
@@ -13,10 +13,10 @@ export class PinComponent implements OnInit {
     @Input() Pin;
   public isDeleted=false;
   public isPinned=false;
-  token = localStorage.getItem('token');
+
   public body: any = {}
 
-  constructor(private service: UserService,private snackBar:MatSnackBar ) { }
+  constructor(private service: NoteService,private snackBar:MatSnackBar ) { }
 
   ngOnInit() {
 
@@ -30,20 +30,20 @@ export class PinComponent implements OnInit {
 
   pin(flag) {
     this.eventEmit.emit({});
-    console.log(event);
+
 
     if (this.note != undefined) {
 
 
-      console.log(this.note)
+
       var array = []
       array.push(this.note.id)
 
-      this.service.post("/notes/pinUnpinNotes", this.body = {
+      this.service.pinUnpin( this.body = {
         "isPined": flag,
         "noteIdList": array
 
-      }, this.token).subscribe((response) => {
+      }).subscribe((response) => {
 
 
         this.eventEmit.emit({});

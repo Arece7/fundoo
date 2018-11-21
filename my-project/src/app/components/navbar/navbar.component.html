@@ -95,7 +95,7 @@
             <div flexLayout="row" fxLayoutAlign="space-around center" >
               <div  class="profilepic1" (click)="$event.stopPropagation();input.click()"
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
-                <!-- <img src="{{img}}" class="profilepic1"> -->
+              <div class="change_image">Change</div>
                 <input type="file" class="input" (change)="onFileSelected($event)" #input>
               </div>
               <div>

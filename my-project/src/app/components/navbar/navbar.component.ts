@@ -6,20 +6,25 @@
  *  @author         : Arghya Ray
  */
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { UserService } from "../../core/services/user.service";
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
 import { MatDialog } from "@angular/material";
 import { DataService } from "../../core/services/data.service";
 import { CropImageComponent } from '../crop-image/crop-image.component';
 import{environment} from '../../../environments/environment'
+import { ClientService } from '../../core/services/userService/client.service';
+import { ActivatedRoute ,ParamMap} from '@angular/router';
+
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public logout: Boolean = false;
   public Fname = localStorage.getItem("fName"); //storing data in local storage
   public Lname = localStorage.getItem("lName");
@@ -29,17 +34,44 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _Service: UserService,
+    private _Service: ClientService,
     public snackbar: MatSnackBar,
     public dialog: MatDialog,
-    private data: DataService
+    private data: DataService,
+    private route:ActivatedRoute
   ) {}
   message: string;
   ngOnInit() {
     this.isLargeScreen()
     this.data.currentMessage.subscribe(message => (this.message = message));
     this.data.currentView2.subscribe(message => (this.name = message));
-this.name='Notes'  }
+    this.route.firstChild.paramMap.subscribe(
+      (params: ParamMap) => {
+
+        this.name = params['params'].labelName;
+
+      })
+
+    if(this.router.url=="/dashboard"){
+      this.name="Fundoo notes"
+    }
+    if(this.router.url=="/archive"){
+      this.name="Archive"
+    }
+    if(this.router.url=="/search"){
+      this.name="Fundoo notes"
+    }
+    if(this.router.url=="/reminder"){
+      this.name="Reminders"
+    }
+    if(this.router.url=="/trash"){
+      this.name="Trash "
+    }
+    if(this.router.url=="/trash"){
+      this.name="Trash "
+    }
+
+ }
   notes() {
     this.router.navigate(["/dashboard"]); //redirecting to dashboard
   }
@@ -57,12 +89,18 @@ this.name='Notes'  }
   }
   Logout() //logout function
   {
-    var Token = localStorage.getItem("token");
+
     var mybody = {};
     //api call for logout
-    this._Service.postPassword("user/logout", mybody, Token).subscribe(
+    this._Service.loggingout()
+    .pipe(takeUntil(this.destroy$)).subscribe(
       response => {
         localStorage.removeItem("token");
+        localStorage.removeItem("uId");
+        localStorage.removeItem("fName");
+        localStorage.removeItem("lName");
+        localStorage.removeItem("email");
+        localStorage.removeItem("imageUrl");
         this.snackbar.open("LogOut", "success", {
           duration: 2000
         });
@@ -127,4 +165,10 @@ public pic;
     isLargeScreen() {
       this.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       }
+      ngOnDestroy() {
+        console.log('destroyed');
+        this.destroy$.next(true);
+        // Now let's also unsubscribe from the subject itself:
+        this.destroy$.unsubscribe();
+        }
 }

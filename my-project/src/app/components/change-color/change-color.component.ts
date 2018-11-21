@@ -5,8 +5,9 @@
  */
 
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from '../../core/services/noteService/note.service';
 import { MatSnackBar } from "@angular/material";
+
 @Component({
   selector: "app-change-color",
   templateUrl: "./change-color.component.html",
@@ -19,7 +20,7 @@ export class ChangeColorComponent implements OnInit {
   note;
   @Output()
   eventEmit = new EventEmitter();
-  constructor(private service: UserService, public snackbar: MatSnackBar) {}
+  constructor(private service: NoteService, public snackbar: MatSnackBar) {}
 
   ngOnInit() {}
   // for changing the color
@@ -27,7 +28,7 @@ export class ChangeColorComponent implements OnInit {
     if (this.note) {
       var idlist = [];
       idlist.push(this.note.id);
-      var token = localStorage.getItem("token");
+
       var body = {
         color: str,
         noteIdList: idlist
@@ -36,7 +37,7 @@ export class ChangeColorComponent implements OnInit {
       //api call for changing color
 
       this.service
-        .colorChange("/notes/changesColorNotes", body, token)
+        .changecolor(body)
         .subscribe(
           data => {
 

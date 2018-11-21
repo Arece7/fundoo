@@ -6,7 +6,7 @@
  */
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from '../../core/services/noteService/note.service'
 
 @Component({
   selector: "app-label-notes",
@@ -14,7 +14,7 @@ import { UserService } from "../../core/services/user.service";
   styleUrls: ["./label-notes.component.scss"]
 })
 export class LabelNotesComponent implements OnInit {
-  constructor(public route: ActivatedRoute, private service: UserService) {}
+  constructor(public route: ActivatedRoute, private service: NoteService) {}
 
   public labelName;
   public labelNOtes = [];
@@ -28,8 +28,8 @@ export class LabelNotesComponent implements OnInit {
   }
   /**@function:  getLabelNOtes() for getting note lists by label */
   getLabelNOtes(labelName) {
-    var url = "notes/getNotesListByLabel/" + labelName;
-    this.service.post(url, null, localStorage.getItem("token")).subscribe(
+
+    this.service.getListByName( labelName).subscribe(
       response => {
 
         this.labelNOtes = response["data"].data;

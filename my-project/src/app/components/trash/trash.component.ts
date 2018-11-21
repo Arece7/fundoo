@@ -4,7 +4,8 @@
  *  @author         : Arghya Ray
  */
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from "../../core/services/noteService/note.service";
+import {Note} from '../../core/Model/note'
 @Component({
   selector: "app-trash",
   templateUrl: "./trash.component.html",
@@ -12,7 +13,7 @@ import { UserService } from "../../core/services/user.service";
 })
 export class TrashComponent implements OnInit {
   public notes = [];
-  constructor(private service: UserService) {}
+  constructor(private service: NoteService) {}
 
   ngOnInit() {
     this.getNotes();
@@ -20,13 +21,14 @@ export class TrashComponent implements OnInit {
 /**@function:getNotes() for getting the notes in trash */
   getNotes()
   {
-    var token = localStorage.getItem("token");
 
-    this.service.getnotes("/notes/getTrashNotesList", token).subscribe(
+
+    this.service.getTrash().subscribe(
       data => {
         this.notes = [];
-        for (var i = data["data"].data.length - 1; i >= 0; i--) {
-          this.notes.push(data["data"].data[i]);
+        var notesData: Note[]=data["data"].data;
+        for (var i = notesData.length - 1; i >= 0; i--) {
+          this.notes.push(notesData[i]);
         }
       },
       error => {

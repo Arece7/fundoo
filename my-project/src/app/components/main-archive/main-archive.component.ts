@@ -5,15 +5,15 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
-
+import {Note} from '../../core/Model/note'
+import { NoteService } from '../../core/services/noteService/note.service';
 @Component({
   selector: "app-main-archive",
   templateUrl: "./main-archive.component.html",
   styleUrls: ["./main-archive.component.scss"]
 })
 export class MainArchiveComponent implements OnInit {
-  constructor(private service: UserService) {}
+  constructor(private service: NoteService) {}
   public notes = [];
   ngOnInit() {
     this.getNotes();
@@ -27,14 +27,15 @@ export class MainArchiveComponent implements OnInit {
 
   getNotes() //for getting the notes in archive
   {
-    var token = localStorage.getItem("token");
 
-    this.service.getnotes("/notes/getArchiveNotesList", token).subscribe(
+
+    this.service.getarchive().subscribe(
       data => {
         this.notes = [];
-        for (var i = data["data"].data.length - 1; i >= 0; i--) {
-          if (data["data"].data[i].isDeleted == false)
-            this.notes.push(data["data"].data[i]);
+        var notesData: Note[]=data["data"].data;
+        for (var i = notesData.length - 1; i >= 0; i--) {
+          if (notesData[i].isDeleted == false)
+            this.notes.push(notesData[i]);
         }
 
       },

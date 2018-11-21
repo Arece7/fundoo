@@ -1,6 +1,6 @@
-import { LoggerService } from './../../core/services/logger.service';
+import { LoggerService } from '../../core/services/logger.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../core/services/user.service";
+import {NoteService} from '../../core/services/noteService/note.service'
 
 
 @Component({
@@ -10,7 +10,7 @@ import { UserService } from "../../core/services/user.service";
 })
 export class MainReminderComponent implements OnInit {
   public notes = [];
-  constructor(private service: UserService) { }
+  constructor(private service: NoteService) { }
 
   ngOnInit() {
     this.getNotes();
@@ -23,9 +23,9 @@ export class MainReminderComponent implements OnInit {
   }
   getNotes() //for getting the notes in archive
   {
-    var token = localStorage.getItem("token");
 
-    this.service.getnotes("/notes/getReminderNotesList", token).subscribe(
+
+    this.service.getRemindersList().subscribe(
       data => {
         this.notes = [];
         for (var i = data["data"].data.length - 1; i >= 0; i--) {

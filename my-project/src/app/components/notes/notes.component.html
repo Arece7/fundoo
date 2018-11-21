@@ -1,13 +1,13 @@
 <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="30px">
 <!-- add notes starts -->
 <div  fxLayoutAlign=" center">
-<app-add-notes (onNewEntryAdded)="addNewEntry($event)"></app-add-notes>
+<app-add-notes (onNewEntryAdded)="addNewEntry($event)" ></app-add-notes>
 </div>
 <!-- add notes ends -->
 
 <!-- note cards starts -->
 <div  fxLayout="column wrap"  *ngIf="pin.length"  >
- <h3 >PINNED</h3>
+ <h3  align="center" >PINNED</h3>
 <app-notes-collection
   [NoteArray]="pin"
   (onNewEntryDeleted)="addNewEntry($event)"
@@ -15,7 +15,7 @@
   (eventEmit)="eventLabel($event)"
   (update)="change($event)"
 ></app-notes-collection>
-<h3 >OTHERS</h3>
+<h3 align="center" >OTHERS</h3>
 <app-notes-collection
   [NoteArray]="notes"
   (onNewEntryDeleted)="addNewEntry($event)"

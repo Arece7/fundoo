@@ -4,17 +4,21 @@
  *  @author         : Arghya Ray
  */
 
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { Component, OnInit, Input, EventEmitter, Output,OnDestroy } from "@angular/core";
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
-
+import { NoteService } from '../../core/services/noteService/note.service'
+import { HttpService } from '../../core/services/httpService/http.service';
 import { MatDialog } from "@angular/material";
+
 @Component({
   selector: "app-more",
   templateUrl: "./more.component.html",
   styleUrls: ["./more.component.scss"]
 })
-export class MoreComponent implements OnInit {
+export class MoreComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public searchLabel;
 
   @Input()
@@ -25,18 +29,22 @@ export class MoreComponent implements OnInit {
   @Output()
   labelEvent = new EventEmitter(); //creating instance of event emitter
   constructor(
-    private service: UserService,
+    private noteservice: NoteService,private service: HttpService,
     public snackbar: MatSnackBar,
     public dialog: MatDialog
   ) { }
   public noteLabels = [];
 
   ngOnInit() {
-    this.getLabels();
+    // this.getLabels();
+  }
+  func(){
+        this.getLabels();
+
   }
   /**@function:  deleteNotes() for deleting the notes*/
   deleteNotes(val) {
-    var token = localStorage.getItem("token");
+
 
     var idList = [];
     idList.push(this.note.id);
@@ -44,7 +52,8 @@ export class MoreComponent implements OnInit {
       isDeleted: val,
       noteIdList: idList
     }; //api call for deleting the notes
-    this.service.deletingNote("/notes/trashNotes", body, token).subscribe(
+    this.noteservice.deleteNote(body)
+    .pipe(takeUntil(this.destroy$)).subscribe(
       data => {
         this.eventEmit.emit({});
       },
@@ -53,7 +62,7 @@ export class MoreComponent implements OnInit {
   }
   /**@function:  deleteNotes() for deleting the notes forever*/
   deleteForever() {
-    var token = localStorage.getItem("token");
+
 
     var idList = [];
     idList.push(this.note.id);
@@ -61,9 +70,8 @@ export class MoreComponent implements OnInit {
       isDeleted: false,
       noteIdList: idList
     }; //api call for deleting the notes
-    this.service
-      .deletingNote("/notes/deleteForeverNotes", body, token)
-      .subscribe(
+    this.noteservice.deleteForever( body)
+    .pipe(takeUntil(this.destroy$)).subscribe(
         data => {
           this.eventEmit.emit({});
         },
@@ -71,15 +79,15 @@ export class MoreComponent implements OnInit {
       );
   }
   public labelList;
-  public token = localStorage.getItem("token");
+
 
   /**
    * @function:getLabels()  for getting the note labels
    */
   getLabels() {
     this.service
-      .getnotes("noteLabels/getNoteLabelList", this.token)
-      .subscribe(response => {
+      .httpGetData("noteLabels/getNoteLabelList")
+      .pipe(takeUntil(this.destroy$)).subscribe(response => {
         this.labelList = response["data"].details;
         if (this.noteLabels.length > 0) {
           for (var i = 0; i < this.labelList.length; i++) {
@@ -99,17 +107,9 @@ export class MoreComponent implements OnInit {
   addDeleteLabel(labelObj) {
     this.labelEvent.emit(labelObj);
     if (this.note != null && labelObj.isChecked == true) {
-      this.service
-        .post(
-          "/notes/" +
-          this.note["id"] +
-          "/addLabelToNotes/" +
-          labelObj.id +
-          "/add",
-          null,
-          this.token
-        )
-        .subscribe(
+      this.noteservice
+        .addLabelToNote( this.note["id"] , labelObj.id )
+        .pipe(takeUntil(this.destroy$)).subscribe(
           Response => {
             this.eventEmit.emit({});
           },
@@ -117,17 +117,12 @@ export class MoreComponent implements OnInit {
         );
     }
     if (this.note != null && labelObj.isChecked == false) {
-      this.service
-        .post(
-          "/notes/" +
-          this.note["id"] +
-          "/addLabelToNotes/" +
-          labelObj.id +
-          "/remove",
-          null,
-          this.token
+      this.noteservice
+        .removeLabelToNote(
+          this.note["id"] ,
+          labelObj.id
         )
-        .subscribe(
+        .pipe(takeUntil(this.destroy$)).subscribe(
           Response => {
             this.eventEmit.emit({});
           },
@@ -135,4 +130,10 @@ export class MoreComponent implements OnInit {
         );
     }
   }
+  ngOnDestroy() {
+    console.log(' destroyed');
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+    }
 }

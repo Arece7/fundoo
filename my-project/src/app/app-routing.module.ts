@@ -15,7 +15,7 @@ import { MainReminderComponent } from './components/main-reminder/main-reminder.
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
-  { path: "login", component: LoginComponent,canActivate: [AuthGuard] },
+  { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "forget", component: ForgetComponent },
   { path: "resetpassword/:token", component: ResetComponent },
@@ -24,12 +24,13 @@ const routes: Routes = [
     path: "",
     component: DashboardComponent,canActivate: [AuthGuard],
     children: [
+      { path: "label/:labelName", component: LabelNotesComponent },
       { path: "dashboard", component: NotesComponent },
       { path: "archive", component: MainArchiveComponent },
       { path: "reminder", component: MainReminderComponent  },
       { path: "trash", component: TrashComponent },
       { path: "search", component: SearchBarComponent },
-      { path: "label/:labelName", component: LabelNotesComponent }
+
     ]
   }
 ];

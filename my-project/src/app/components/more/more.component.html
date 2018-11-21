@@ -5,12 +5,10 @@
   <button mat-menu-item (click)=deleteNotes(true)>
     Delete
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="addLabel">
+  <button mat-menu-item [matMenuTriggerFor]="addLabel" (click)="func()">
     Add label
   </button>
-  <button mat-menu-item>
-    Show checkboxes
-  </button>
+
 </mat-menu>
 
 

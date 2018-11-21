@@ -8,9 +8,8 @@ import { EventEmitter } from '@angular/core';
 import { Component, OnInit,Output } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { CreatelabelComponent } from "../createlabel/createlabel.component";
-import { UserService } from "../../core/services/user.service";
 import { Router } from "@angular/router";
-
+import { HttpService } from '../../core/services/httpService/http.service';
 @Component({
   selector: "app-addlabel",
   templateUrl: "./addlabel.component.html",
@@ -18,11 +17,11 @@ import { Router } from "@angular/router";
 })
 export class AddlabelComponent implements OnInit {
   public labelList;
-  public token = localStorage.getItem("token");
+
   @Output() labelname=new EventEmitter();
 
   constructor(
-    private _Service: UserService,
+    private _Service: HttpService,
     public dialog: MatDialog,
     private router: Router
   ) {
@@ -44,7 +43,7 @@ export class AddlabelComponent implements OnInit {
   }
   show() {
     this._Service
-      .getnotes("/noteLabels/getNoteLabelList", this.token)
+      .httpGetData("/noteLabels/getNoteLabelList")
       .subscribe(
         response => {
           this.labelList = response["data"].details;

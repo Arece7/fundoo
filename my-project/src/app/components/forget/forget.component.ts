@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { ClientService } from  '../../core/services/userService/client.service';
 import { MatSnackBar } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 @Component({
@@ -14,7 +14,7 @@ export class ForgetComponent implements OnInit {
   email: string = "";
 
   constructor(
-    private _Service: UserService,
+    private _Service: ClientService,
     public snackbar: MatSnackBar,
     fb: FormBuilder
   ) {
@@ -35,7 +35,7 @@ export class ForgetComponent implements OnInit {
   model: any = {};
   reset() {
     this._Service
-      .checkData("user/reset", {
+      .forgotPassword( {
         email: this.model.uname
       })
       .subscribe(

@@ -27,8 +27,6 @@ export class DataService {
     this.viewSource1.next(message);
   }
   changeView2(message: boolean) {
-    console.log("print",message);
-
-    this.viewSource2.next(message);
+   this.viewSource2.next(message);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { NoteService } from  '../../core/services/noteService/note.service';
 import { MatSnackBar } from "@angular/material";
+
 @Component({
   selector: "app-archive",
   templateUrl: "./archive.component.html",
@@ -13,7 +14,7 @@ export class ArchiveComponent implements OnInit {
   eventEmit = new EventEmitter();
   @Input()
   Delete: any;
-  constructor(private service: UserService, public snackbar: MatSnackBar) {}
+  constructor(private service: NoteService, public snackbar: MatSnackBar) {}
   public isArchived = false;
   public isDeleted = false;
   ngOnInit() {
@@ -27,7 +28,7 @@ export class ArchiveComponent implements OnInit {
 
   ArchiveNotes(flag) {
     if (this.note) {
-      var token = localStorage.getItem("token");
+
 
       var idList = [];
       idList.push(this.note.id);
@@ -36,7 +37,7 @@ export class ArchiveComponent implements OnInit {
         noteIdList: idList
       };
       if (this.note != undefined && this.note.noteLabels.length != undefined) {
-        this.service.deletingNote("/notes/archiveNotes", body, token).subscribe(
+        this.service.addArchive(body).subscribe(
           data => {
 
 

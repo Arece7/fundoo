@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+import { ClientService } from "../../core/services/userService/client.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { passValidator } from "./custom";
 import { MatSnackBar } from "@angular/material";
@@ -24,8 +25,8 @@ export class SignupComponent implements OnInit {
   public cards = [];
 
   constructor(
-    private _getService: UserService,
-    private _postService: UserService,
+    private _getService: ClientService,
+    private _postService:ClientService,
     fb: FormBuilder,
     public snackbar: MatSnackBar,
     private router: Router
@@ -51,7 +52,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._getService.getData("user/service").subscribe(response => {
+    this._getService.getData().subscribe(response => {
 
       var data = response["data"];
       for (var i = 0; i < data.data.length; i++) {
@@ -86,7 +87,7 @@ export class SignupComponent implements OnInit {
       });
     } else
       this._postService
-        .postData("user/userSignUp", {
+        .signUp( {
           firstName: this.model.fname,
           lastName: this.model.lname,
           service: this.service,

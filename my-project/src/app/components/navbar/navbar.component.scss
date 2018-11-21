@@ -159,4 +159,20 @@ input:focus {
 {
   display:none;
 }
+.change_image:hover{
+  background-color: white;
+
+  opacity: 0.9;
+  color: black;
+  opacity: 0.6;
+  font-weight: 500;
+  font-size:15px;
+  cursor: pointer;
+}
+.change_image{
+  text-align: center;
+  opacity: 0;
+  padding-top: 35px;
+
+}
 

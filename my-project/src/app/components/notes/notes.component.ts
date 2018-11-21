@@ -5,15 +5,15 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
-
+import { NoteService } from  '../../core/services/noteService/note.service';
+import {Note} from '../../core/Model/note'
 @Component({
   selector: "app-notes",
   templateUrl: "./notes.component.html",
   styleUrls: ["./notes.component.scss"]
 })
 export class NotesComponent implements OnInit {
-  constructor(private service: UserService) {}
+  constructor(private service: NoteService) {}
   public notes = [];
   public pin=[]
 
@@ -31,19 +31,18 @@ export class NotesComponent implements OnInit {
 
   getNotes() //for getting the data of the notes
   {
-    var token = window.localStorage.getItem("token");
-
     //api call for getting note list
 
-    this.service.getnotes("/notes/getNotesList", token).subscribe(
+    this.service.getnotes().subscribe(
       data => {
         this.notes = [];
-        for (var i = data["data"].data.length - 1; i >= 0; i--) {
+        var notesData: Note[]=data["data"].data;
+        for (var i = notesData.length - 1; i >= 0; i--) {
           if (
             //checking the flags
-            data["data"].data[i].isDeleted == false &&
-            data["data"].data[i].isArchived == false &&
-            data["data"].data[i].isPined == false
+            notesData[i].isDeleted == false &&
+            notesData[i].isArchived == false &&
+            notesData[i].isPined == false
           ) {
             this.notes.push(data["data"].data[i]); //pusing in note array
           }
@@ -57,11 +56,11 @@ export class NotesComponent implements OnInit {
   }
   pinNotes() //for getting the data of the notes
   {
-    var token = window.localStorage.getItem("token");
+
 
     //api call for getting note list
 
-    this.service.getnotes("/notes/getNotesList", token).subscribe(
+    this.service.getnotes().subscribe(
       data => {
         this.pin = [];
         for (var i = data["data"].data.length - 1; i >= 0; i--) {

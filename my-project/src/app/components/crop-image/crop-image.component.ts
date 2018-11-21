@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { UserService } from '../../core/services/user.service';
+import {NoteService} from '../../core/services/noteService/note.service'
 import { environment } from '../../../environments/environment';
 import { DataService } from "../../core/services/data.service";
 // import { SearchServiceService } from '../../core/service/searchService/search-service.service'
@@ -17,7 +17,7 @@ export class CropImageComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<NavbarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _service: UserService,
+    private _service: NoteService,
     private data1: DataService
   ) { }
 
@@ -30,12 +30,12 @@ export class CropImageComponent implements OnInit {
   public image2 = localStorage.getItem('imageUrl');
   img = environment.apiurl + this.image2;
   onUpload() {
-    var token = localStorage.getItem('token');
-    
+
+
     const uploadData = new FormData();
     uploadData.append('file', this.croppedImage);
-    this._service.AddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
-      this.img = environment.apiurl + res['status'].imageUrl;
+    this._service.updateProfile( uploadData).subscribe(res => {
+      // this.img = environment.apiurl + res['status'].imageUrl;
       localStorage.setItem("imageUrl", res['status'].imageUrl);
       this.dialogRef.close()
       this.data1.changeView1(true);

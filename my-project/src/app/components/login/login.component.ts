@@ -1,16 +1,18 @@
 import { LoggerService } from '../../core/services/logger.service';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UserService } from "../../core/services/user.service";
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
-
+import { ClientService } from '../../core/services/userService/client.service';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   public hide;
 
   lForm: FormGroup;
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   constructor(
-    private _Service: UserService,
+    private _Service: ClientService,
     fb: FormBuilder,
     public snackbar: MatSnackBar,
     private router: Router
@@ -48,10 +50,11 @@ if(localStorage.getItem('token')!=null)
   model: any = {};
   login() {
     this._Service
-      .checkData("user/login", {
+      .loggingin( {
         email: this.model.uname,
         password: this.model.pass
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         response => {
           var token = response["id"];
@@ -68,7 +71,8 @@ if(localStorage.getItem('token')!=null)
           {
             "pushToken": localStorage.getItem('pushtoken')
           }
-          this._Service.post('user/registerPushToken',body,localStorage.getItem('token'))
+          this._Service.registerPushToken(body)
+          .pipe(takeUntil(this.destroy$))
           .subscribe(
             data => {
              LoggerService.log("success" +  data)
@@ -91,4 +95,10 @@ if(localStorage.getItem('token')!=null)
         }
       );
   }
+  ngOnDestroy() {
+    console.log('destroyed');
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+    }
 }

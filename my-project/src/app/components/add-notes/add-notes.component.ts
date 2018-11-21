@@ -5,7 +5,8 @@
  */
 
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { UserService } from "../../core/services/user.service";
+
+import { NoteService } from '../../core/services/noteService/note.service';
 import { MatSnackBar } from "@angular/material";
 @Component({
   selector: "app-add-notes",
@@ -26,7 +27,7 @@ public status="open"
   @Output()
   onNewEntryAdded = new EventEmitter(); //creating an instance
 
-  constructor(private service: UserService, public snackbar: MatSnackBar) {}
+  constructor(private service: NoteService, public snackbar: MatSnackBar) {}
 
   ngOnInit() {
     this.labelId = [];
@@ -55,7 +56,7 @@ public status="open"
     };
   }
   else{
-    
+
 
 for(var i=0;i<this.dataArray.length;i++){
 if(this.dataArray[i].isChecked==true){
@@ -80,7 +81,7 @@ this.status="open"
      "reminder":this.reminder
     }
 }
-    var token = localStorage.getItem("token");
+
 
     if (title == "" && description == "") {
       this.labelId = [];
@@ -89,7 +90,7 @@ this.status="open"
       return;
     } //api call for add notes
     if (title != ""){
-    this.service.addingNote("/notes/addNotes", this.body, token).subscribe(
+    this.service.addnote(this.body).subscribe(
       data => {
         this.labelId = [];
         this.labelName = [];
@@ -190,7 +191,7 @@ this.reminder=event;
       "isChecked":this.isChecked
     }
     this.dataArray.push(obj)
-   
+
     this.data=null;
     this.adding=false;
     this.isChecked=false;
@@ -198,7 +199,7 @@ this.reminder=event;
      }
   }
   onDelete(deletedObj){
-    
+
        for(var i=0;i<this.dataArray.length;i++){
           if(deletedObj.index==this.dataArray[i].index){
             this.dataArray.splice(i,1);
@@ -206,6 +207,6 @@ this.reminder=event;
        }
 
       }
-    
+
   }
 }

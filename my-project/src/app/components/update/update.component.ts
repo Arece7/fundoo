@@ -6,7 +6,8 @@
 
 import { Component, OnInit, Inject, Output, EventEmitter } from "@angular/core";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { UserService } from "../../core/services/user.service";
+import { HttpService } from "../../core/services/httpService/http.service";
+import { NoteService } from '../../core/services/noteService/note.service';
 import { MatSnackBar } from "@angular/material";
 @Component({
   selector: "app-update",
@@ -26,7 +27,8 @@ export class UpdateComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public service: UserService,
+    public service: HttpService,
+    private noteservice: NoteService,
     public snackbar: MatSnackBar
   ) {}
 
@@ -51,14 +53,12 @@ export class UpdateComponent implements OnInit {
       var description = document.getElementById("description").innerHTML;
 
       var body = {
+        noteId: this.data.id,
         title: title,
-        description: description,
-        noteId: [this.data.id]
+        description: description
+
       };
-
-      var token = localStorage.getItem("token");
-
-      this.service.addingNote("/notes/UpdateNotes", body, token).subscribe(
+    this.noteservice.updatecard(body).subscribe(
         data => {
           this.labels = [];
 
@@ -73,22 +73,17 @@ export class UpdateComponent implements OnInit {
         status: this.modifiedCheckList.status
       };
 
-      var url =
-        "notes/" +
-        this.data.id +
-        "/checklist/" +
-        this.modifiedCheckList.id +
-        "/update";
-      this.service
-        .post(url, JSON.stringify(apiData), localStorage.getItem("token"))
+
+      this.noteservice
+        .updatecheck( this.modifiedCheckList.id, this.data.id,JSON.stringify(apiData))
         .subscribe(response => {
-          
+
         });
       }
     }
   }
   editing(editedList, event) {
-   
+
     if (event.code == "Enter"||event.isTrusted==true) {
       this.modifiedCheckList = editedList;
       this.update();
@@ -127,13 +122,9 @@ export class UpdateComponent implements OnInit {
   /**@function:  deleteLabel() for deleting labels */
   deleteLabel(note, label) {
     this.labels.splice(this.labels.indexOf(event), 1);
-    var token = localStorage.getItem("token");
-    this.service
-      .post(
-        "/notes/" + note + "/addLabelToNotes/" + label + "/remove",
-        null,
-        token
-      )
+
+    this.noteservice
+      .removeLabelToNote(note ,label)
       .subscribe(Response => {}, error => {});
   }
   checkBox(checkList) {
@@ -142,23 +133,22 @@ export class UpdateComponent implements OnInit {
     } else {
       checkList.status = "open";
     }
-  
+
     this.modifiedCheckList = checkList;
     this.update();
   }
   public removedList;
   removeList(checklist) {
-   
+
     this.removedList = checklist;
     this.removeCheckList();
   }
   removeCheckList() {
-    var url =
-      "notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove";
-    this.service
-      .post(url, null, localStorage.getItem("token"))
+
+    this.noteservice
+      .deletecheck( this.removedList.id,this.data.id)
       .subscribe(response => {
-    
+
         for (var i = 0; i < this.tempArray.length; i++) {
           if (this.tempArray[i].id == this.removedList.id) {
             this.tempArray.splice(i, 1);
@@ -187,18 +177,18 @@ export class UpdateComponent implements OnInit {
       };
 
       var url = "notes/" + this.data.id + "/checklist/add";
-      this.service
-        .post(url, this.newData, localStorage.getItem("token"))
+      this.noteservice
+        . addchecktopopup( this.data.id,this.newData)
         .subscribe(response => {
-         
+
           this.newList = null;
           this.addCheck = false;
           this.adding = false;
-          
+
 
           this.tempArray.push(response["data"].details);
 
-       
+
         });
     }
   }
@@ -208,15 +198,15 @@ export class UpdateComponent implements OnInit {
     var body={
       "noteIdList" : id
     }
-    this.service.deletingNote("/notes/removeReminderNotes",body, localStorage.getItem('token'))
+    this.noteservice.deleteReminder(body)
       .subscribe((response) => {
-       
+
         this.data.reminder.pop();
         this.eventEmit.emit({});
 
       },
         (error) => {
-          
+
         }
       )
   }
