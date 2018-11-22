@@ -20,6 +20,7 @@ export class UpdateComponent implements OnInit {
   public newList;
   public tempArray = [];
   public newData: any = {};
+  public isPinned=false;
   @Output()
   onNewEntryAdded = new EventEmitter();
   eventEmit = new EventEmitter();
@@ -55,7 +56,8 @@ export class UpdateComponent implements OnInit {
       var body = {
         noteId: this.data.id,
         title: title,
-        description: description
+        description: description,
+        isPined: this.isPinned,
 
       };
     this.noteservice.updatecard(body).subscribe(
@@ -70,7 +72,8 @@ export class UpdateComponent implements OnInit {
       if(this.modifiedCheckList!=null){
       var apiData = {
         itemName: this.modifiedCheckList.itemName,
-        status: this.modifiedCheckList.status
+        status: this.modifiedCheckList.status,
+        isPined: this.isPinned,
       };
 
 
@@ -209,5 +212,9 @@ export class UpdateComponent implements OnInit {
 
         }
       )
+  }
+  eventpin(event)
+  {
+    this.isPinned=true;
   }
 }

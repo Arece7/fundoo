@@ -1,0 +1,21 @@
+@mixin color-generator($card-bg-color)
+ {	border-radius: 100%;
+	outline: none;
+	border: none;
+	width: 30px;
+	height: 30px;
+  background-color: $card-bg-color;
+ }
+ @mixin wrap()
+ {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden !important;
+ }
+ @mixin width ($width) {
+   width:$width;
+ }
+ @mixin input_width
+ {
+  width:100%;
+ }

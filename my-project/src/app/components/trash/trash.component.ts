@@ -28,8 +28,10 @@ export class TrashComponent implements OnInit {
         this.notes = [];
         var notesData: Note[]=data["data"].data;
         for (var i = notesData.length - 1; i >= 0; i--) {
+          if(notesData[i].isDeleted==true)
           this.notes.push(notesData[i]);
         }
+
       },
       error => {
 

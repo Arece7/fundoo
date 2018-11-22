@@ -1,120 +1,79 @@
-.span {
-  top: 10px;
-  right: 0px;
-  position: absolute;
-}
+@import '../../../scss/variables.scss';
+@import "../../../scss/mixin.scss";
 
 .div2 {
-  outline: none;
-  width: 130px;
-  position: relative;
-  word-wrap: break-word;
-}
-div:empty:before {
-  content: attr(data-text);
-  color: gray;
-}
-
-.take_note {
-  padding-top: 12px;
-  padding-left: 14px;
-  padding-bottom: 0px;
+  	width: 130px;
+	word-wrap: break-word;
 }
 .card_note {
-  margin: 1%;
-  height: min-content;
-
-}
-/* .note-card
-{
-
-  display:flex;
-  flex-wrap:wrap;
-
-} */
-.card_note:hover .action {
-  opacity: 1;
+	margin: 1%;
+	height: min-content;
+	&:hover .action {
+		opacity: 1;
+	}
 }
 .action {
-  opacity: 0;
+	opacity: 0;
 }
-
 .grid-card {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-
-
-
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	> * {
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+		&:not(:last-child) {
+			margin-right: 12px;
+		}
+	}
 }
 .list-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center
-
-
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	> *:not(:last-child) {
+		margin-bottom: 12px;
+	}
 }
-.grid-card > * {
-  box-sizing: border-box;
+@media screen and(max-width: 859px) {
+	.grid-view {
+		flex: 0 1 calc(30% - 12px);
+	}
+	.grid-card > *:not(:last-child) {
+		margin-right: 32px;
+	}
 }
-.grid-card > *:not(:last-child) {
-  margin-right: 12px;
+@media screen and(max-width: 599px) {
+	.grid-view {
+		flex: 0 1 calc(95% - 12px);
+	}
+	.grid-card > *:not(:last-child) {
+		margin-right: unset;
+		margin-bottom: 12px;
+	}
 }
-/* medium size viewport */
-@media screen and (max-width: 859px) {
-  /* Column Gap */
-  .grid-card > *:not(:last-child) {
-    margin-right: 32px;
-  }
-  /* Item sizing */
-  .grid-view {
-    flex: 0 1 calc(30% - 12px);
-
-  }
-}
-/* small size viewport */
-@media screen and (max-width: 599px) {
-
-  .grid-view {
-    flex: 0 1 calc(95% - 12px);
-
-  }
-  .grid-card > *:not(:last-child) {
-    margin-right: unset;
-    margin-bottom: 12px;
-  }
-}
-.list-card > *:not(:last-child) {
-  margin-bottom: 12px;
-}
-
 .grid-view {
-  width:300px;
-
+	width: 300px;
 }
 .list-view {
-  width: 870px;
+	width: 870px;
 }
-::ng-deep.note{
-  width: 100%;
-height: auto;
-border:none;
- border: transparent;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-font-size: 15px;
-outline: none
 
+.label {
+	max-width: 100px;
 }
-.wrap
-{
-  white-space: nowrap;
- text-overflow: ellipsis;
- overflow: hidden !important;
+div:empty:before {
+	content: attr(data-text);
+	color: $gray;
 }
-.label
-{
- max-width:100px;
+::ng-deep.note {
+	width: 100%;
+	height: auto;
+	border: transparent;
+	font-family: $font_0, $font_1, $font_2, $font_3;
+	font-size: 15px;
+	outline: none;
 }

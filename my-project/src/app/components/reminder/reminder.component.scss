@@ -1,25 +1,22 @@
-.remain{
-  opacity:0.5;
+.remain {
+	opacity: 0.5;
+	&:hover {
+		opacity: 1;
+	}
 }
-.remain:hover{
-  opacity:1;
+.spaceremain {
+	float: right;
 }
-.spaceremain{
-  float:right;
+.remainder {
+	float: right;
+	margin-left: 40px;
 }
-.remainder{
-  float:right;
-  margin-left:40px;
+.clock {
+	margin-top: 10px;
 }
-.clock{
-  margin-top:10px;
+.button {
+	width: 170px;
 }
-.button
-{
-  width:170px;
-}
-
-.menu
-{
-  width:250px
+.menu {
+	width: 250px;
 }

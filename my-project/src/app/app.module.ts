@@ -59,6 +59,7 @@ import { CropImageComponent } from './components/crop-image/crop-image.component
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
 import { MessagingService } from "./core/services/messaging.service";
 import { InterceptService } from "./core/services/Intrerceptor/intercept.service";
+import { MainCollaboratorComponent } from './components/main-collaborator/main-collaborator.component';
 
 
 @NgModule({
@@ -116,6 +117,10 @@ import { InterceptService } from "./core/services/Intrerceptor/intercept.service
     MainReminderComponent,
 
 
+
+    MainCollaboratorComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -160,7 +165,7 @@ import { InterceptService } from "./core/services/Intrerceptor/intercept.service
     NotesCollectionComponent,
     CreatelabelComponent,
     AddlabelComponent,
-    CropImageComponent
+    CropImageComponent,MainCollaboratorComponent
   ]
 })
 export class AppModule {}

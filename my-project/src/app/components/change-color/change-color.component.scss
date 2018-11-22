@@ -1,111 +1,78 @@
-.colorPalette1{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#FAFAFA;
-}
-.colorPalette2{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color: #FF8A80;
-}
-.colorPalette3{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#FFD180;
-}
-.colorPalette4{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#FFFF8D;
-}
-.colorPalette5{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#CCFF90;
-}
-.colorPalette6{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#A7FFEB;
-}
-.colorPalette7{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#80D8FF;
-}
-.colorPalette8{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#82B1FF;
-}
-.colorPalette9{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#B388FF;
-}
-.colorPalette10{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#F8BBD0;
-}
-.colorPalette11{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#D7CCC8;
-}
-.colorPalette12{
-  border-radius: 100%;
-  outline: none;
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color:#CFD8DC;
-}
+@import "../../../scss/mixin.scss";
 
+//colors
+$alabaster: rgb(250, 250, 250);
+$color_geraldine_approx: rgb(255, 138, 128);
+$color_grandis_approx: rgb(255, 209, 128);
+$color_dolly_approx: rgb(255, 255, 141);
+$color_reef_approx: rgb(204, 255, 144);
+$color_ice_cold_approx: rgb(167, 255, 235);
+$color_malibu_approx: rgb(128, 216, 255);
+$color_jordy_blue_approx: rgb(130, 177, 255);
+$color_dull_lavender_approx: rgb(179, 136, 255);
+$color_cotton_candy_approx: rgb(248, 187, 208);
+$color_swirl_approx: rgb(215, 204, 200);
+$color_iron_approx: rgb(207, 216, 220);
+
+.colorPalette1 {
+
+  @include color-generator($alabaster);
+}
+.colorPalette2 {
+
+	@include color-generator($color_geraldine_approx);
+}
+.colorPalette3 {
+
+	@include color-generator($color_grandis_approx);
+}
+.colorPalette4 {
+
+  @include color-generator($color_dolly_approx);
+}
+.colorPalette5 {
+
+	@include color-generator($color_reef_approx);
+}
+.colorPalette6 {
+
+  @include color-generator($color_ice_cold_approx);
+}
+.colorPalette7 {
+
+  @include color-generator($color_malibu_approx);
+
+}
+.colorPalette8 {
+
+	@include color-generator($color_jordy_blue_approx);
+}
+.colorPalette9 {
+
+	@include color-generator($color_dull_lavender_approx);
+}
+.colorPalette10 {
+
+	@include color-generator($color_cotton_candy_approx);
+}
+.colorPalette11 {
+
+	@include color-generator($color_swirl_approx);
+}
+.colorPalette12 {
+
+	@include color-generator($color_iron_approx);
+}
 .colorCard {
-  left: 331px;
-  margin-top: -692px;
-  width: 160px;
-  padding: 5px;
+	left: 331px;
+	margin-top: -692px;
+	@include width(160px);
+	padding: 5px;
 }
 .colorDiv {
-  margin-bottom: 5px;
-  display: flex;
+	margin-bottom: 5px;
+	display: flex;
 }
-.col2
-{
-  background-color: #FF8A80;
+.col2 {
+	background-color: $color_geraldine_approx;
 }

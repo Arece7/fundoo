@@ -20,7 +20,7 @@
     ></div>
     <div fxFlex="10%" class="action">
       <!-- pin starts -->
-      <app-pin [note]="data"></app-pin>
+      <app-pin [note]="data"(eventEmit)="eventpin($event)"></app-pin>
       <!-- pin ends -->
     </div>
   </div>

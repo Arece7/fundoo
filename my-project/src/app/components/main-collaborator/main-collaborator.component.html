@@ -1,0 +1,37 @@
+<div  class="collaborator">
+  <mat-card>
+    <mat-card-header>
+    <div class="collab">Collaborators</div>
+    </mat-card-header>
+    <hr>
+    <br>
+<mat-card-content>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+      </button>
+      <mat-card-content fxFlex class="content">
+          {{firstName | titlecase}} {{lastName | titlecase}}<br>
+      </mat-card-content>
+
+    </div>
+    <div class="contentNew"><mat-card-content fxFlex>{{email}}</mat-card-content></div>
+
+
+    <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
+    <input class="place" placeholder="person or email to share with...">
+
+    </div>
+
+
+</mat-card-content>
+
+<mat-card-footer class="collabcolor">
+  <div  class="buttons">
+        <button mat-button >Cancel</button>
+        <button mat-button >Save</button>
+
+  </div>
+  </mat-card-footer>
+
+  </mat-card>
+</div>

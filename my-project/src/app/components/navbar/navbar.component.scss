@@ -1,115 +1,76 @@
-.menu {
+@import '../../../scss/mixin.scss';
 
-  color: black;
+//colors
+$black: rgb(0, 0, 0);
+$color_buttercup_approx: rgb(235, 174, 22);
+$white: rgb(255, 255, 255);
+$color_selective_yellow_approx: rgb(255, 187, 0);
+$color_iron_approx: rgb(214, 218, 216);
+$black_54: rgba(0, 0, 0, 0.54);
+
+.commonColor {
+  color:$black;
 }
 .head {
-  color: black;
 
-max-width: 50%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden !important;
-
+  @include width(50%);
+  @include wrap();
 }
-
-
 .view {
-margin-left: 3%;
-  color: black;
+  margin-left: 3%;
+
 }
-
-
 .person {
+  margin-left: 20%;
 
-margin-left: 20%;
-  color: black;
 }
 .search {
-
   height: 39px;
-  width: 90%;
-  background-color: rgb(235, 174, 22);
-  border: 0px;
+  @include width(90%);
+  background-color: $color_buttercup_approx;
+  border: 0;
+
   border-radius: 5px;
   font-size: 20px;
   outline: none;
-  padding: 0px 0px 0px 47px;
+  padding: 0 0 0 47px;
 }
-// @media only screen and (max-width: 1000px) {
-//   .search{
-//   width: inherit;
-//   }
-//   }
 .searchicon {
-
   position: absolute;
   padding-left: 10px;
-  color: black;
-}
 
-input:focus {
-  background-color: white;
 }
-/* .mat-drawer-container {
-    position: fixed;
-    z-index: 1;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    display: block;
-    overflow: hidden;
-} */
-
 .toolbar {
-  background-color: #fb0;
-  /* display:flex; */
+  background-color: $color_selective_yellow_approx;
   position: fixed;
   z-index: 2;
 }
-
 .material-icons {
   font-size: 30px;
 }
 .example-container {
   height: fit-content;
-  width: 100%;
+  @include input_width();
 }
-/* .example-sidenav-content {
-
-    overflow:auto;
-
-    height: 100%;
-
-    padding-right: 2%;
-    padding-left:10%;
-
-  } */
-
 .example-sidenav {
-  padding-left: 0%;
-  padding-right: 0%;
+  padding-left: 0;
+  padding-right: 0;
   padding-top: 5px;
-  background-color: rgb(214, 218, 216);
+  background-color: $color_iron_approx;
   position: fixed;
-  margin: 55px 0px 0px 0px;
-  width: 286px;
+  margin: 55px 0 0 0;
+  @include width(286px);
 }
-
-/* .example-sidenav[_ngcontent-c3] {
-    padding-left:0px;
-    padding-right: 0px;
-    padding-top: 5px;
-} */
 .mat-stroked-button {
-  border: 0px;
+  border: 0;
   line-height: 58px;
-  width: 270px;
-  background-color: rgb(214, 218, 216);
+  @include width(270px);
+  background-color: $color_iron_approx;
   text-align: left;
   font-weight: 400;
 }
-
 .Link {
-  color: rgba(0, 0, 0, 0.54);
+  color: $black_54;
   cursor: pointer;
   font-size: 12px;
   padding: 2px 5px;
@@ -120,11 +81,9 @@ input:focus {
   display: block;
   margin: 12px 15px 12px 24px;
 }
-
 .img {
   margin-right: 20px;
 }
-
 .para {
   margin-left: 20px;
 }
@@ -136,43 +95,38 @@ input:focus {
   top: 50px;
   z-index: 1;
 }
-
 .button2 {
   margin-left: 109px;
-
-
-  border: 1px solid black;
-  color: black;
+  border: 1px solid $black;
 
 }
 .profilepic1 {
-  width: 70px;
+  @include width(70px);
   height: 70px;
   border-radius: 50%;
 }
 .profilepic2 {
-  width: 40px;
+  @include width(40px);
   height: 40px;
+
   border-radius: 100%;
 }
-.input
-{
-  display:none;
+.input {
+  display: none;
 }
-.change_image:hover{
-  background-color: white;
-
-  opacity: 0.9;
-  color: black;
-  opacity: 0.6;
-  font-weight: 500;
-  font-size:15px;
-  cursor: pointer;
-}
-.change_image{
+.change_image {
   text-align: center;
   opacity: 0;
   padding-top: 35px;
+  &:hover {
+    background-color: $white;
 
+    opacity: 0.6;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+  }
 }
-
+input:focus {
+  background-color: $white;
+}
