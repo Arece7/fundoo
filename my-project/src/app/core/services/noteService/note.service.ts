@@ -132,6 +132,9 @@ export class NoteService {
      var url='notes/getReminderNotesList';
      return this.service.httpGetData(url);
    }
-
+   addCollab(note,body){
+    var url="notes/" + note.id + "/AddcollaboratorsNotes";
+    return this.service.httpPostData(url,body);
+  }
 
 }

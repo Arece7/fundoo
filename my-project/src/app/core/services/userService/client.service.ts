@@ -32,4 +32,8 @@ export class ClientService {
     var url='user/registerPushToken'
     return this.service.httpPostData(url,body);
   }
+  searchUser(body){
+    var url='user/searchUserList'
+    return this.service.httpPostData(url,body);
+  }
 }

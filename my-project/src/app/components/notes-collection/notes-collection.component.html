@@ -59,7 +59,7 @@
       <app-reminder [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)> </app-reminder>
         <!-- reminder starts -->
        <!-- collaborator starts -->
-      <app-collaborator [Delete]="note.isDeleted"></app-collaborator>
+      <app-collaborator [note]="note" [Delete]="note.isDeleted"></app-collaborator>
       <!-- collaborator ends -->
        <!-- color change starts -->
       <app-change-color [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-change-color>

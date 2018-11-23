@@ -10,7 +10,7 @@
       <button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
       </button>
       <mat-card-content fxFlex class="content">
-          {{firstName | titlecase}} {{lastName | titlecase}}<br>
+          {{firstName | titlecase}} {{lastName | titlecase}} (Owner)<br>
       </mat-card-content>
 
     </div>
@@ -18,7 +18,7 @@
 
 
     <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
-    <input class="place" placeholder="person or email to share with...">
+    <input class="place" [matMenuTriggerFor]="menu" placeholder="person or email to share with..." [(ngModel)]="search" (keyup)="Collabname()" >
 
     </div>
 
@@ -27,11 +27,17 @@
 
 <mat-card-footer class="collabcolor">
   <div  class="buttons">
-        <button mat-button >Cancel</button>
+        <button mat-button (click)=close() >Cancel</button>
         <button mat-button >Save</button>
 
   </div>
   </mat-card-footer>
 
   </mat-card>
+  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
+    <div style="width:280px" *ngFor='let search of userlist' (click)=" addCollab(search)">
+        {{search.firstName | titlecase}} {{search.lastName | titlecase}}   [{{search.email}}]
+    </div>
+  </mat-menu>
+
 </div>
