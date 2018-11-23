@@ -17,6 +17,37 @@
     <div class="contentNew"><mat-card-content fxFlex>{{email}}</mat-card-content></div>
 
 
+
+
+    <div style="width: 95%" fxLayout="row" *ngFor="let data of colList ">
+      <div fxFlex="10%" fxLayoutAlign="start center">
+          <button mat-mini-fab class="miniFab" disabled></button>
+      </div>
+      <div fxFlex="2%"></div>
+      <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
+          <span>{{data.email}}</span>
+      </div>
+      <div fxFlex="10%" fxLayoutAlign="end center">
+          <i class="material-icons icon" (click)="removeCollaborator(data)">cancel</i>
+      </div>
+    </div>
+
+
+
+  <div style="width: 95%" fxLayout="row" *ngFor="let data of listCollaborator ">
+      <div fxFlex="10%" fxLayoutAlign="start center">
+          <button mat-mini-fab class="miniFab" disabled></button>
+      </div>
+      <div fxFlex="2%"></div>
+      <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
+          <span>{{data.email}}</span>
+      </div>
+      <div fxFlex="10%" fxLayoutAlign="end center">
+          <i class="material-icons icon" (click)="addCollaboratorList(data)">check</i>
+      </div>
+    </div>
+
+
     <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
     <input class="place" [matMenuTriggerFor]="menu" placeholder="person or email to share with..." [(ngModel)]="search" (keyup)="Collabname()" >
 
@@ -35,7 +66,7 @@
 
   </mat-card>
   <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
-    <div style="width:280px" *ngFor='let search of userlist' (click)=" addCollab(search)">
+    <div style="width:280px" *ngFor='let search of userlist' (click)="addToColaborator(search)">
         {{search.firstName | titlecase}} {{search.lastName | titlecase}}   [{{search.email}}]
     </div>
   </mat-menu>

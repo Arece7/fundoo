@@ -14,10 +14,7 @@ export class MainCollaboratorComponent implements OnInit {
   @Input() note;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public  dialogRef: MatDialogRef<MainCollaboratorComponent>,
   private _Service: ClientService,private noteservice:NoteService) { }
-
-  ngOnInit() {
-
-  }
+   colList=[];
   image=localStorage.getItem('imageUrl');
   img=environment.apiurl+this.image;
   email=localStorage.getItem('email');
@@ -26,7 +23,12 @@ export class MainCollaboratorComponent implements OnInit {
   userId=localStorage.getItem('userId');
   public search:String;
   public userlist=[];
-  public collabArray=[]
+  listCollaborator=[];
+  // public collabArray=[]
+  ngOnInit() {
+    for(var i=0;i<this.data.collaborators.length;i++){
+      this.colList.push(this.data.collaborators[i]);}
+  }
   Collabname()
   {
       if(this.search!=null && this.search!=undefined && this.search!="")
@@ -43,6 +45,33 @@ export class MainCollaboratorComponent implements OnInit {
       })
     }
   }
+  addToColaborator(data){
+    this.listCollaborator.push(data);
+ }
+
+ addCollaboratorList(user){
+  this.listCollaborator.splice(this.listCollaborator.indexOf(user),1)
+  this.colList.push(user);
+  this.noteservice.addCollab(this.data,user).subscribe(
+    data=>{
+      console.log('add sucessfull');
+    },
+    error=>{
+      console.log('add failed');
+    })
+ }
+
+ removeCollaborator(user){
+  this.colList.splice(this.colList.indexOf(user),1);
+  this.noteservice.deleteCollab(this.data,user).subscribe(
+    data=>{
+      console.log('sucess in delete');
+    },
+    error=>{
+      console.log('failed to delete');
+    })
+ }
+
 
   // addCollab(search){
 
