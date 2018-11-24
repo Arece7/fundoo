@@ -65,6 +65,11 @@
         </mat-chip>
       </div>
     </mat-chip-list>
+    <div fxLayout="row" >
+        <div *ngFor="let data of data.collaborators ">
+          <button mat-mini-fab class="miniFab" color="warn">{{data.firstName|titlecase|slice:0:1}} </button>
+            </div>
+            </div>
     <mat-chip-list>
       <div *ngFor="let label of data.reminder">
         <mat-chip *ngIf="!label.isDeleted && data.reminder[0]!='Invalid Date'">
@@ -78,7 +83,7 @@
     <app-reminder  [note]="data" (eventEmit)="eventOccured($event)" [Delete]="data.isDeleted"> </app-reminder>
     <!-- reminder endss -->
     <!-- collaborator starts -->
-    <app-collaborator [Delete]="data.isDeleted"></app-collaborator>
+    <app-collaborator [note]="data" [Delete]="data.isDeleted"></app-collaborator>
     <!-- collaborator ends -->
     <!-- color change starts -->
     <app-change-color

@@ -51,12 +51,21 @@ $black_12: rgba(0, 0, 0, 0.12);
     margin-left:58px;
     margin-top:-20px;
 }
+.contentNew1{
+  font-weight:lighter;
+  font-family:cursive;
+
+}
 .person{
     margin-top:20px;
 }
 .buttons{
     float:right;
     margin-top:7px;
+
+}
+.inputDiv{
+  margin-top: 15px;
 
 }
 .place{
@@ -68,4 +77,14 @@ $black_12: rgba(0, 0, 0, 0.12);
 .collabcolor{
   background-color:rgba(117, 105, 105, 0.12);
   height: 50px ;
+}
+.icon{
+  opacity: 0.5;
+  color: black;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.miniFab
+{
+  margin-top: 10px;
 }

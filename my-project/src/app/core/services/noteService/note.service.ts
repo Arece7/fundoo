@@ -136,5 +136,8 @@ export class NoteService {
     var url="notes/" + note.id + "/AddcollaboratorsNotes";
     return this.service.httpPostData(url,body);
   }
-
+  deleteCollab(note,user){
+    var url="notes/"+note.id+"/removeCollaboratorsNotes/"+user.userId;
+    return this.service.httpDeleteData(url);
+  }
 }
