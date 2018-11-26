@@ -26,9 +26,18 @@ export class MainCollaboratorComponent implements OnInit {
   listCollaborator=[];
   // public collabArray=[]
   ngOnInit() {
+    if(this.data.collaborators!=null)
     for(var i=0;i<this.data.collaborators.length;i++){
       this.colList.push(this.data.collaborators[i]);}
+
+if(this.data.userId!=this.data.user.userId){
+  this.email=this.data.user.email;
+  this.firstName=this.data.user.firstName;
+  this.lastName=this.data.user.lastName;
+  this.img=environment.apiurl+this.data.user.imageUrl;
+}
   }
+
   Collabname()
   {
       if(this.search!=null && this.search!=undefined && this.search!="")
@@ -47,14 +56,17 @@ export class MainCollaboratorComponent implements OnInit {
   }
   addToColaborator(data){
     this.listCollaborator.push(data);
+    this.search = '';
  }
 
  addCollaboratorList(user){
   this.listCollaborator.splice(this.listCollaborator.indexOf(user),1)
   this.colList.push(user);
+  this.data.collaborators.push(user)
   this.noteservice.addCollab(this.data,user).subscribe(
     data=>{
       console.log('add sucessfull');
+
     },
     error=>{
       console.log('add failed');
@@ -62,6 +74,7 @@ export class MainCollaboratorComponent implements OnInit {
  }
 
  removeCollaborator(user){
+  this.data.collaborators.splice(this.data.collaborators.indexOf(user),1);
   this.colList.splice(this.colList.indexOf(user),1);
   this.noteservice.deleteCollab(this.data,user).subscribe(
     data=>{
@@ -71,25 +84,6 @@ export class MainCollaboratorComponent implements OnInit {
       console.log('failed to delete');
     })
  }
-
-
-  // addCollab(search){
-
-  //   var body={
-  //     "firstName":search.firstName,
-  //     "lastName":search.lastName,
-  //     "email":search.email,
-  //     "userId":search.userId
-  //   }
-  //   this.noteservice.addCollab(this.data,body).subscribe(data=>{
-  //   console.log("success");
-
-  //     this.collabArray=data['data'].details;
-  //   },
-  //   error=>{
-
-  //    })
-  // }
 
   close()
   {

@@ -1,3 +1,4 @@
+
 /** Purpose         : For Add Notes
  *  @description
  *  @file           : add.component.ts
@@ -5,9 +6,11 @@
  */
 
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-
+import {userList} from '../../core/Model/note'
 import { NoteService } from '../../core/services/noteService/note.service';
 import { MatSnackBar } from "@angular/material";
+import { ClientService } from '../../core/services/userService/client.service';
+import { environment } from './../../../environments/environment';
 @Component({
   selector: "app-add-notes",
   templateUrl: "./add-notes.component.html",
@@ -23,18 +26,33 @@ export class AddNotesComponent implements OnInit {
 public dataArray=[];
 public dataArrayApi=[];
 public isChecked=false;
+public nameList=[];
+public listCollaborator=[];
+public colList=[];
+
+public collaboratorList=[];
+public col:boolean=false;
+public img:string;
+public name:string;
+public nameInput:string;
+public mail:string;
 public status="open"
   @Output()
   onNewEntryAdded = new EventEmitter(); //creating an instance
 
-  constructor(private service: NoteService, public snackbar: MatSnackBar) {}
+  constructor(private service: NoteService,private _Service: ClientService, public snackbar: MatSnackBar) {}
 
   ngOnInit() {
+    localStorage.getItem('userid');
+    this.img= environment.apiurl+localStorage.getItem('imageUrl');
+    this.name=localStorage.getItem('fName')+' '+ localStorage.getItem('lName')+'(Owner)';
+    this.mail=localStorage.getItem('email')
     this.labelId = [];
     this.labelName = [];
     this.cardColor = "#FFFFFF";
         this.dataArray=[];
         this.dataArrayApi=[];
+        this.collaboratorList=[];
         this.adding = false;
         this.reminder=null;
   }
@@ -52,7 +70,8 @@ public status="open"
       isArchived: this.archive,
       color: this.cardColor,
       labelIdList: JSON.stringify(this.labelId),
-      reminder:this.reminder
+      reminder:this.reminder,
+      collaberators:JSON.stringify(this.collaboratorList)
     };
   }
   else{
@@ -78,7 +97,8 @@ this.status="open"
      "color": this.cardColor,
      "isArchived":this.archive,
      "labelIdList": JSON.stringify(this.labelId),
-     "reminder":this.reminder
+     "reminder":this.reminder,
+     "collaberators":JSON.stringify(this.collaboratorList)
     }
 }
 
@@ -92,6 +112,7 @@ this.status="open"
     if (title != ""){
     this.service.addnote(this.body).subscribe(
       data => {
+        this.collaboratorList=[];
         this.labelId = [];
         this.labelName = [];
         this.cardColor = "#FFFFFF";
@@ -105,6 +126,7 @@ this.status="open"
         this.onNewEntryAdded.emit({});
       },
       error => {
+        this.collaboratorList=[];
         this.labelId = [];
         this.reminder=null;
         this.labelName = [];
@@ -169,6 +191,8 @@ this.reminder=event;
         this.dataArray=[];
         this.dataArrayApi=[];
         this.adding = false
+        this.collaboratorList=[];
+        this.colList=[];
   }
   public data;
   public i=0;
@@ -209,4 +233,50 @@ this.reminder=event;
       }
 
   }
+  getName(event){
+    if(this.nameInput!=null && this.nameInput!=undefined && this.nameInput.length!=0){
+      var reqBody={
+        "searchWord":this.nameInput
+      }
+      this._Service.searchUser(reqBody).subscribe(
+        data=>{
+          let arr:userList[]=data["data"].details
+         this.nameList=arr;
+        },
+        error=>{
+          console.log('error');
+        })
+      }
+  }
+  addToColaborator(user){
+    var name=user.email.split('')
+      let letter=name[0].toUpperCase();
+      let body={
+        "letter":letter,
+        "userobj":user
+      }
+    this.colList.push(body);
+    this.nameInput=null;
+  }
+
+  removeCollaborator(data){
+    this.colList.splice(this.colList.indexOf(data),1);
+    this.collaboratorList.splice(this.collaboratorList.indexOf(data.userobj),1)
+  }
+
+  saveToList(){
+  this.collaboratorList=[];
+  for(var i=0;i<this.colList.length;i++){
+    this.collaboratorList.push(this.colList[i].userobj)
+  }
+    this.col=false;
+  }
+  cancel(){
+    this.col=false;
+    this.colList=[];
+  }
+
+
+
+
 }

@@ -16,15 +16,15 @@ export interface Note {
   noteCheckLists: Array<Checklists>
   questionAndAnswerNotes:[Object]
   collaborators:[Object]
-  }
-  export interface Label{
+}
+export interface Label{
   id: string
   label: string
   isDeleted: boolean
   userId: string
 
-  }
-  export interface Checklists{
+}
+export interface Checklists{
   createdDate: Date
   id: string
   isDeleted: boolean
@@ -32,4 +32,10 @@ export interface Note {
   modifiedDate: Date
   notesId: string
   status: string
+}
+export interface userList{
+  "firstName":string
+  "lastName":string
+  "email":string
+  "userId":string
 }

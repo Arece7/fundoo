@@ -19,14 +19,15 @@
 
 
 
-    <div style="width: 95%" fxLayout="row" *ngFor="let data of colList ">
+    <div class="width" fxLayout="row" fxLayoutGap="10px" *ngFor="let data of colList ">
       <div fxFlex="10%" fxLayoutAlign="start center">
-          <button mat-mini-fab class="miniFab" disabled></button>
+          <button mat-mini-fab class="miniFab" disabled >{{data.firstName|titlecase|slice:0:1}} </button>
       </div>
       <div fxFlex="2%"></div>
-      <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
-          <span>{{data.email}}</span>
-      </div>
+      <div fxFlex="78%" fxLayout="column" fxLayoutAlign="start start"  class="inputDiv">
+          <span  class="content"> {{data.firstName | titlecase}} {{data.lastName | titlecase}}</span>
+            <span class="contentNew1">{{data.email}}</span>
+        </div>
       <div fxFlex="10%" fxLayoutAlign="end center">
           <i class="material-icons icon" (click)="removeCollaborator(data)">cancel</i>
       </div>
@@ -34,13 +35,14 @@
 
 
 
-  <div style="width: 95%" fxLayout="row" *ngFor="let data of listCollaborator ">
+  <div class="width" fxLayout="row" fxLayoutGap="10px" *ngFor="let data of listCollaborator ">
       <div fxFlex="10%" fxLayoutAlign="start center">
-          <button mat-mini-fab class="miniFab" disabled></button>
+          <button mat-mini-fab class="miniFab" disabled>{{data.firstName|titlecase|slice:0:1}}</button>
       </div>
       <div fxFlex="2%"></div>
-      <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
-          <span>{{data.email}}</span>
+      <div fxFlex="78%" fxLayout="column" fxLayoutAlign="start start"  class="inputDiv">
+        <span  class="content"> {{data.firstName | titlecase}} {{data.lastName | titlecase}}</span>
+          <span class="contentNew1">{{data.email}}</span>
       </div>
       <div fxFlex="10%" fxLayoutAlign="end center">
           <i class="material-icons icon" (click)="addCollaboratorList(data)">check</i>
@@ -48,7 +50,7 @@
     </div>
 
 
-    <div class="person"><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
+    <div class="person" fxLayout="row" ><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
     <input class="place" [matMenuTriggerFor]="menu" placeholder="person or email to share with..." [(ngModel)]="search" (keyup)="Collabname()" >
 
     </div>
@@ -59,16 +61,15 @@
 <mat-card-footer class="collabcolor">
   <div  class="buttons">
         <button mat-button (click)=close() >Cancel</button>
-        <button mat-button >Save</button>
-
+        <button mat-button (click)=close() >Save</button>
   </div>
   </mat-card-footer>
 
   </mat-card>
-  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
-    <div style="width:280px" *ngFor='let search of userlist' (click)="addToColaborator(search)">
+  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"   [overlapTrigger]="false">
+    <button mat-menu-item class="width1" *ngFor='let search of userlist' (click)="addToColaborator(search)">
         {{search.firstName | titlecase}} {{search.lastName | titlecase}}   [{{search.email}}]
-    </div>
+    </button>
   </mat-menu>
 
 </div>

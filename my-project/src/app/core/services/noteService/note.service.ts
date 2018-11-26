@@ -140,5 +140,4 @@ export class NoteService {
     var url="notes/"+note.id+"/removeCollaboratorsNotes/"+user.userId;
     return this.service.httpDeleteData(url);
   }
-
 }

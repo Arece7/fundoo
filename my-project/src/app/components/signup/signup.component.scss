@@ -1,5 +1,5 @@
 
-@import '../../../scss/mixin.scss';
+@import '../../../scss/_mixin.scss';
 
 //colors
 $color_alto_approx: rgb(220, 220, 220);
@@ -33,7 +33,8 @@ a {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	@include width(35%);
+  @include width(45%);
+  margin-top: -30px;
 }
 .example-card {
 	background-color: $color_alto_approx;
