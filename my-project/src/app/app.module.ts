@@ -1,7 +1,7 @@
 
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { NgModule,ErrorHandler } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
@@ -16,6 +16,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import { ImageCropperModule } from 'ngx-image-cropper';
+import {CustomErrorHandlerServiceService} from '../app/core/services/errorHandler/custom-error-handler-service.service'
 import {
   MatSidenavModule,
   MatListModule,
@@ -60,6 +61,7 @@ import { MainReminderComponent } from './components/main-reminder/main-reminder.
 import { MessagingService } from "./core/services/messaging.service";
 import { InterceptService } from "./core/services/Intrerceptor/intercept.service";
 import { MainCollaboratorComponent } from './components/main-collaborator/main-collaborator.component';
+import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
 
 
 @NgModule({
@@ -121,6 +123,10 @@ import { MainCollaboratorComponent } from './components/main-collaborator/main-c
     MainCollaboratorComponent,
 
 
+
+    GlobalErrorComponentComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -158,6 +164,9 @@ import { MainCollaboratorComponent } from './components/main-collaborator/main-c
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
       multi: true
+    },CustomErrorHandlerServiceService,{
+      provide: ErrorHandler,
+      useClass: CustomErrorHandlerServiceService
     }],
   bootstrap: [AppComponent],
   entryComponents: [

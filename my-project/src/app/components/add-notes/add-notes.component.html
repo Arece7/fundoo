@@ -18,7 +18,7 @@
   <mat-card [ngStyle]="{ 'background-color': cardColor }"class="matcard"*ngIf="!note1">
   <div>
     <div fxLayout="row">
-      <div
+      <div [innerHTML]="tempTitle"
         data-text="Title"
         id="title"
         contenteditable="true"
@@ -31,7 +31,9 @@
     </div>
 
     <mat-card-content class="take_note">
-      <div data-text="Take a note.." id="description" contenteditable="true" class="div2" *ngIf="!check" ></div>
+      <div data-text="Take a note.." id="description"
+      [innerHTML]="tempDescription"
+      contenteditable="true" class="div2" *ngIf="!check" ></div>
       <div *ngIf="check" >
         <div *ngFor="let data of dataArray" fxLayout="row">
           <mat-checkbox fxFlex="5%" [(ngModel)]=data.isChecked (click)="isChecked=!isChecked"></mat-checkbox>
@@ -76,7 +78,7 @@
       <app-reminder (reminderEmit)="reminderEvent($event)"></app-reminder>
       <!-- reminder ends -->
       <!-- collaborator starts -->
-      <button mat-icon-button matTooltip="profile" (click)="col=true">
+      <button mat-icon-button matTooltip="profile" (click)="col=true;addTitle()">
         <i class="material-icons icons" > person_add </i>
       </button>
       <!-- collaborator  ends -->

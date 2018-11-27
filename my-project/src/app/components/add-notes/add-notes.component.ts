@@ -36,7 +36,9 @@ public img:string;
 public name:string;
 public nameInput:string;
 public mail:string;
-public status="open"
+public status="open";
+public tempTitle:string;
+public tempDescription:string;
   @Output()
   onNewEntryAdded = new EventEmitter(); //creating an instance
 
@@ -119,6 +121,8 @@ this.status="open"
         this.dataArray=[];
         this.dataArrayApi=[];
         this.reminder=null;
+        this.tempTitle=null;
+        this.tempDescription=null;
         this.adding=false;
         this.snackbar.open("Note", "Added", {
           duration: 2000
@@ -126,6 +130,7 @@ this.status="open"
         this.onNewEntryAdded.emit({});
       },
       error => {
+
         this.collaboratorList=[];
         this.labelId = [];
         this.reminder=null;
@@ -133,10 +138,13 @@ this.status="open"
         this.cardColor = "#FFFFFF";
         this.dataArray=[];
         this.dataArrayApi=[];
+        this.tempTitle=null;
+        this.tempDescription=null;
         this.adding = false
         this.snackbar.open("Note", "not added", {
           duration: 2000
         });
+        throw error;
       }
     );
   }
@@ -244,7 +252,8 @@ this.reminder=event;
          this.nameList=arr;
         },
         error=>{
-          console.log('error');
+
+          throw error;
         })
       }
   }
@@ -276,7 +285,11 @@ this.reminder=event;
     this.colList=[];
   }
 
-
+  addTitle(){
+  this.tempTitle=document.getElementById("title").innerHTML;
+  if(this.check==false)
+  this.tempDescription=document.getElementById("description").innerHTML
+  }
 
 
 }

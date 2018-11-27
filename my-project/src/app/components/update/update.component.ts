@@ -66,7 +66,9 @@ export class UpdateComponent implements OnInit {
 
           this.onNewEntryAdded.emit({});
         },
-        error => {}
+        error => {
+          throw error;
+        }
       );
     } else {
       if(this.modifiedCheckList!=null){
@@ -128,7 +130,9 @@ export class UpdateComponent implements OnInit {
 
     this.noteservice
       .removeLabelToNote(note ,label)
-      .subscribe(Response => {}, error => {});
+      .subscribe(Response => {}, error => {
+        throw error;
+      });
   }
   checkBox(checkList) {
     if (checkList.status == "open") {
@@ -192,6 +196,9 @@ export class UpdateComponent implements OnInit {
           this.tempArray.push(response["data"].details);
 
 
+        },
+        (error) => {
+          throw error;
         });
     }
   }
@@ -209,7 +216,7 @@ export class UpdateComponent implements OnInit {
 
       },
         (error) => {
-
+          throw error;
         }
       )
   }
