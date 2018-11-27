@@ -12,13 +12,14 @@ import { TrashComponent } from "./components/trash/trash.component";
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 import { LabelNotesComponent } from "./components/label-notes/label-notes.component";
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
-
+import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "forget", component: ForgetComponent },
   { path: "resetpassword/:token", component: ResetComponent },
+  { path: 'error', component: GlobalErrorComponentComponent},
 
   {
     path: "",

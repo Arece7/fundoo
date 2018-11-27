@@ -50,7 +50,7 @@ export class AddlabelComponent implements OnInit {
 
         },
         error => {
-
+         throw error;
         }
       );
   }

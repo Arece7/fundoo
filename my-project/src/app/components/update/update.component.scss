@@ -7,7 +7,8 @@ $black_14: rgba(0, 0, 0, 0.14);
 $black_12: rgba(0, 0, 0, 0.12);
 
 .matcard {
-	height: auto;
+  height: auto;
+  width:auto;
 }
 .mat-card-actions {
 	display: block;
@@ -30,10 +31,7 @@ mat-card-actions {
 	margin-right: 0;
 	padding: 0;
 }
-.float {
-	float: right;
-	margin-top: 9px;
-}
+
 
 div:empty:before {
 	content: attr(data-text);

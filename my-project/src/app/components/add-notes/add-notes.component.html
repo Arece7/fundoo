@@ -12,16 +12,13 @@
     <span class="span">
 
       <button mat-icon-button (click)="check=true;noteOpen() "><i class="material-icons">list</i></button>
-
-
-
     </span>
   </mat-card>
-
+<div *ngIf="col==false">
   <mat-card [ngStyle]="{ 'background-color': cardColor }"class="matcard"*ngIf="!note1">
   <div>
     <div fxLayout="row">
-      <div
+      <div [innerHTML]="tempTitle"
         data-text="Title"
         id="title"
         contenteditable="true"
@@ -34,7 +31,9 @@
     </div>
 
     <mat-card-content class="take_note">
-      <div data-text="Take a note.." id="description" contenteditable="true" class="div2" *ngIf="!check" ></div>
+      <div data-text="Take a note.." id="description"
+      [innerHTML]="tempDescription"
+      contenteditable="true" class="div2" *ngIf="!check" ></div>
       <div *ngIf="check" >
         <div *ngFor="let data of dataArray" fxLayout="row">
           <mat-checkbox fxFlex="5%" [(ngModel)]=data.isChecked (click)="isChecked=!isChecked"></mat-checkbox>
@@ -62,6 +61,9 @@
           </mat-chip>
         </div>
       </mat-chip-list>
+      <div *ngFor="let col of collaboratorList">
+        <button mat-mini-fab class="mini-fab">{{col.email | titlecase | slice:0:1}}</button>
+      </div>
       <mat-chip-list>
         <div>
           <mat-chip *ngIf="reminder!=null">
@@ -76,7 +78,9 @@
       <app-reminder (reminderEmit)="reminderEvent($event)"></app-reminder>
       <!-- reminder ends -->
       <!-- collaborator starts -->
-      <app-collaborator></app-collaborator>
+      <button mat-icon-button matTooltip="profile" (click)="col=true;addTitle()">
+        <i class="material-icons icons" > person_add </i>
+      </button>
       <!-- collaborator  ends -->
       <!-- color change starts -->
       <app-change-color
@@ -101,4 +105,65 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  </div>
+</div>
+<!-- ************************************************************************************************ -->
+<!-- collaborator starts -->
+<div class="collaborator" *ngIf="col==true">
+  <mat-card>
+    <mat-card-header>
+    <div class="collab">Collaborators</div>
+    </mat-card-header>
+    <hr>
+    <br>
+<mat-card-content>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+      </button>
+      <mat-card-content fxFlex class="content">
+          {{name}} <br>
+      </mat-card-content>
+
+    </div>
+    <div class="contentNew"><mat-card-content fxFlex>{{mail}}</mat-card-content></div>
+
+
+
+
+    <div class="width" fxLayout="row" fxLayoutGap="10px" *ngFor="let data of colList ">
+      <div fxFlex="10%" fxLayoutAlign="start center">
+          <button mat-mini-fab class="miniFab" disabled >{{data.letter}} </button>
+      </div>
+      <div fxFlex="2%"></div>
+      <div fxFlex="78%" fxLayout="column" fxLayoutAlign="start start"  class="inputDiv">
+          <span  class="content"> {{data.userobj.firstName | titlecase}} {{data.userobj.lastName | titlecase}}</span>
+            <span class="contentNew1">{{data.userobj.email}}</span>
+        </div>
+      <div fxFlex="10%" fxLayoutAlign="end center">
+          <i class="material-icons icon" (click)="removeCollaborator(data)">cancel</i>
+      </div>
+    </div>
+
+    <div class="person" fxLayout="row" ><button mat-mini-fab disabled><mat-icon>person_add</mat-icon></button>
+    <input class="place" [matMenuTriggerFor]="menu" placeholder="person or email to share with..." [(ngModel)]="nameInput" (keyup)="getName($event)" >
+
+    </div>
+
+
+</mat-card-content>
+
+<mat-card-footer class="collabcolor">
+  <div  class="buttons">
+        <button mat-button (click)=cancel() >Cancel</button>
+        <button mat-button (click)="saveToList()">Save</button>
+  </div>
+  </mat-card-footer>
+
+  </mat-card>
+  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"   [overlapTrigger]="false">
+    <button mat-menu-item class="width1" *ngFor='let search of nameList' (click)="addToColaborator(search)">
+        {{search.firstName | titlecase}} {{search.lastName | titlecase}}   [{{search.email}}]
+    </button>
+  </mat-menu>
+
 </div>

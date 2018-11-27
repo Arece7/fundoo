@@ -36,7 +36,7 @@ export class LabelNotesComponent implements OnInit {
 
       },
       error => {
-
+        throw error;
       }
     );
   }

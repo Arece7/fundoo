@@ -30,9 +30,9 @@
   </div>
 </mat-menu>
 
-<button mat-icon-button matTooltip="More">
-  <mat-icon [matMenuTriggerFor]="delete" *ngIf="Delete">more_vert</mat-icon>
-</button>
+
+  <mat-icon  matTooltip="More" [matMenuTriggerFor]="delete" *ngIf="Delete">more_vert</mat-icon>
+
 <mat-menu #delete="matMenu">
   <button mat-menu-item (click)="deleteForever()">Delete Forever</button>
   <button mat-menu-item (click)="deleteNotes(false)">Restore</button>

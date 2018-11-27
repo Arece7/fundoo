@@ -61,7 +61,7 @@ export class PinComponent implements OnInit {
       },
         (error) => {
 
-
+          throw error;
         })
     }
   }

@@ -29,7 +29,15 @@ export class MainCollaboratorComponent implements OnInit {
     if(this.data.collaborators!=null)
     for(var i=0;i<this.data.collaborators.length;i++){
       this.colList.push(this.data.collaborators[i]);}
+
+if(this.data.userId!=this.data.user.userId){
+  this.email=this.data.user.email;
+  this.firstName=this.data.user.firstName;
+  this.lastName=this.data.user.lastName;
+  this.img=environment.apiurl+this.data.user.imageUrl;
+}
   }
+
   Collabname()
   {
       if(this.search!=null && this.search!=undefined && this.search!="")

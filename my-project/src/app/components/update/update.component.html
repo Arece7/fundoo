@@ -79,6 +79,8 @@
         </mat-chip>
       </div>
     </mat-chip-list>
+    <div>
+    <div fxLayout="row" fxFlex=70 fxLayoutAlign="space-around center" >
     <!-- reminder starts -->
     <app-reminder  [note]="data" (eventEmit)="eventOccured($event)" [Delete]="data.isDeleted"> </app-reminder>
     <!-- reminder endss -->
@@ -111,7 +113,10 @@
     >
     </app-more>
     <!-- more ends -->
-
-    <button mat-button class="float" (click)="onNoClick()">Close</button>
+</div>
+<div fxFlex=30 fxLayoutAlign="space-around center"  >
+    <button mat-button  (click)="onNoClick()">Close</button>
+  </div>
+</div>
   </mat-card-actions>
 </mat-card>

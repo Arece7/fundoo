@@ -33,3 +33,9 @@ export interface Checklists{
   notesId: string
   status: string
 }
+export interface userList{
+  "firstName":string
+  "lastName":string
+  "email":string
+  "userId":string
+}

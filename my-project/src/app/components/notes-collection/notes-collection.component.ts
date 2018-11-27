@@ -47,7 +47,8 @@ export class NotesCollectionComponent implements OnInit {
   openDialog(note): void {
     // for dialog mateial
     const dialogRef = this.dialog.open(UpdateComponent, {
-      width: "600px",
+      // width: "600px",
+      maxWidth:'auto',
       data: note
     });
 
@@ -67,7 +68,7 @@ export class NotesCollectionComponent implements OnInit {
           this.eventEmit.emit({});
         },
         error => {
-
+        throw error;
         }
       );
   }
@@ -99,7 +100,9 @@ export class NotesCollectionComponent implements OnInit {
 
     this.service.updateCheckBox( this.modifiedCheckList.id ,id, JSON.stringify(apiData)).subscribe(response => {
 
-
+    },
+    (error) => {
+      throw error;
     })
   }
   removeRemainder(label) {
@@ -114,7 +117,7 @@ export class NotesCollectionComponent implements OnInit {
         this.eventEmit.emit({});
       },
         (error) => {
-
+          throw error;
         }
       )
   }
@@ -124,7 +127,7 @@ export class NotesCollectionComponent implements OnInit {
   if(value > Present){
   return true;
   }
-  else false;
+
 }
 labelClick(data) {
   var labelName = data;
