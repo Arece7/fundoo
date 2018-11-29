@@ -3,7 +3,7 @@ version: "3"
 services:
   sonarqube:
     image: sonarqube:6.7.1
-    restart: unless_stopped
+    restart: always
     environment:
       - SONARQUBE_JDBC_USERNAME=sonar
       - SONARQUBE_JDBC_PASSWORD=v07IGCFCF83Z95NX
@@ -11,6 +11,9 @@ services:
     ports:
       - "9000:9000"
       - "9092:9092"
+    expose:
+      - "9000"
+      - "9092"
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
@@ -19,7 +22,7 @@ services:
 
   db:
     image: postgres:10.1
-    restart: unless_stopped
+    restart: always
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=v07IGCFCF83Z95NX

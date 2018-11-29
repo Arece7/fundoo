@@ -140,4 +140,12 @@ export class NoteService {
     var url="notes/"+note.id+"/removeCollaboratorsNotes/"+user.userId;
     return this.service.httpDeleteData(url);
   }
+  getNoteDetails(id){
+    var url='/notes/getNotesDetail/'+id;
+    return this.service.httpGetData(url);
+  }
+  askQuestion(body){
+    var url='/questionAndAnswerNotes/addQuestionAndAnswer'
+    return this.service.httpPostData(url,body)
+   }
 }

@@ -16,6 +16,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { BarRatingModule } from "ngx-bar-rating";
 import {CustomErrorHandlerServiceService} from '../app/core/services/errorHandler/custom-error-handler-service.service'
 import {
   MatSidenavModule,
@@ -62,6 +63,8 @@ import { MessagingService } from "./core/services/messaging.service";
 import { InterceptService } from "./core/services/Intrerceptor/intercept.service";
 import { MainCollaboratorComponent } from './components/main-collaborator/main-collaborator.component';
 import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
+import { QuestionComponent } from './components/question/question.component';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 @NgModule({
@@ -127,6 +130,14 @@ import { GlobalErrorComponentComponent } from './components/global-error-compone
     GlobalErrorComponentComponent,
 
 
+
+    QuestionComponent,
+
+
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -157,7 +168,9 @@ import { GlobalErrorComponentComponent } from './components/global-error-compone
     MatChipsModule,
     ImageCropperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    BarRatingModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [MatDatepickerModule,MessagingService,InterceptService,
     {

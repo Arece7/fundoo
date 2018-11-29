@@ -1,0 +1,60 @@
+
+<div class="container" fxLayout="row">
+  <div fxFlex="15%" fxFlex.xs=5 fxFlex.xs=5></div>
+  <div fxFlex="70%" fxFlex.md=90 fxFlex.xs=100>
+  <!-- start the title description and question part -->
+  <div class="topDiv " fxLayout="row" >
+  <div fxFlex="90%"  fxLayout="column">
+  <div fxFlex="50%" class="title"[innerHTML]="note.title"></div>
+  <div fxFlex="50%" *ngIf="note.noteCheckLists.length==0"[innerHTML]="note.description"></div>
+
+  <div *ngIf="note.noteCheckLists.length>0" class="checklist">
+    <div *ngFor="let data of note.noteCheckLists" fxLayout="column">
+      <div *ngIf="data.isDeleted==false && data.status=='close'">
+          <mat-checkbox [ngModel]="true"></mat-checkbox>
+          <s fxFlex=80% [innerHTML]="data.itemName"></s>
+      </div>
+      <div *ngIf="data.isDeleted==false && data.status=='open'">
+          <mat-checkbox [ngModel]="false"></mat-checkbox>
+          <div fxFlex=80% [innerHTML]="data.itemName"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div fxFlex="10%" fxLayoutAlign="center start">
+    <button mat-button (click)=close()>Close</button></div>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div fxLayout="column">
+  <div fxFlex="50%" class="question" *ngIf="note.questionAndAnswerNotes.length==0">Ask a Question??</div>
+  <div fxFlex="50%" class="question" *ngIf="note.questionAndAnswerNotes.length>0">Question Asked</div>
+  <div fxFlex="50%">
+    <mat-form-field class="example-full-width formfield" *ngIf="note.questionAndAnswerNotes.length==0">
+        <input matInput placeholder="Ask Question??"  [(ngModel)]="inputMessage"
+        (keydown)="question($event)" ></mat-form-field>
+        <mat-form-field class="example-full-width formfield" *ngIf="note.questionAndAnswerNotes.length>0">
+        <input matInput placeholder="{{questionAsk.message}}"
+          disabled >
+      </mat-form-field>
+  </div>
+  </div>
+  <!-- end of the title description and question part -->
+  <div fxLayout="row" fxLayoutAlign="space-between start" >
+  <div fxFlex="10%" fxFlex.md=10 fxFlex.xs=15 fxLayoutAlign="start" ><button mat-mini-fab class="miniFab" *ngIf="note.questionAndAnswerNotes.length>0">Basic</button></div>
+  <div fxFlex="90%"fxFlex.md=90 fxFlex.xs=85 fxLayout="column">
+    <div fxFlex="40%" fxFlex.xs=50  class="username">{{questionAsk.user.firstName}}  {{questionAsk.user.lastName}}
+      <span class="date">{{questionAsk.createdDate |date:"short"}}</span></div>
+    <div fxFlex="60%" fxFlex.xs=50 class="question" fxLayout="row">
+      <div fxFlex="50%" fxFlex.md=70 fxFlex.xs=70>{{questionAsk.message}}</div>
+      <div fxFlex="50%" fxFlex.md=30 fxFlex.xs=30 fxLayoutAlign="end center" fxLayout="row wrap" class="list">
+          <i class="material-icons icon" *ngIf="note.questionAndAnswerNotes.length>0">reply </i>
+          <i class="material-icons icon" *ngIf="note.questionAndAnswerNotes.length>0">thumb_up</i>
+          <bar-rating [(rate)]="rate" [theme]="'default'"  fxLayoutAlign="end center" [max]="5"></bar-rating>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  </div>
+  <div fxFlex="15%" fxFlex.md=5 fxFlex.xs=5></div>
+  </div>

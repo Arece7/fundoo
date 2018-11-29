@@ -13,6 +13,7 @@ import { SearchBarComponent } from "./components/search-bar/search-bar.component
 import { LabelNotesComponent } from "./components/label-notes/label-notes.component";
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
 import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
+import { QuestionComponent } from './components/question/question.component';
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -31,7 +32,7 @@ const routes: Routes = [
       { path: "reminder", component: MainReminderComponent  },
       { path: "trash", component: TrashComponent },
       { path: "search", component: SearchBarComponent },
-
+      { path: "questionAndAnswer/:id/Q&A", component: QuestionComponent },
     ]
   }
 ];

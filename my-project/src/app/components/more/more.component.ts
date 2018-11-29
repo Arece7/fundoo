@@ -11,7 +11,7 @@ import { MatSnackBar } from "@angular/material";
 import { NoteService } from '../../core/services/noteService/note.service'
 import { HttpService } from '../../core/services/httpService/http.service';
 import { MatDialog } from "@angular/material";
-
+import { Router } from "@angular/router";
 @Component({
   selector: "app-more",
   templateUrl: "./more.component.html",
@@ -31,7 +31,8 @@ export class MoreComponent implements OnInit, OnDestroy {
   constructor(
     private noteservice: NoteService,private service: HttpService,
     public snackbar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
   public noteLabels = [];
 
@@ -135,5 +136,9 @@ export class MoreComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
+    }
+    questionAndanswer()
+    {
+      this.router.navigate(["/questionAndAnswer/"+this.note.id+"/Q&A"]);
     }
 }

@@ -11,8 +11,7 @@ export class CustomErrorHandlerServiceService implements
     handleError(error) {
 
       let router = this.injector.get(Router);
-      console.log('URL: ' + router.url);
-      console.warn('Handler caught an error', error);
+
 
 
 
@@ -33,17 +32,17 @@ if (error instanceof HttpErrorResponse ) {
   }
 }
 
-else if(error instanceof TypeError || error instanceof ReferenceError){
-this.snackBar.open('Some error happened ', 'close', {
-  duration: 2500,
-})
-}
+// else if(error instanceof TypeError || error instanceof ReferenceError){
+// this.snackBar.open('Some error happened ', 'close', {
+//   duration: 2500,
+// })
+// }
 
-else{
-this.snackBar.open('some error happened', 'close', {
-  duration: 2500,
-})
-}
+// else{
+// this.snackBar.open('some error happened', 'close', {
+//   duration: 2500,
+// })
+// }
 
   }
     }
