@@ -148,4 +148,19 @@ export class NoteService {
     var url='/questionAndAnswerNotes/addQuestionAndAnswer'
     return this.service.httpPostData(url,body)
    }
+   addLike(body,id)
+   {
+    var url='/questionAndAnswerNotes/like/'+id
+    return this.service.httpPostData(url,body)
+   }
+   addReply(body,id)
+   {
+    var url='/questionAndAnswerNotes/reply/'+id
+    return this.service.httpPostData(url,body)
+   }
+   addrating(body,id)
+   {
+    var url='/questionAndAnswerNotes/rate/'+id
+    return this.service.httpPostData(url,body)
+   }
 }

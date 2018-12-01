@@ -136,5 +136,9 @@ labelClick(data) {
   this.data.changeView2(labelName)
   // this.labelname.emit(labelName)
 }
+questionAnswer(id)
+{
+  this.router.navigate(["/questionAndAnswer/"+id+"/Q&A"]);
+}
 
 }

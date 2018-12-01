@@ -78,7 +78,14 @@
        <!-- more starts -->
       <app-more [note]="note" [Delete]="note.isDeleted" (eventEmit)=eventOccured($event)></app-more>
       <!-- more ends -->
+
     </mat-card-actions>
+
+    <div *ngIf="note.questionAndAnswerNotes.length!=0" (click)=questionAnswer(note.id)>
+      <mat-divider></mat-divider>
+        <div><small>Question Asked</small></div>
+        <div class=question [innerHTML]=note.questionAndAnswerNotes[0].message></div>
+      </div>
 
   </mat-card>
 

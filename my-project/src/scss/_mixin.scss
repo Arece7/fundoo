@@ -19,3 +19,26 @@
  {
   width:100%;
  }
+@mixin margin($top,$right,$bottom,$left){
+  margin:$top $right $bottom $left;
+}
+
+@mixin color-test($property) {
+  color:$property;
+}
+@mixin back-ground-color($color-value) {
+  background-color: $color-value;
+}
+@mixin overflowText {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden!important;
+}
+
+@mixin padding($top,$right,$bottom,$left){
+  padding:$top $right $bottom $left;
+}
+@mixin opacity($value){
+  opacity:$value;
+}
+
