@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
       (params: ParamMap) => {
 
         this.name = params['params'].labelName;
-        this.name = params['params'].id;
+
       })
 
     if(this.router.url=="/dashboard"){

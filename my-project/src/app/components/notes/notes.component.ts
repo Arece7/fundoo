@@ -15,7 +15,8 @@ import {Note} from '../../core/Model/note'
 export class NotesComponent implements OnInit {
   constructor(private service: NoteService) {}
   public notes = [];
-  public pin=[]
+  public pin=[];
+  public loader:boolean=false;
 
   ngOnInit() {
     this.getNotes();
@@ -44,7 +45,8 @@ export class NotesComponent implements OnInit {
             notesData[i].isArchived == false &&
             notesData[i].isPined == false
           ) {
-            this.notes.push(data["data"].data[i]); //pusing in note array
+            this.notes.push(data["data"].data[i]);
+            this.loader=true;                        //pusing in note array
           }
         }
 

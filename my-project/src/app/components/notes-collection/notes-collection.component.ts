@@ -49,6 +49,7 @@ export class NotesCollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateComponent, {
       // width: "600px",
       maxWidth:'auto',
+      maxHeight:"300px",
       data: note
     });
 

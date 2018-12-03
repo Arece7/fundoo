@@ -1,8 +1,18 @@
+// import { NoteService } from './../../core/services/noteService/note.service';
+
+/** Purpose         : For Question & Answer
+ *  @description
+ *  @file           : question.component.ts
+ *  @author         : Arghya Ray
+ */
+
+
+
 import { LoggerService } from './../../core/services/logger.service';
 import { environment } from './../../../environments/environment';
 import { Component, OnInit,ViewChild, ElementRef  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { NoteService } from '../../core/services/noteService/note.service'
+import { NoteService } from '@service/noteService/note.service'
 
 
 @Component({
@@ -23,24 +33,43 @@ export class QuestionComponent implements OnInit {
   public replyid;
   public ratingValue;
   public reply2;
+  public showHide:boolean=false;
+
   ngOnInit() {
-    this.getDetails();
+    this.getNoteDetails();
   }
-  /*@functuion: getDetails() for getting the note details */
-  getDetails(){
+  /*@functuion: getNoteDetails() for getting the note details */
+  getNoteDetails(){
     this.service.getNoteDetails(this.id)
     .subscribe( (response)=>{
       this.note=response["data"].data[0];
       this.questions=this.note['questionAndAnswerNotes']
       this.img=environment.apiurl;
+
     },(error)=>{
       LoggerService.log("notedetails"+error);
     });
   }
- /*@functuion: rateCheck() for getting the note details */
-  rateCheck(data){
+   /*@functuion: addrate() to  give rate  */
+   addrate(data,rate){
+    let body={
+      "rate":rate
+    }
+    this.service.addrating(body,data.id)
+    .subscribe((response)=>{
+
+      this.getNoteDetails()
+
+
+    },(error)=>{
+
+    })
+  }
+
+ /*@functuion: rateChecking() for checking rate details */
+  rateChecking(data){
     // debugger;
-    console.log(data);
+
       if(data.length>0){
         for(let i=0;i<data.length;i++){
           if(data[i].userId==localStorage.getItem("uId")){
@@ -48,7 +77,7 @@ export class QuestionComponent implements OnInit {
             return true
           }
           if(data[i].userId!=localStorage.getItem("uId")){
-            // this.ratingValue=data[i].rate;
+
             return true
           }
         }
@@ -57,8 +86,8 @@ else if(data.length==0){
   this.ratingValue=0;
   return true
 }
-
   }
+  /*@functuion: rateCount() for counting rate details */
   rateCount(data){
     if(data.length==0)
     return 0;
@@ -69,6 +98,7 @@ else if(data.length==0){
     let rate=value/(data.length)
     return rate
   }
+  /*@functuion: addQuestion() for adding question */
   addQuestion(){
     let body={
       "message":this.question.nativeElement.innerHTML,
@@ -76,22 +106,26 @@ else if(data.length==0){
     }
     this.service.askQuestion(body)
     .subscribe((response)=>{
-      this.getDetails()
+      this.getNoteDetails()
     },(error)=>{
     })
   }
+   /*@functuion: close() for redirecting to dashboard*/
   close(){
     this.router.navigate(["/dashboard"]);
   }
+   /*@functuion:  replyToQuestion() to identify a particular Queston reply */
   replyToQuestion(data){
     this.replyid=data.id
     this.reply=!this.reply;
   }
-
+ /*@functuion:  replyToReply() to identify a particular reply to a reply */
   replyToReply(data){
     this.replyid=data.id
     this.reply2=!this.reply2;
   }
+   /*@functuion:  like() to give like to a Question or reply */
+
   like(data){
     let body={
       "like":false
@@ -100,28 +134,39 @@ else if(data.length==0){
       body.like=true;
     else{
       body.like=!data.like[0].like
-      for(let l=0;l<data.like.length;l++){
-        if(data.like[l].userId==localStorage.getItem("uId") && data.like[l].like==false)
+      for(let n=0;n<data.like.length;n++){
+        if(data.like[n].userId==localStorage.getItem("uId") && data.like[n].like==false)
           body.like=true;
       }
     }
     LoggerService.log("like"+body)
     this.service.addLike(body,data.id)
     .subscribe((response)=>{
-      this.getDetails()
+      this.getNoteDetails()
     },(error)=>{
 
     })
   }
+
   likeCheck(question){
-    for(let m=0;m<question.length;m++){
-      if(question[m].like==true){
-        if(question[m].userId==localStorage.getItem("uId")){
+    for(let p=0;p<question.length;p++){
+      if(question[p].like==true){
+        if(question[p].userId==localStorage.getItem("uId")){
           return true
         }
       }
     }
     return false
+  }
+   /* @functuion: countLIke() to count the likes  */
+  countLIke(data){
+    let count=0
+    for(let m=0;m<data.like.length;m++){
+      if(data.like[m].like==true){
+        count+=1;
+      }
+    }
+    return count;
   }
   Check(data){
     for(let m=0;m<data.length;m++){
@@ -133,16 +178,7 @@ else if(data.length==0){
     }
     return false;
   }
-  countLIke(data){
-    let count=0
-    for(let m=0;m<data.like.length;m++){
-      if(data.like[m].like==true){
-        count+=1;
-      }
-    }
-    return count;
-  }
-
+ /*@functuion:   answer() to add a reply to a question */
   answer(){
     let reply=this.replayMessage.nativeElement.innerHTML;
     let body={
@@ -154,22 +190,15 @@ else if(data.length==0){
     .subscribe((response)=>{
 
       this.reply=this.reply2=false
-      this.getDetails();
+      this.getNoteDetails();
     },(error)=>{
     })
   }
-  rating(data,rate){
-    let body={
-      "rate":rate
-    }
-    this.service.addrating(body,data.id)
-    .subscribe((response)=>{
+  /*@functuion:  replyShowing() to show & hide replies  */
 
-      this.getDetails()
-
-
-    },(error)=>{
-
-    })
+  replyShowing(data,value){
+    this.showHide=value;
+    this.replyid=data.id;
   }
+
 }

@@ -65,11 +65,11 @@ if(this.data.userId!=this.data.user.userId){
   this.data.collaborators.push(user)
   this.noteservice.addCollab(this.data,user).subscribe(
     data=>{
-      console.log('add sucessfull');
+
 
     },
     error=>{
-      console.log('add failed');
+
     })
  }
 
@@ -78,10 +78,10 @@ if(this.data.userId!=this.data.user.userId){
   this.colList.splice(this.colList.indexOf(user),1);
   this.noteservice.deleteCollab(this.data,user).subscribe(
     data=>{
-      console.log('sucess in delete');
+
     },
     error=>{
-      console.log('failed to delete');
+
     })
  }
 

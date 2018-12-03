@@ -1,10 +1,21 @@
 <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="30px">
 <!-- add notes starts -->
 <div  fxLayoutAlign=" center">
+
 <app-add-notes (onNewEntryAdded)="addNewEntry($event)" ></app-add-notes>
 </div>
 <!-- add notes ends -->
-
+<div class="sk-cube-grid" *ngIf="loader==false">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </div>
 <!-- note cards starts -->
 <div  fxLayout="column wrap"  *ngIf="pin.length"  >
  <h3  align="center" >PINNED</h3>

@@ -1,5 +1,4 @@
 
-
 <div fxLayout="column">
   <div fxLayout=row fxLayoutAlign=center class=div >
   <div class=main2>
@@ -53,11 +52,11 @@
         <button mat-icon-button class=icon *ngIf="!Check(item.like)">
           <mat-icon (click)=like(item)>thumb_up_alt</mat-icon></button>
 
-        <div class=margin_top10>{{countLIke(item)}} likes</div>
-        <div class=star *ngIf=rateCheck(item.rate)>
-          <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="rating(item,$event)"[max]="5"></bar-rating>
+        <div>{{countLIke(item)}} likes</div>
+        <div class=star *ngIf=rateChecking(item.rate)>
+          <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="addrate(item,$event)"[max]="5"></bar-rating>
         </div>
-        <div class=margin_top10>{{rateCount(item.rate)}}</div>
+        <div>{{rateCount(item.rate)}}</div>
         </div>
         </div>
       </div>
@@ -97,11 +96,15 @@
               (click)=like(data)>thumb_up_alt</mat-icon></button>
             <button mat-icon-button class=icon *ngIf="!likeCheck(data.like)"><mat-icon
               (click)=like(data)>thumb_up_alt</mat-icon></button>
-            <div class=margin_top10>{{countLIke(data)}} likes</div>
-            <div class=star *ngIf=rateCheck(data.rate)>
-                <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="rating(data,$event)"[max]="5"></bar-rating>
+            <div>{{countLIke(data)}} likes</div>
+            <div class=star *ngIf=rateChecking(data.rate)>
+                <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="addrate(data,$event)"[max]="5"></bar-rating>
             </div>
-            <div class=margin_top10>{{rateCount(data.rate)}}</div>
+            <div>{{rateCount(data.rate)}}</div>
+            <button mat-icon-button class=icon *ngIf="!showHide || replyid!=data.id"
+          (click)="replyShowing(data,true)"><mat-icon>keyboard_arrow_down</mat-icon></button>
+          <button mat-icon-button class=icon *ngIf="showHide && replyid==data.id"
+          (click)="replyShowing(data,false)"><mat-icon>keyboard_arrow_up</mat-icon></button>
           </div></div>
         </div>
         <div *ngIf="reply2 && replyid==data.id">
@@ -117,7 +120,7 @@
 
           <div *ngFor="let data2 of questions">
             <div *ngIf="data2.parentId==data.id" class=body3>
-              <div fxLayout="row" >
+              <div fxLayout="row" *ngIf="showHide" >
                   <div fxFlex.xl=8 fxFlex.lg=8 fxFlex.md=8 fxFlex.sm=8 fxFlex.xs=15><div class=image>
                   <div mat-card-avatar ngStyle.xs="width:30px;height:30px"
                   [ngStyle]="{'background-image':'url(' +img+data2.user.imageUrl+ ')',
@@ -135,11 +138,12 @@
                 <mat-icon class=blue (click)=like(data2)>thumb_up_alt</mat-icon></button>
                 <button mat-icon-button class=icon *ngIf="!likeCheck(data2.like)">
                 <mat-icon (click)=like(data2)>thumb_up_alt</mat-icon></button>
-                <div class=margin_top10>{{countLIke(data2)}} likes</div>
-                <div class=star *ngIf=rateCheck(data2.rate)>
-                    <bar-rating [(rate)]=ratingValue  [theme]="'default'" (rateChange)="rating(data2,$event)"[max]="5"></bar-rating>
+                <div>{{countLIke(data2)}} likes</div>
+
+                <div class=star *ngIf=rateChecking(data2.rate)>
+                    <bar-rating [(rate)]=ratingValue  [theme]="'default'" (rateChange)="addrate(data2,$event)"[max]="5"></bar-rating>
                 </div>
-                <div class=margin_top10>{{rateCount(data2.rate)}}</div>
+                <div >{{rateCount(data2.rate)}}</div>
               </div>
             </div></div>
             </div>
