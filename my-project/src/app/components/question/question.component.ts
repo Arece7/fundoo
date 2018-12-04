@@ -1,4 +1,4 @@
-// import { NoteService } from './../../core/services/noteService/note.service';
+
 
 /** Purpose         : For Question & Answer
  *  @description
@@ -8,8 +8,8 @@
 
 
 
-import { LoggerService } from './../../core/services/logger.service';
-import { environment } from './../../../environments/environment';
+import { LoggerService } from '@service/logger.service';
+import { environment } from '@environments/environment';
 import { Component, OnInit,ViewChild, ElementRef  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { NoteService } from '@service/noteService/note.service'

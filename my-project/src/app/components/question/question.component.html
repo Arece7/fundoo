@@ -52,11 +52,11 @@
         <button mat-icon-button class=icon *ngIf="!Check(item.like)">
           <mat-icon (click)=like(item)>thumb_up_alt</mat-icon></button>
 
-        <div>{{countLIke(item)}} likes</div>
+        <div>{{countLIke(item)}}</div>
         <div class=star *ngIf=rateChecking(item.rate)>
           <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="addrate(item,$event)"[max]="5"></bar-rating>
         </div>
-        <div>{{rateCount(item.rate)}}</div>
+        <div>({{rateCount(item.rate)}})</div>
         </div>
         </div>
       </div>
@@ -96,11 +96,11 @@
               (click)=like(data)>thumb_up_alt</mat-icon></button>
             <button mat-icon-button class=icon *ngIf="!likeCheck(data.like)"><mat-icon
               (click)=like(data)>thumb_up_alt</mat-icon></button>
-            <div>{{countLIke(data)}} likes</div>
+            <div>{{countLIke(data)}}</div>
             <div class=star *ngIf=rateChecking(data.rate)>
                 <bar-rating [(rate)]=ratingValue [theme]="'default'" (rateChange)="addrate(data,$event)"[max]="5"></bar-rating>
             </div>
-            <div>{{rateCount(data.rate)}}</div>
+            <div>({{rateCount(data.rate)}})</div>
             <button mat-icon-button class=icon *ngIf="!showHide || replyid!=data.id"
           (click)="replyShowing(data,true)"><mat-icon>keyboard_arrow_down</mat-icon></button>
           <button mat-icon-button class=icon *ngIf="showHide && replyid==data.id"
@@ -138,12 +138,12 @@
                 <mat-icon class=blue (click)=like(data2)>thumb_up_alt</mat-icon></button>
                 <button mat-icon-button class=icon *ngIf="!likeCheck(data2.like)">
                 <mat-icon (click)=like(data2)>thumb_up_alt</mat-icon></button>
-                <div>{{countLIke(data2)}} likes</div>
+                <div>{{countLIke(data2)}} </div>
 
                 <div class=star *ngIf=rateChecking(data2.rate)>
                     <bar-rating [(rate)]=ratingValue  [theme]="'default'" (rateChange)="addrate(data2,$event)"[max]="5"></bar-rating>
                 </div>
-                <div >{{rateCount(data2.rate)}}</div>
+                <div >({{rateCount(data2.rate)}})</div>
               </div>
             </div></div>
             </div>

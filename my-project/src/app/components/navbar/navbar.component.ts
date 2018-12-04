@@ -69,6 +69,7 @@ export class NavbarComponent implements OnInit {
     }
 
 
+
  }
   notes() {
     this.router.navigate(["/dashboard"]); //redirecting to dashboard
