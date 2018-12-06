@@ -34,7 +34,7 @@ export class QuestionComponent implements OnInit {
   public ratingValue;
   public reply2;
   public showHide:boolean=false;
-
+public editorContent: string ;
   ngOnInit() {
     this.getNoteDetails();
   }
@@ -180,7 +180,8 @@ else if(data.length==0){
   }
  /*@functuion:   answer() to add a reply to a question */
   answer(){
-    let reply=this.replayMessage.nativeElement.innerHTML;
+
+    let reply=this.editorContent;
     let body={
       "message":reply
     }
@@ -191,6 +192,7 @@ else if(data.length==0){
 
       this.reply=this.reply2=false
       this.getNoteDetails();
+      this.editorContent=null
     },(error)=>{
     })
   }
@@ -200,5 +202,15 @@ else if(data.length==0){
     this.showHide=value;
     this.replyid=data.id;
   }
+  public options: Object = {
+    charCounterCount: true,
+    toolbarButtons: ['bold', 'italic','underline', 'strikeThrough','|', 'fontFamily', 'fontSize', 'color', 'inlineClass', 'inlineStyle', 'paragraphStyle', 'lineHeight', '|', 'indent', 'outdent', 'formatOL', 'formatUL', '|',
+      'subscript', 'superscript','|', 'fontAwesome', 'specialCharacters', 'insertHR', 'selectAll',
+      '|', 'print', 'getPDF', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat','alert'],
+  };
+
 
 }

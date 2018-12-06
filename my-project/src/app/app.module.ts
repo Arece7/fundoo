@@ -1,4 +1,3 @@
-
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule,ErrorHandler } from "@angular/core";
@@ -17,6 +16,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { LayoutModule } from "@angular/cdk/layout";
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { BarRatingModule } from "ngx-bar-rating";
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import {CustomErrorHandlerServiceService} from '../app/core/services/errorHandler/custom-error-handler-service.service'
 import {
   MatSidenavModule,
@@ -170,7 +170,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     MatDatepickerModule,
     MatNativeDateModule,
     BarRatingModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers: [MatDatepickerModule,MessagingService,InterceptService,
     {
