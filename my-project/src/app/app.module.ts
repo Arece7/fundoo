@@ -35,7 +35,8 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatTabsModule
 } from "@angular/material";
 import { NotesComponent } from "./components/notes/notes.component";
 import { ClickOutsideModule } from "ng4-click-outside";
@@ -65,6 +66,9 @@ import { MainCollaboratorComponent } from './components/main-collaborator/main-c
 import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
 import { QuestionComponent } from './components/question/question.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { CartComponent } from './components/cart/cart.component';
+import { CartServiceComponent } from './components/cart-service/cart-service.component';
+
 
 
 @NgModule({
@@ -135,6 +139,18 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 
+    CartComponent,
+
+
+
+    CartServiceComponent,
+
+
+
+
+
+
+
 
 
 
@@ -172,7 +188,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    MatTabsModule
+
   ],
   providers: [MatDatepickerModule,MessagingService,InterceptService,
     {
@@ -189,7 +207,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     NotesCollectionComponent,
     CreatelabelComponent,
     AddlabelComponent,
-    CropImageComponent,MainCollaboratorComponent
+    CropImageComponent,
+    MainCollaboratorComponent,
+    CartServiceComponent,
   ]
 })
 export class AppModule {}

@@ -6,6 +6,7 @@ import { passValidator } from "./custom";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 
+import { LoggerService } from '@service/logger.service';
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
@@ -21,15 +22,16 @@ export class SignupComponent implements OnInit {
   email: string = "";
   password: string = "";
   cnfpassword: string = "";
+  public services=[];
 
-  public cards = [];
 
   constructor(
     private _getService: ClientService,
     private _postService:ClientService,
     fb: FormBuilder,
     public snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private userService : ClientService
   ) {
     this.rForm = fb.group({
       fname: [null, Validators.required],
@@ -52,32 +54,19 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._getService.getData().subscribe(response => {
-
-      var data = response["data"];
-      for (var i = 0; i < data.data.length; i++) {
-        data.data[i].select = false;
-        this.cards.push(data.data[i]);
+    this. getServices();
+  }
+  getServices(){
+    this.services=[];
+    this.userService.getData().subscribe(data => {
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.services.push(data["data"].data[i]);
       }
-
-    });
+      LoggerService.log('Success'+this.services);
+    })
   }
 
-  toggle(card) {
-    card.select = !card.select;
-    this.service = card.name;
-    if (card.select == false) {
-      this.service = "";
-    }
-
-
-    for (var i = 0; i < this.cards.length; i++) {
-      if (card.name == this.cards[i].name) {
-        continue;
-      }
-      this.cards[i].select = false;
-    }
-  }
 
   model: any = {};
   Signup() {
@@ -111,4 +100,5 @@ export class SignupComponent implements OnInit {
           }
         );
   }
+
 }

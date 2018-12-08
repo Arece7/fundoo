@@ -1,9 +1,9 @@
 <div class="container" fxLayout>
-  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
-  <div fxFlex="34" fxFlex.xs="100" fxFlex.sm="84">
+  <div class="item item-1" fxFlex="30%" fxFlex.xs="0" fxFlex.sm="0"></div>
+  <div fxFlex="40" fxFlex.xs="100" fxFlex.sm="100">
     <div fxLayout="column" fxLayoutGap="5%">
-      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
-      <div fxFlex="34%" fxFlex.xs="100" fxFlex.sm="84" [formGroup]='rForm'>
+      <div class="item item-1" fxFlex="20%" fxFlex.xs="0" fxFlex.sm="0"></div>
+      <div fxFlex="60%" fxFlex.xs="100" fxFlex.sm="100" [formGroup]='rForm'>
         <mat-card class="card">
 
 
@@ -32,21 +32,26 @@
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             <mat-error class="alert" *ngIf="!rForm.controls['cnfpassword'].valid && rForm.controls['cnfpassword'].touched">Both password should be same</mat-error>
           </mat-form-field>
-          <div fxLayout="row" fxLayoutGap="10px">
-            <mat-card class="example-card" fxFlex="50" *ngFor="let card of cards" (click)="toggle(card)" [ngClass]="card.select ? 'select' : 'deselect'">
-              <mat-card-header>
+          <div fxLayout="row" fxLayoutAlign="space-around center" class="serviceCard" >
+            <div *ngFor="let index of services" fxLayout="row" >
 
-                <mat-card-title>{{card.name}}</mat-card-title>
+          <mat-card  (click)="selectCards(index)"
+          [ngClass]="index.select ? 'select' : 'notSelect'">
+            <div class="alignCart" >
+        <mat-card class="cartMatCard cartSize">
+          <div class="package">{{index.price | currency}}</div><br>
+          <div class="basic" >{{index.name | uppercase}}</div>
+          <div>
+              <ul class="details">
+                  <li> {{index.description}}</li>
+                </ul>
+          </div>
+        </mat-card><br>
+        <div class="cartTitle" (click)="addToCart(index)">ADD TO CART</div>
+      </div>
+      </mat-card>
 
-              </mat-card-header>
-
-              <mat-card-content>
-                <p>
-                  {{card.description}}
-                </p>
-              </mat-card-content>
-
-            </mat-card>
+    </div>
           </div>
           <br>
           <br>
@@ -57,9 +62,9 @@
 
         </mat-card>
       </div>
-      <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+      <div class="item item-1" fxFlex="20%" fxFlex.xs="0" fxFlex.sm="0"></div>
     </div>
 
   </div>
-  <div class="item item-1" fxFlex="33%" fxFlex.xs="0" fxFlex.sm="8"></div>
+  <div class="item item-1" fxFlex="30%" fxFlex.xs="0" fxFlex.sm="0"></div>
 </div>

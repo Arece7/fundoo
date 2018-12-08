@@ -48,3 +48,67 @@ a {
 .container > * {
 	@include input_width;
 }
+.ecommerce_header{
+  margin-top: 40px;
+}
+.package{
+
+  font-size:20px;
+}
+.cartAlign{
+  margin-top: 80px;
+}
+ul.details {
+  list-style-type: square;
+ margin-left: -14%;
+
+ line-height: 200%;
+}
+.cartMatCard{
+  width: 150px;
+  height: 250px;
+}
+.basic{
+  color: blue;
+
+}
+.cartSize{
+  margin-top: -42px;
+  margin-left: -14%;
+}
+.alignCart{
+  margin-top: 10%;
+  margin-left: -8%;
+}
+.cartTitle{
+  padding: 5px;
+
+  cursor: pointer;
+}
+.heading{
+      font-size: 25px;
+
+      color: #5f6368;
+  }
+  .select{
+      cursor:pointer;
+      width: 150px;
+      height: 300px;
+      background-color: #fb0;
+}
+mat-toolbar{
+    background-color: #fb0;
+}
+.notSelect{
+      cursor: pointer;
+      width: 150px;
+      height: 300px;
+      background-color: grey;
+}
+.notSelect:hover{
+  background-color: #fb0;
+}
+.serviceCard
+{
+  margin-top: 20px;
+}

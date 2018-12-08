@@ -27,13 +27,17 @@
               [(ngModel)]="searchInput">
           </div>
           <div fxFlex=30 fxFlex.xs=30 fxLayoutAlign="end none" >
-          <button mat-icon-button aria-label="view_agenda" class="view commonColor" fxShow.xs="false" fxShow.sm="false" fxShow.md="true" fxShow.lg="true">
+
+          <button mat-icon-button aria-label="view_agenda"  matTooltip="view" class="view commonColor" fxShow.xs="false" fxShow.sm="false" fxShow.md="true" fxShow.lg="true">
             <mat-icon aria-label="view_stream" (click)="viewList()" *ngIf="grid==0">view_stream</mat-icon>
             <mat-icon aria-label="view_module" (click)="viewGrid()" *ngIf="grid==1">view_module</mat-icon>
 
           </button>
-
-
+          <button mat-icon-button class=" person commonColor" matTooltip="Cart">
+          <i class="material-icons">
+              shopping_cart
+              </i>
+            </button>
           <button mat-icon-button class=" person" [matMenuTriggerFor]="appMenu" (clickOutside)="logout=false">
             <img src="{{img}}" class="profilepic2">
           </button>

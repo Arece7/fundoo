@@ -163,4 +163,11 @@ export class NoteService {
     var url='/questionAndAnswerNotes/rate/'+id
     return this.service.httpPostData(url,body)
    }
+   addTocart(body){
+    return this.service.httpPostData('/productcarts/addToCart',body)
+  }
+  cartId(id){
+    var url='/productcarts/getCartDetails/'+id;
+    return this.service.httpGetData(url);
+  }
 }

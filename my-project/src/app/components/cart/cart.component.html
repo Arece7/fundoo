@@ -1,0 +1,37 @@
+<div fxLayout="row" class="ecommerce_main">
+  <mat-toolbar>fundooNotes</mat-toolbar>
+</div>
+<div fxLayout="column">
+  <div fxLayout="row">
+    <div fxFlex.lg="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="0"></div>
+    <div fxFlex.lg="70" fxFlex.md="70" fxFlex.sm="60" fxFlex.xs="100" fxLayoutAlign="center center"
+    class="ecommerce_header">
+      <div class="heading"> Which fundooNotes service package do you want?</div>
+    </div>
+    <div fxFlex.lg="15" fxFlex.md="15" fxFlex.sm="20" fxFlex.xs="0"></div>
+  </div>
+  <div class="cartAlign">
+    <div fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="0"></div>
+    <div *ngFor="let index of service" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="60" fxFlex.xs="100"
+     fxLayout.lg="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+      <div>
+          <mat-card  (click)="selectCards(index)"
+          [ngClass]="index.select ? 'select' : 'notSelect'">
+            <div class="alignCart" >
+        <mat-card class="cartMatCard cartSize">
+          <div class="package">{{index.price | currency}}</div><br>
+          <div class="basic" >{{index.name | uppercase}}</div>
+          <div>
+              <ul class="details">
+                  <li> {{index.description}}</li>
+                </ul>
+          </div>
+        </mat-card><br>
+        <div class="cartTitle" (click)="addToCart(index)">ADD TO CART</div>
+      </div>
+      </mat-card>
+      </div>
+    </div>
+    <div fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="0"></div>
+  </div>
+</div>

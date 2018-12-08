@@ -14,7 +14,7 @@ import { ClientService } from '../../core/services/userService/client.service';
 export class LoginComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   public hide;
-
+ public services=[];
   lForm: FormGroup;
   post: any;
   email: string = "";
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private _Service: ClientService,
     fb: FormBuilder,
     public snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private userService : ClientService
   ) {
     this.lForm = fb.group({
       email: [
@@ -46,8 +47,19 @@ if(localStorage.getItem('token')!=null)
 {
   this.router.navigateByUrl('/dashboard')
 }
+this.getServices();
   }
   model: any = {};
+  getServices(){
+    this.services=[];
+    this.userService.getData().subscribe(data => {
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.services.push(data["data"].data[i]);
+      }
+      LoggerService.log('Success'+this.services);
+    })
+  }
   login() {
     this._Service
       .loggingin( {

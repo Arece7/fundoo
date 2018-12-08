@@ -1,3 +1,4 @@
+import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './core/services/authGuard/auth.guard';
 import { MainArchiveComponent } from "./components/main-archive/main-archive.component";
 import { NgModule } from "@angular/core";
@@ -15,12 +16,13 @@ import { MainReminderComponent } from './components/main-reminder/main-reminder.
 import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
 import { QuestionComponent } from './components/question/question.component';
 const routes: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "", redirectTo: "/cart", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "forget", component: ForgetComponent },
   { path: "resetpassword/:token", component: ResetComponent },
   { path: 'error', component: GlobalErrorComponentComponent},
+  { path: 'cart', component: CartComponent},
 
   {
     path: "",
