@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 import { ClientService } from '../../core/services/userService/client.service';
+import { NoteService } from '../../core/services/noteService/note.service';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -14,18 +15,24 @@ import { ClientService } from '../../core/services/userService/client.service';
 export class LoginComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   public hide;
- public services=[];
+
   lForm: FormGroup;
   post: any;
   email: string = "";
   password: string = "";
+  private card=[];
+
+  private cartId=localStorage.getItem("CartId");
+  private cardId;
+  private productCartId='';
 
   constructor(
     private _Service: ClientService,
     fb: FormBuilder,
     public snackbar: MatSnackBar,
     private router: Router,
-    private userService : ClientService
+    private userService : ClientService,
+    private cartService : NoteService
   ) {
     this.lForm = fb.group({
       email: [
@@ -47,22 +54,30 @@ if(localStorage.getItem('token')!=null)
 {
   this.router.navigateByUrl('/dashboard')
 }
-this.getServices();
+if(this.cartId){
+  this.productCartId=this.cartId;
+this.cartService.getCardDetails(this.cartId)
+.subscribe((response) => {
+  LoggerService.log("response"+response);
+  this.cardId=response["data"].product.id
+},(error)=>{
+});}
+this.getService();
   }
   model: any = {};
-  getServices(){
-    this.services=[];
-    this.userService.getData().subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.services.push(data["data"].data[i]);
+  getService(){
+    this.userService.getData()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response) => {
+      for(let i=0;i<response["data"].data.length;i++){
+        response["data"].data[i].select=false;
+        this.card.push(response["data"].data[i]);
       }
-      LoggerService.log('Success'+this.services);
-    })
+
+    });
   }
   login() {
-    this._Service
-      .loggingin( {
+    this._Service.loggingin( {
         email: this.model.uname,
         password: this.model.pass
       })
@@ -114,3 +129,9 @@ this.getServices();
     this.destroy$.unsubscribe();
     }
 }
+
+
+
+
+
+

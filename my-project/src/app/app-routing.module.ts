@@ -15,6 +15,7 @@ import { LabelNotesComponent } from "./components/label-notes/label-notes.compon
 import { MainReminderComponent } from './components/main-reminder/main-reminder.component';
 import { GlobalErrorComponentComponent } from './components/global-error-component/global-error-component.component';
 import { QuestionComponent } from './components/question/question.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 const routes: Routes = [
   { path: "", redirectTo: "/cart", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: "resetpassword/:token", component: ResetComponent },
   { path: 'error', component: GlobalErrorComponentComponent},
   { path: 'cart', component: CartComponent},
-
+  { path: 'cartDetails', component:CartDetailsComponent},
   {
     path: "",
     component: DashboardComponent,canActivate: [AuthGuard],

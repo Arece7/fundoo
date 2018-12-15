@@ -164,10 +164,19 @@ export class NoteService {
     return this.service.httpPostData(url,body)
    }
    addTocart(body){
-    return this.service.httpPostData('/productcarts/addToCart',body)
+    var url='/productcarts/addToCart'
+    return this.service.httpPostData(url,body)
   }
-  cartId(id){
+  getCardDetails(id){
     var url='/productcarts/getCartDetails/'+id;
+    return this.service.httpGetData(url);
+  }
+  placeOrder(body){
+    var url='/productcarts/placeOrder'
+    return this.service.httpPostData(url,body);
+  }
+  getmyCart(){
+    var url='/productcarts/myCart'
     return this.service.httpGetData(url);
   }
 }

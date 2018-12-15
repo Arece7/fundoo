@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { passValidator } from "./custom";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
-
+import { NoteService } from '../../core/services/noteService/note.service';
 import { LoggerService } from '@service/logger.service';
 @Component({
   selector: "app-signup",
@@ -14,7 +14,7 @@ import { LoggerService } from '@service/logger.service';
 })
 export class SignupComponent implements OnInit {
   hide = false;
-  service = "";
+  service ="";
   rForm: FormGroup;
   post: any;
   fname: string = "";
@@ -22,7 +22,10 @@ export class SignupComponent implements OnInit {
   email: string = "";
   password: string = "";
   cnfpassword: string = "";
-  public services=[];
+  private card=[];
+  private cardId="";
+  private cartId=localStorage.getItem("cartId");
+
 
 
   constructor(
@@ -31,7 +34,7 @@ export class SignupComponent implements OnInit {
     fb: FormBuilder,
     public snackbar: MatSnackBar,
     private router: Router,
-    private userService : ClientService
+    private userService : ClientService, private cartService : NoteService
   ) {
     this.rForm = fb.group({
       fname: [null, Validators.required],
@@ -47,30 +50,44 @@ export class SignupComponent implements OnInit {
       ],
       password: [
         null,
-        [Validators.required, Validators.minLength(6), Validators.maxLength(10)]
+        [Validators.required, Validators.minLength(6)]
       ],
       cnfpassword: [null, passValidator]
     });
   }
 
   ngOnInit() {
-    this. getServices();
+    this.getCardDetails();
+    this.getService();
   }
-  getServices(){
-    this.services=[];
-    this.userService.getData().subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.services.push(data["data"].data[i]);
+
+  getCardDetails(){
+    this.cartService.getCardDetails(this.cartId)
+    .subscribe((response) => {
+      this.cardId=response["data"].product.id;
+    },(error)=>{
+    });
+  }
+  getService(){
+    this.userService.getData()
+
+    .subscribe((response) => {
+      for(let i=0;i<response["data"].data.length;i++){
+        response["data"].data[i].select=false;
+        this.card.push(response["data"].data[i]);
       }
-      LoggerService.log('Success'+this.services);
-    })
+      for(let j=0;j<this.card.length;j++){
+        if(this.card[j].id==this.cardId)
+          this.service=this.card[j].name;
+      }
+    });
   }
+
 
 
   model: any = {};
   Signup() {
-    if (this.service.length === 0) {
+    if (this.service.length == 0) {
       this.snackbar.open("services", "select a service first", {
         duration: 2000
       });
@@ -82,7 +99,8 @@ export class SignupComponent implements OnInit {
           service: this.service,
           email: this.model.uname,
           emailVerified: true,
-          password: this.model.pass
+          password: this.model.pass,
+          cartId:this.cartId
         })
         .subscribe(
           response => {
@@ -102,3 +120,7 @@ export class SignupComponent implements OnInit {
   }
 
 }
+
+
+
+

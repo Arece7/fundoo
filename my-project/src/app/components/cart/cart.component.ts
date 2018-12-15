@@ -53,9 +53,7 @@ addToCart(index){
     height: '410px',
     data: index
   });
-  // dialogRef.afterClosed().subscribe(() => {
-  //   this.getServices();
-  // });
+
 })
 }
 ngOnDestroy() {
@@ -64,6 +62,8 @@ ngOnDestroy() {
 }
 
 }
+
+
 
 
 

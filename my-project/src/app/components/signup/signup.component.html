@@ -33,10 +33,10 @@
             <mat-error class="alert" *ngIf="!rForm.controls['cnfpassword'].valid && rForm.controls['cnfpassword'].touched">Both password should be same</mat-error>
           </mat-form-field>
           <div fxLayout="row" fxLayoutAlign="space-around center" class="serviceCard" >
-            <div *ngFor="let index of services" fxLayout="row" >
+            <div *ngFor="let index of card" fxLayout="row" >
 
           <mat-card  (click)="selectCards(index)"
-          [ngClass]="index.select ? 'select' : 'notSelect'">
+          [ngClass]="index.id==cardId ? 'select' : 'notSelect'">
             <div class="alignCart" >
         <mat-card class="cartMatCard cartSize">
           <div class="package">{{index.price | currency}}</div><br>
@@ -47,9 +47,19 @@
                 </ul>
           </div>
         </mat-card><br>
-        <div class="cartTitle" (click)="addToCart(index)">ADD TO CART</div>
+        <div class="cartTitle" *ngIf="index.id==cardId" >SELECTED</div>
+        <div class="cartTitle" *ngIf="index.id!=cardId" >ADD TO CART</div>
       </div>
       </mat-card>
+
+
+
+
+
+
+
+
+
 
     </div>
           </div>

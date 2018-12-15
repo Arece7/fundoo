@@ -86,6 +86,9 @@ export class NavbarComponent implements OnInit {
   reminder() {
     this.router.navigate(["/reminder"]); //redirecting to reminder
   }
+  cart() {
+    this.router.navigate(["/cartDetails"]); //redirecting to cart
+  }
   Logout() //logout function
   {
 

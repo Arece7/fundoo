@@ -18,6 +18,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { BarRatingModule } from "ngx-bar-rating";
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import {CustomErrorHandlerServiceService} from '../app/core/services/errorHandler/custom-error-handler-service.service'
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {
   MatSidenavModule,
   MatListModule,
@@ -68,6 +69,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { CartComponent } from './components/cart/cart.component';
 import { CartServiceComponent } from './components/cart-service/cart-service.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 
 
@@ -147,6 +149,10 @@ import { CartServiceComponent } from './components/cart-service/cart-service.com
 
 
 
+    CartDetailsComponent,
+
+
+
 
 
 
@@ -189,7 +195,8 @@ import { CartServiceComponent } from './components/cart-service/cart-service.com
     Ng4LoadingSpinnerModule.forRoot(),
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule
 
   ],
   providers: [MatDatepickerModule,MessagingService,InterceptService,
